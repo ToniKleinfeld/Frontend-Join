@@ -1,4 +1,5 @@
-@use "./app/shared/_mixin.scss" as main;
+// @use "./app/shared/_mixin.scss" as main;
+@use "./app/shared/animations.scss" as *;
 
 * {
   box-sizing: border-box;
