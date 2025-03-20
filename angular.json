@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "current-directory": {
+    "join": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/current-directory",
+            "outputPath": "dist/join",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "current-directory:build:production"
+              "buildTarget": "join:build:production"
             },
             "development": {
-              "buildTarget": "current-directory:build:development"
+              "buildTarget": "join:build:development"
             }
           },
           "defaultConfiguration": "development"

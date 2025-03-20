@@ -23,7 +23,7 @@ a {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
-  src: url("../src/assets/fonts/open-sans-v40-latin-regular.woff2")
+  src: url("/assets/fonts/open-sans-v40-latin-regular.woff2")
     format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* open-sans-700 - latin */
@@ -32,5 +32,5 @@ a {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
-  src: url("../src/assets/fonts/open-sans-v40-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("/assets/fonts/open-sans-v40-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
