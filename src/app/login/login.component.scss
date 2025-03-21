@@ -1,0 +1,88 @@
+@use "../shared/mixin" as mix;
+
+section {
+  height: 100dvh;
+  width: 100dvw;
+  @include mix.center($jc: space-between);
+  flex-direction: column;
+  header {
+    width: 100%;
+    max-width: 1440px;
+    padding: 50px 50px;
+    @include mix.center($jc: space-between);
+    .logo {
+      img {
+        width: 100px;
+        height: 120px;
+      }
+    }
+  }
+
+  .wrapper {
+    @include mix.center($jc: space-between);
+    flex-direction: column;
+    height: 610px;
+    width: 600px;
+    padding: 50px 50px;
+    background-color: white;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    -webkit-box-shadow: 0px 10px 5px -7px #000000,
+      1px 2px 26px -13px rgba(0, 0, 0, 0.14);
+    box-shadow: 0px 5px 5px -5px #000000, 1px 2px 26px -13px rgba(0, 0, 0, 0.14);
+  }
+
+  footer {
+    @include mix.center($x: 20px);
+    width: 100%;
+    max-width: 1440px;
+    padding: 50px 50px;
+  }
+}
+
+.bgBlue {
+  background: mix.$main-color;
+}
+
+.change-to-signup {
+  @include mix.center($jc: space-between, $x: 25px);
+  p {
+    font-size: 23px;
+  }
+}
+
+.h1head {
+  @include mix.center();
+  width: 100%;
+
+  img {
+    margin: 0 -33px 0 0;
+    cursor: pointer;
+  }
+
+  h1 {
+    @include mix.center();
+    flex-direction: column;
+    margin: auto;
+    font-weight: 700;
+    font-size: 48px;
+
+    .seperator {
+      width: 95%;
+      height: 3px;
+      background: mix.$main-color;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+  }
+}
+
+.button-container {
+  @include mix.center($x: 30px);
+}
+
+.color {
+  a {
+    color: white;
+  }
+}

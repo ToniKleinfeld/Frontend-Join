@@ -1,23 +1,100 @@
-<section>
+<section [ngClass]="{'bgBlue': signup}">
   <header>
 
     <div class="logo">
       @if(signup){
-      <img src="/assets/img/logobgblue.svg" alt="">
+      <img src="/assets/img/logobgblue.svg" alt="logo from Join">
       } @else {
-      <img src="/assets/img/logobgwhite.svg" alt="">
+      <img src="/assets/img/logobgwhite.svg" alt="logo from Join">
       }
     </div>
 
 
-    <div class="change-to-signup">
+    <div class="change-to-signup dektop" [ngClass]="{'d-none': signup}">
       <p>Not a join user?</p>
       <app-button text="Sign up" (clicked)="signIn()" />
-
     </div>
 
   </header>
-</section>
 
-      <!-- <app-button text="Guest log in" type="secondary" (clicked)="signIn()" />
-      <app-button text="Log in" (clicked)="signIn()" /> -->
+  <div class="wrapper">
+
+    <div class="h1head">
+      @if(signup){
+      <img class="arrow" src="/assets/img/arrow.svg" alt="arrow back" (click)="signIn()">
+      }
+      <h1>@if(signup){Sign up}@else{Log in}
+        <div class="seperator"></div>
+      </h1>
+    </div>
+
+
+    <form onsubmit="event.preventDefault()" id="login">
+      @if(signup){
+      <div class="passwortcontainer">
+        <input type="text" class="input-name" placeholder="Name" required id="signupname">
+        <br>
+        <label for="signupname" class="redtext d-none" id="signupnamelabel">Please insert a Name.</label>
+      </div>
+      <div class="passwortcontainer">
+        <input type="email" class="input-mail" placeholder="Email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+          required id="signupmail">
+        <br>
+        <label for="signupmail" class="redtext d-none" id="signupmaillabel">Please insert a Email, example:
+          my&#64;mail.com.</label>
+      </div>
+      } @else {
+      <input type="email" class="input-mail" placeholder="Email" required id="email" autocomplete="on">
+      }
+
+      <div class="passwortcontainer">
+        <input type="password" class="input-password" placeholder="Password" required id="setpassword"
+          onkeyup="addEyeIcons('setpassword')">
+        <div class="eye-container" id="setpasswordicon"></div>
+        <label for="setpassword" class="redtext d-none" id="setpasswordlabel">Please fill this field.</label>
+      </div>
+
+      @if(signup){
+      <div class="passwortcontainer">
+        <input type="password" class="input-password" placeholder="Confirm Password" required id="confirmpassword"
+          onkeyup="addEyeIcons('confirmpassword'), checkPasswordMatch()">
+        <div class="eye-container" onclick="hideShowPassword('confirmpassword')" id="confirmpasswordicon"></div>
+        <br>
+        <label for="confirmpassword" class="redtext d-none" id="passwordnomatch">Your password don't match. Please try
+          again.</label>
+      </div>
+      <div class="confirmbox">
+        <input class="checkbox" type="checkbox" name="confirmread" required id="confirmread">
+        <span class="checkmark"></span>
+        <label for="confirmread">I confirm the <a href="./privacy.html" class="privacy-link">Privacy policy</a></label>
+
+      </div>
+      <label for="confirmread" class="redtext d-none" id="confirmreadlabel">Please confirm.</label>
+      } @else {
+      <div class="checkbox-container">
+        <input class="checkbox" type="checkbox" name="remember" id="remember">
+        <span class="checkmark"></span>
+        <label for="remember">Remember me</label>
+      </div>
+      }
+    </form>
+
+    <div class="button-container">
+      @if(signup){
+      <app-button text="Sign up" (clicked)="signIn()" form="login" />
+      } @else {
+      <app-button text="Log in" (clicked)="signIn()" form="login" />
+      <app-button text="Guest log in" type="secondary" (clicked)="signIn()" />
+      }
+    </div>
+  </div>
+
+  <!-- <div class="change-to-signup mobile" [ngClass]="{'d-none': signup}">
+    <p>Not a join user?</p>
+    <app-button text="Sign up" (clicked)="signIn()" />
+  </div>  if abfrage?? wenn display >= xxx px ??   -->
+
+  <footer [ngClass]="{'color': signup}">
+    <a href="#">Privacy Policy</a><a href="#">Legal Notice</a>
+  </footer>
+</section>
