@@ -44,7 +44,9 @@
           my&#64;mail.com.</label>
       </div>
       } @else {
-      <input type="email" class="input-mail" placeholder="Email" required id="email" autocomplete="on">
+      <div class="passwortcontainer">
+        <input type="email" class="input-mail" placeholder="Email" required id="email" autocomplete="on">
+      </div>
       }
 
       <div class="passwortcontainer">
@@ -55,13 +57,34 @@
       </div>
 
       @if(signup){
+
+
       <div class="passwortcontainer">
-        <input type="password" class="input-password" placeholder="Confirm Password" required id="confirmpassword"
-          onkeyup="addEyeIcons('confirmpassword'), checkPasswordMatch()">
-        <label for="confirmpassword" class="redtext d-none" id="passwordnomatch">Your password don't match. Please try
-          again.</label>
-        <div class="eye-container" onclick="hideShowPassword('confirmpassword')" id="confirmpasswordicon"></div>
+        <input
+        type="password"
+         class="input-password"
+          placeholder="Confirm Password"
+          required
+          id="confirmpassword"
+          onkeyup="addEyeIcons('confirmpassword'),
+          checkPasswordMatch()"
+          >
+        <label
+        for="confirmpassword"
+         class="redtext d-none"
+          id="passwordnomatch"
+          >Your password don't match. Please try
+          again.
+        </label>
+        <div
+        class="eye-container"
+         onclick="hideShowPassword('confirmpassword')"
+         id="confirmpasswordicon"></div>
+
       </div>
+
+
+
       <div class="confirmbox">
         <input class="checkbox" type="checkbox" name="confirmread" required id="confirmread">
         <span class="checkmark"></span>
@@ -87,7 +110,6 @@
     <app-button text="Sign up" (clicked)="signIn()" />
   </div>
   }
-
 
   <footer [ngClass]="{'color': signup}">
     <a href="#">Privacy Policy</a><a href="#">Legal Notice</a>

@@ -20,4 +20,12 @@ export class LoginComponent {
   onResize() {
     this.isMobile = window.innerWidth < 1024;
   }
+
+  toggleShowPassword(){
+
+  }
+
 }
+
+
+
