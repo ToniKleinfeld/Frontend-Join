@@ -1,5 +1,23 @@
 <section>
   <header>
-    
+
+    <div class="logo">
+      @if(signup){
+      <img src="/assets/img/logobgblue.svg" alt="">
+      } @else {
+      <img src="/assets/img/logobgwhite.svg" alt="">
+      }
+    </div>
+
+
+    <div class="change-to-signup">
+      <p>Not a join user?</p>
+      <app-button text="Sign up" (clicked)="signIn()" />
+
+    </div>
+
   </header>
 </section>
+
+      <!-- <app-button text="Guest log in" type="secondary" (clicked)="signIn()" />
+      <app-button text="Log in" (clicked)="signIn()" /> -->
