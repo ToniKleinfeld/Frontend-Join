@@ -28,14 +28,16 @@
       </h1>
     </div>
 
+    @if(signup){
 
-    <form onsubmit="event.preventDefault()" id="login-form" class="login-form">
-      @if(signup){
+    <form onsubmit="event.preventDefault()" name="signup-form" class="login-form">
+
       <div class="passwortcontainer">
         <input type="text" class="input-name" placeholder="Name" required id="signupname">
         <br>
         <label for="signupname" class="redtext d-none" id="signupnamelabel">Please insert a Name.</label>
       </div>
+
       <div class="passwortcontainer">
         <input type="email" class="input-mail" placeholder="Email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
           required id="signupmail">
@@ -43,47 +45,24 @@
         <label for="signupmail" class="redtext d-none" id="signupmaillabel">Please insert a Email, example:
           my&#64;mail.com.</label>
       </div>
-      } @else {
-      <div class="passwortcontainer">
-        <input type="email" class="input-mail" placeholder="Email" required id="email" autocomplete="on">
-      </div>
-      }
 
       <div class="passwortcontainer">
-        <input type="password" class="input-password" placeholder="Password" required id="setpassword"
-          onkeyup="addEyeIcons('setpassword')">
+        <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="setpassword" name="setpassword"
+          (keyup)="onKeyup()" [ngClass]="{'eye': setpassword, '': !setpassword}" class="input-password"
+          placeholder="Password" required>
         <label for="setpassword" class="redtext d-none" id="setpasswordlabel">Please fill this field.</label>
-        <div class="eye-container" id="setpasswordicon"></div>
+        <div class="eye-container" (click)="toggleShowPassword('pw')" [ngClass]="{'pointer': setpassword}"></div>
       </div>
-
-      @if(signup){
-
 
       <div class="passwortcontainer">
-        <input
-        type="password"
-         class="input-password"
-          placeholder="Confirm Password"
-          required
-          id="confirmpassword"
-          onkeyup="addEyeIcons('confirmpassword'),
-          checkPasswordMatch()"
-          >
-        <label
-        for="confirmpassword"
-         class="redtext d-none"
-          id="passwordnomatch"
-          >Your password don't match. Please try
-          again.
-        </label>
-        <div
-        class="eye-container"
-         onclick="hideShowPassword('confirmpassword')"
-         id="confirmpasswordicon"></div>
-
+        <input [type]="showRepeadetPassword ? 'text' : 'password'" [(ngModel)]="confirmPassword" name="confirmpassword"
+          (keyup)="onKeyup()" [ngClass]="{'eye': confirmPassword, '': !confirmPassword}" class="input-password"
+          placeholder="Confirm Password" required>
+        <label *ngIf="!passwordsMatch" for="confirmpassword" class="redtext d-none">Your password don't match. Please
+          try again.</label>
+        <div class="eye-container" (click)="toggleShowPassword('repeat')" [ngClass]="{'pointer': confirmPassword}">
+        </div>
       </div>
-
-
 
       <div class="confirmbox">
         <input class="checkbox" type="checkbox" name="confirmread" required id="confirmread">
@@ -91,14 +70,34 @@
         <label for="confirmread">I confirm the <a href="./privacy.html" class="privacy-link">Privacy policy</a></label>
       </div>
       <label for="confirmread" class="redtext d-none" id="confirmreadlabel">Please confirm.</label>
-      }
+
     </form>
+
+    } @else {
+
+    <form onsubmit="event.preventDefault()" name="login-form" class="login-form">
+
+      <div class="passwortcontainer">
+        <input type="email" class="input-mail" placeholder="Email" required id="email" autocomplete="on">
+      </div>
+
+      <div class="passwortcontainer">
+        <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="input_password" name="input_password"
+          (keyup)="onKeyup()" [ngClass]="{'eye': input_password, '': !input_password}" class="input-password"
+          placeholder="Password" required>
+        <label for="password" class="redtext d-none">Check your email and password. Please try again.</label>
+        <div class="eye-container" (click)="toggleShowPassword('pw')" [ngClass]="{'pointer': input_password}"></div>
+      </div>
+
+    </form>
+    }
+
 
     <div class="button-container">
       @if(signup){
-      <app-button text="Sign up" (clicked)="signIn()" form="login-form" />
+      <app-button text="Sign up" (clicked)="signIn()" for="signup-form" />
       } @else {
-      <app-button text="Log in" (clicked)="signIn()" form="login-form" />
+      <app-button text="Log in" (clicked)="signIn()" for="login-form" />
       <app-button text="Guest log in" type="secondary" (clicked)="signIn()" />
       }
     </div>
