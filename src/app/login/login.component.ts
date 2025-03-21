@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener  } from '@angular/core';
 import { ButtonComponent } from "../shared/components/button/button.component";
 import { CommonModule } from '@angular/common';
 
@@ -10,8 +10,14 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginComponent {
   signup:boolean = false;
+  isMobile:boolean = window.innerWidth < 1024;
 
   signIn(){
     this.signup = this.signup ? false : true
+  }
+
+  @HostListener('window:resize', [])
+  onResize() {
+    this.isMobile = window.innerWidth < 1024;
   }
 }

@@ -9,12 +9,12 @@
       }
     </div>
 
-
-    <div class="change-to-signup dektop" [ngClass]="{'d-none': signup}">
+    @if(!isMobile){
+    <div class="change-to-signup" [ngClass]="{'d-none': signup}">
       <p>Not a join user?</p>
       <app-button text="Sign up" (clicked)="signIn()" />
     </div>
-
+    }
   </header>
 
   <div class="wrapper">
@@ -29,7 +29,7 @@
     </div>
 
 
-    <form onsubmit="event.preventDefault()" id="login">
+    <form onsubmit="event.preventDefault()" id="login-form" class="login-form">
       @if(signup){
       <div class="passwortcontainer">
         <input type="text" class="input-name" placeholder="Name" required id="signupname">
@@ -50,49 +50,44 @@
       <div class="passwortcontainer">
         <input type="password" class="input-password" placeholder="Password" required id="setpassword"
           onkeyup="addEyeIcons('setpassword')">
-        <div class="eye-container" id="setpasswordicon"></div>
         <label for="setpassword" class="redtext d-none" id="setpasswordlabel">Please fill this field.</label>
+        <div class="eye-container" id="setpasswordicon"></div>
       </div>
 
       @if(signup){
       <div class="passwortcontainer">
         <input type="password" class="input-password" placeholder="Confirm Password" required id="confirmpassword"
           onkeyup="addEyeIcons('confirmpassword'), checkPasswordMatch()">
-        <div class="eye-container" onclick="hideShowPassword('confirmpassword')" id="confirmpasswordicon"></div>
-        <br>
         <label for="confirmpassword" class="redtext d-none" id="passwordnomatch">Your password don't match. Please try
           again.</label>
+        <div class="eye-container" onclick="hideShowPassword('confirmpassword')" id="confirmpasswordicon"></div>
       </div>
       <div class="confirmbox">
         <input class="checkbox" type="checkbox" name="confirmread" required id="confirmread">
         <span class="checkmark"></span>
         <label for="confirmread">I confirm the <a href="./privacy.html" class="privacy-link">Privacy policy</a></label>
-
       </div>
       <label for="confirmread" class="redtext d-none" id="confirmreadlabel">Please confirm.</label>
-      } @else {
-      <div class="checkbox-container">
-        <input class="checkbox" type="checkbox" name="remember" id="remember">
-        <span class="checkmark"></span>
-        <label for="remember">Remember me</label>
-      </div>
       }
     </form>
 
     <div class="button-container">
       @if(signup){
-      <app-button text="Sign up" (clicked)="signIn()" form="login" />
+      <app-button text="Sign up" (clicked)="signIn()" form="login-form" />
       } @else {
-      <app-button text="Log in" (clicked)="signIn()" form="login" />
+      <app-button text="Log in" (clicked)="signIn()" form="login-form" />
       <app-button text="Guest log in" type="secondary" (clicked)="signIn()" />
       }
     </div>
   </div>
 
-  <!-- <div class="change-to-signup mobile" [ngClass]="{'d-none': signup}">
+  @if(isMobile){
+  <div class="change-to-signup" [ngClass]="{'d-none': signup}">
     <p>Not a join user?</p>
     <app-button text="Sign up" (clicked)="signIn()" />
-  </div>  if abfrage?? wenn display >= xxx px ??   -->
+  </div>
+  }
+
 
   <footer [ngClass]="{'color': signup}">
     <a href="#">Privacy Policy</a><a href="#">Legal Notice</a>

@@ -1,0 +1,43 @@
+@use "../shared/mixin" as mix;
+
+.login-form{
+  @include mix.center();
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.confirmbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+}
+
+.confirmbox input{
+  position: absolute;
+  opacity: 0;
+  scale: 1.2;
+  left: 6px;
+  z-index: 12;
+}
+
+.confirmbox input:hover ~ .checkmark {
+  filter: drop-shadow(0.1rem 0.15rem 0.2rem rgba(0, 93, 255, 1));
+  scale: 1.1;
+}
+
+.checkmark, .confirmbox input:checked ~ .checkmark {
+  content: url('/assets/img/checkboxcheck.svg');
+}
+
+.checkmark {
+  content: url('/assets/img/checkboxunchecked.svg');
+}
+
+.checkbox{
+  cursor: pointer;
+  width: auto;
+  height: 24px;
+}

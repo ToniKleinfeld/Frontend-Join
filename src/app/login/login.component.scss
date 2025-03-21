@@ -27,9 +27,7 @@ section {
     background-color: white;
     border: 1px solid transparent;
     border-radius: 30px;
-    -webkit-box-shadow: 0px 10px 5px -7px #000000,
-      1px 2px 26px -13px rgba(0, 0, 0, 0.14);
-    box-shadow: 0px 5px 5px -5px #000000, 1px 2px 26px -13px rgba(0, 0, 0, 0.14);
+    box-shadow: 2px 0 6px 0 rgb(0, 0, 0, 0.2);
   }
 
   footer {
@@ -37,6 +35,20 @@ section {
     width: 100%;
     max-width: 1440px;
     padding: 50px 50px;
+
+    a {
+      color: unset;
+
+      &:hover{
+        color: mix.$third-color;
+      }
+    }
+  }
+
+  .color {
+    a {
+      color: white;
+    }
   }
 }
 
@@ -57,7 +69,12 @@ section {
 
   img {
     margin: 0 -33px 0 0;
-    cursor: pointer;
+
+
+    &:hover{
+      filter: drop-shadow(0.1rem 0.15rem 0.2rem rgba(0, 93, 255, 1));
+      cursor: pointer;
+    }
   }
 
   h1 {
@@ -79,10 +96,4 @@ section {
 
 .button-container {
   @include mix.center($x: 30px);
-}
-
-.color {
-  a {
-    color: white;
-  }
 }
