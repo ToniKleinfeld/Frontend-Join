@@ -97,5 +97,19 @@ section {
 
 .button-container {
   @include mix.center($x: 30px);
+  width: 100%;
   margin: auto;
+
+  label{
+    max-width: 50%;
+    font-size: 12px;
+    word-break: break-word;
+    font-weight: 700;
+    color: mix.$urgend-color;
+    border: 2px solid mix.$urgend-color;
+    border-radius: 10px;
+    padding: 2px 5px;
+    animation: blinker 2s linear infinite;
+    -webkit-animation: blinker 2s linear infinite;
+  }
 }

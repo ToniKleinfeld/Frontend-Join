@@ -33,25 +33,20 @@
     <form (ngSubmit)="onSubmit(signupform)" id="signupform" #signupform="ngForm"  name="signupform" class="login-form">
 
       <div class="passwortcontainer">
-        <input type="text" class="input-name" placeholder="Name" required id="signup_name" name="signup_name" #signup_name="ngModel" [(ngModel)]="signupData.signup_name">
-        <br>
-        <label for="signup_name" class="redtext d-none" id="signupnamelabel">Please insert a Name.</label>
+        <input type="text" class="input-name" placeholder="Name" required id="signup_name" name="signup_name" #signup_name="ngModel" [(ngModel)]="signupData.signup_name" [class.noValid]="!signup_name.valid && signup_name.touched" minlength="3">
       </div>
 
       <div class="passwortcontainer">
-        <input type="email" class="input-mail" placeholder="Email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
-          required id="signup_mail" name="signup_mail" #signup_mail="ngModel" [(ngModel)]="signupData.signup_mail">
-        <br>
-        <label for="signupmail" class="redtext d-none" id="signupmaillabel">Please insert a Email, example:
-          my&#64;mail.com.</label>
+        <input type="email" class="input-mail"  pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+          required id="signup_mail" name="signup_mail" #signup_mail="ngModel" [(ngModel)]="signupData.signup_mail"
+          [placeholder]="(!signup_mail.valid && signup_mail.touched && signup_name.valid) ? 'Example@gmail.com'  : 'Email'" [class.noValid]="!signup_mail.valid && signup_mail.touched && signup_name.valid" >
       </div>
 
       <div class="passwortcontainer">
         <input [type]="showPassword ? 'text' : 'password'"
            [ngClass]="{'eye': signupData.signup_pw, '': !signupData.signup_pw}" class="input-password"
-          placeholder="Password" required
-          name="signup_pw" #signup_pw="ngModel" [(ngModel)]="signupData.signup_pw" id="signup_pw">
-        <label for="signup_pw" class="redtext d-none" id="setpasswordlabel">Please fill this field.</label>
+          placeholder="Password" required minlength="8" pattern="^(?=.*[A-Za-z])(?=.*\d).+$"
+          name="signup_pw" #signup_pw="ngModel" [(ngModel)]="signupData.signup_pw" id="signup_pw" [class.noValid]="!signup_pw.valid && signup_pw.touched && signup_name.valid && signup_mail.valid">
         <div class="eye-container" (click)="toggleShowPassword('pw')" [ngClass]="{'pointer': signupData.signup_pw}"></div>
       </div>
 
@@ -59,9 +54,7 @@
         <input [type]="showRepeadetPassword ? 'text' : 'password'"
           [ngClass]="{'eye': signupData.signup_pw_confirm, '': !signupData.signup_pw_confirm}" class="input-password"
           placeholder="Confirm Password" required
-          name="signup_pw_confirm" #signup_pw_confirm="ngModel" [(ngModel)]="signupData.signup_pw_confirm" id="signup_pw_confirm">
-        <label for="signup_pw_confirm" class="redtext d-none">Your password don't match. Please
-          try again.</label>
+          name="signup_pw_confirm" #signup_pw_confirm="ngModel" [(ngModel)]="signupData.signup_pw_confirm" id="signup_pw_confirm" [class.noValid]=" !(signup_pw_confirm.value == signup_pw.value) && signup_pw_confirm.touched && signup_name.valid && signup_mail.valid && signup_pw.valid">
         <div class="eye-container" (click)="toggleShowPassword('repeat')" [ngClass]="{'pointer': signupData.signup_pw_confirm}">
         </div>
       </div>
@@ -70,13 +63,28 @@
         <input class="checkbox" type="checkbox" name="confirmread" required id="confirmread" [(ngModel)]="signupData.terms"
         [checked]="this.signupData">
         <span class="checkmark"></span>
-        <label for="confirmread">I confirm the <a href="./privacy.html" class="privacy-link">Privacy policy</a></label>
+        <label for="confirmread" [class.noValid]="!signupData.terms && signup_name.valid && signup_mail.valid && signup_pw.valid && (signup_pw_confirm.value == signup_pw.value)">I confirm the <a href="./privacy.html" class="privacy-link">Privacy policy</a></label>
       </div>
       <label for="confirmread" class="redtext d-none" id="confirmreadlabel">Please confirm.</label>
     </form>
 
     <div class="button-container">
-      <app-button text="Sign up" (clicked)="onSubmit(signupform)" for="signup-form" />
+      @if(signupData.terms && signup_name.valid && signup_mail.valid && signup_pw.valid && (signup_pw_confirm.value == signup_pw.value)){
+        <app-button text="Sign up" (clicked)="onSubmit(signupform)" for="signup-form"/>
+      } @else {
+
+        @if(!signup_name.valid && signup_name.touched){
+          <label for="signup_name">Please insert at least 3 letters.</label>
+        } @else if(!signup_mail.valid && signup_mail.touched && signup_name.valid){
+          <label for="signup_name">Example: mustermann&#64;gmail.com</label>
+        } @else if (!signup_pw.valid && signup_pw.touched && signup_name.valid && signup_mail.valid) {
+          <label for="signup_name">The password must consist of at least 8 letters, including at least 1 number.</label>
+        } @else if (!(signup_pw_confirm.value == signup_pw.value) && signup_pw_confirm.touched && signup_name.valid && signup_mail.valid && signup_pw.valid) {
+          <label for="signup_name">Check if your passwords match!</label>
+        }
+        
+        <app-button text="Sign up" type="deactive" for="signup-form"/>
+      }
     </div>
 
     } @else {

@@ -96,10 +96,10 @@ input {
   background-image: url("/assets/img/visibility.svg");
 }
 
-.redtext{
-  color: red;
+.pointer {
+  cursor: pointer;
 }
 
-.pointer{
-  cursor: pointer;
+.noValid {
+  border-bottom: 2px solid mix.$urgend-color;
 }
