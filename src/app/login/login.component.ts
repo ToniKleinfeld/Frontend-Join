@@ -58,6 +58,15 @@ export class LoginComponent {
     }
   }
 
-  onSubmit(ngForm: NgForm) {
+  onSubmitLogIn(ngForm: NgForm) {
+    if (ngForm.submitted && ngForm.form.valid) {
+
+    }
+  }
+
+  onSubmitSignUp(ngForm:NgForm){
+    if (ngForm.submitted && ngForm.form.valid) {
+
+    }
   }
 }

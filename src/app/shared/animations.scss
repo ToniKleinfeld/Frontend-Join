@@ -1,5 +1,4 @@
-@use './mixin' as main;
-
+@use "./mixin" as main;
 
 @keyframes blinker {
   50% {
@@ -10,5 +9,64 @@
 @-webkit-keyframes blinker {
   50% {
     opacity: 0.5;
+  }
+}
+
+@keyframes logoAnimation {
+  0% {
+    position: absolute;
+    width: 50vw;
+    height: 50vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    opacity: 1;
+    z-index: 99;
+    background-image: url("/assets/img/logobgblue.svg");
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position: center;
+  }
+  99% {
+    position: absolute;
+    width: 100px;
+    height: 120px;
+    top: 50px;
+    left: 50px;
+    opacity: 1;
+    z-index: 99;
+    background-image: url("/assets/img/logobgwhite.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  100%{
+    display: none;
+  }
+}
+
+@keyframes bg {
+  0% {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: main.$main-color;
+    top: 0;
+    left: 0;
+    z-index: 80;
+    opacity: 1;
+  }
+  99%{
+    position: fixed;
+    opacity: 1;
+    z-index: 80;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    opacity: 0.3;
+  }
+  100%{
+    display: none;
   }
 }

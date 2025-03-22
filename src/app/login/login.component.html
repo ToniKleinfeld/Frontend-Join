@@ -1,13 +1,18 @@
 <section [ngClass]="{'bgBlue': signup}">
   <header>
 
-    <div class="logo">
+    <div class="logo-wrapper">
+      <div class="animation">
+      </div>
+
       @if(signup){
       <img src="/assets/img/logobgblue.svg" alt="logo from Join">
       } @else {
       <img src="/assets/img/logobgwhite.svg" alt="logo from Join">
       }
     </div>
+
+    <div class="logo"></div>
 
     @if(!isMobile){
     <div class="change-to-signup" [ngClass]="{'d-none': signup}">
@@ -30,83 +35,97 @@
 
     @if(signup){
 
-    <form (ngSubmit)="onSubmit(signupform)" id="signupform" #signupform="ngForm"  name="signupform" class="login-form">
+    <form (ngSubmit)="onSubmitSignUp(signupform)" id="signupform" #signupform="ngForm" name="signupform"
+      class="login-form">
 
       <div class="passwortcontainer">
-        <input type="text" class="input-name" placeholder="Name" required id="signup_name" name="signup_name" #signup_name="ngModel" [(ngModel)]="signupData.signup_name" [class.noValid]="!signup_name.valid && signup_name.touched" minlength="3">
+        <input type="text" class="input-name" placeholder="Name" required id="signup_name" name="signup_name"
+          #signup_name="ngModel" [(ngModel)]="signupData.signup_name"
+          [class.noValid]="!signup_name.valid && signup_name.touched" minlength="3">
       </div>
 
       <div class="passwortcontainer">
-        <input type="email" class="input-mail"  pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
-          required id="signup_mail" name="signup_mail" #signup_mail="ngModel" [(ngModel)]="signupData.signup_mail"
-          [placeholder]="(!signup_mail.valid && signup_mail.touched && signup_name.valid) ? 'Example@gmail.com'  : 'Email'" [class.noValid]="!signup_mail.valid && signup_mail.touched && signup_name.valid" >
+        <input type="email" class="input-mail" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" required
+          id="signup_mail" name="signup_mail" #signup_mail="ngModel" [(ngModel)]="signupData.signup_mail"
+          [placeholder]="(!signup_mail.valid && signup_mail.touched && signup_name.valid) ? 'Example@gmail.com'  : 'Email'"
+          [class.noValid]="!signup_mail.valid && signup_mail.touched && signup_name.valid">
       </div>
 
       <div class="passwortcontainer">
         <input [type]="showPassword ? 'text' : 'password'"
-           [ngClass]="{'eye': signupData.signup_pw, '': !signupData.signup_pw}" class="input-password"
-          placeholder="Password" required minlength="8" pattern="^(?=.*[A-Za-z])(?=.*\d).+$"
-          name="signup_pw" #signup_pw="ngModel" [(ngModel)]="signupData.signup_pw" id="signup_pw" [class.noValid]="!signup_pw.valid && signup_pw.touched && signup_name.valid && signup_mail.valid">
-        <div class="eye-container" (click)="toggleShowPassword('pw')" [ngClass]="{'pointer': signupData.signup_pw}"></div>
+          [ngClass]="{'eye': signupData.signup_pw, '': !signupData.signup_pw}" class="input-password"
+          placeholder="Password" required minlength="8" pattern="^(?=.*[A-Za-z])(?=.*\d).+$" name="signup_pw"
+          #signup_pw="ngModel" [(ngModel)]="signupData.signup_pw" id="signup_pw"
+          [class.noValid]="!signup_pw.valid && signup_pw.touched && signup_name.valid && signup_mail.valid">
+        <div class="eye-container" (click)="toggleShowPassword('pw')" [ngClass]="{'pointer': signupData.signup_pw}">
+        </div>
       </div>
 
       <div class="passwortcontainer">
         <input [type]="showRepeadetPassword ? 'text' : 'password'"
           [ngClass]="{'eye': signupData.signup_pw_confirm, '': !signupData.signup_pw_confirm}" class="input-password"
-          placeholder="Confirm Password" required
-          name="signup_pw_confirm" #signup_pw_confirm="ngModel" [(ngModel)]="signupData.signup_pw_confirm" id="signup_pw_confirm" [class.noValid]=" !(signup_pw_confirm.value == signup_pw.value) && signup_pw_confirm.touched && signup_name.valid && signup_mail.valid && signup_pw.valid">
-        <div class="eye-container" (click)="toggleShowPassword('repeat')" [ngClass]="{'pointer': signupData.signup_pw_confirm}">
+          placeholder="Confirm Password" required name="signup_pw_confirm" #signup_pw_confirm="ngModel"
+          [(ngModel)]="signupData.signup_pw_confirm" id="signup_pw_confirm"
+          [class.noValid]=" !(signup_pw_confirm.value == signup_pw.value) && signup_pw_confirm.touched && signup_name.valid && signup_mail.valid && signup_pw.valid">
+        <div class="eye-container" (click)="toggleShowPassword('repeat')"
+          [ngClass]="{'pointer': signupData.signup_pw_confirm}">
         </div>
       </div>
 
       <div class="confirmbox">
-        <input class="checkbox" type="checkbox" name="confirmread" required id="confirmread" [(ngModel)]="signupData.terms"
-        [checked]="this.signupData">
+        <input class="checkbox" type="checkbox" name="confirmread" required id="confirmread"
+          [(ngModel)]="signupData.terms" [checked]="this.signupData">
         <span class="checkmark"></span>
-        <label for="confirmread" [class.noValid]="!signupData.terms && signup_name.valid && signup_mail.valid && signup_pw.valid && (signup_pw_confirm.value == signup_pw.value)">I confirm the <a href="./privacy.html" class="privacy-link">Privacy policy</a></label>
+        <label for="confirmread"
+          [class.noValid]="!signupData.terms && signup_name.valid && signup_mail.valid && signup_pw.valid && (signup_pw_confirm.value == signup_pw.value)">I
+          confirm the <a href="./privacy.html" class="privacy-link">Privacy policy</a></label>
       </div>
       <label for="confirmread" class="redtext d-none" id="confirmreadlabel">Please confirm.</label>
     </form>
 
     <div class="button-container">
-      @if(signupData.terms && signup_name.valid && signup_mail.valid && signup_pw.valid && (signup_pw_confirm.value == signup_pw.value)){
-        <app-button text="Sign up" (clicked)="onSubmit(signupform)" for="signup-form"/>
+      @if(signupData.terms && signup_name.valid && signup_mail.valid && signup_pw.valid && (signup_pw_confirm.value ==
+      signup_pw.value)){
+      <app-button text="Sign up" (clicked)="onSubmitSignUp(signupform)" for="signup-form" />
       } @else {
 
-        @if(!signup_name.valid && signup_name.touched){
-          <label for="signup_name">Please insert at least 3 letters.</label>
-        } @else if(!signup_mail.valid && signup_mail.touched && signup_name.valid){
-          <label for="signup_name">Example: mustermann&#64;gmail.com</label>
-        } @else if (!signup_pw.valid && signup_pw.touched && signup_name.valid && signup_mail.valid) {
-          <label for="signup_name">The password must consist of at least 8 letters, including at least 1 number.</label>
-        } @else if (!(signup_pw_confirm.value == signup_pw.value) && signup_pw_confirm.touched && signup_name.valid && signup_mail.valid && signup_pw.valid) {
-          <label for="signup_name">Check if your passwords match!</label>
-        }
-        
-        <app-button text="Sign up" type="deactive" for="signup-form"/>
+      @if(!signup_name.valid && signup_name.touched){
+      <label for="signup_name">Please insert at least 3 letters.</label>
+      } @else if(!signup_mail.valid && signup_mail.touched && signup_name.valid){
+      <label for="signup_name">Example: mustermann&#64;gmail.com</label>
+      } @else if (!signup_pw.valid && signup_pw.touched && signup_name.valid && signup_mail.valid) {
+      <label for="signup_name">The password must consist of at least 8 letters, including at least 1 number.</label>
+      } @else if (!(signup_pw_confirm.value == signup_pw.value) && signup_pw_confirm.touched && signup_name.valid &&
+      signup_mail.valid && signup_pw.valid) {
+      <label for="signup_name">Check if your passwords match!</label>
+      }
+
+      <app-button text="Sign up" type="deactive" for="signup-form" />
       }
     </div>
 
     } @else {
 
-    <form (ngSubmit)="onSubmit(loginForm)" id="login-form" #loginForm="ngForm" class="login-form">
+    <form (ngSubmit)="onSubmitLogIn(loginForm)" id="login-form" #loginForm="ngForm" class="login-form">
 
       <div class="passwortcontainer">
-        <input type="email" class="input-mail" placeholder="Email" required id="login_mail" name="login_mail" autocomplete="on" #login_mail="ngModel" [(ngModel)]="loginData.login_mail">
+        <input type="email" class="input-mail" placeholder="Email" required id="login_mail" name="login_mail"
+          autocomplete="on" #login_mail="ngModel" [(ngModel)]="loginData.login_mail">
       </div>
 
       <div class="passwortcontainer">
         <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="loginData.login_pw" name="login_pw"
-           [ngClass]="{'eye': loginData.login_pw, '': !loginData.login_pw}" #login_pw="ngModel" class="input-password"
+          [ngClass]="{'eye': loginData.login_pw, '': !loginData.login_pw}" #login_pw="ngModel" class="input-password"
           placeholder="Password" required id="login_pw">
-        <div class="eye-container" (click)="toggleShowPassword('pw')" [ngClass]="{'pointer': loginData.login_pw }"></div>
+        <div class="eye-container" (click)="toggleShowPassword('pw')" [ngClass]="{'pointer': loginData.login_pw }">
+        </div>
       </div>
 
     </form>
 
     <div class="button-container">
-      <app-button text="Log in" (clicked)="onSubmit(loginForm)"/>
-      <app-button text="Guest log in" type="secondary" (clicked)="signIn()"/>
+      <app-button text="Log in" (clicked)="onSubmitLogIn(loginForm)" />
+      <app-button text="Guest log in" type="secondary" (clicked)="signIn()" />
     </div>
     }
   </div>

@@ -6,15 +6,32 @@ section {
   @include mix.center($jc: space-between);
   flex-direction: column;
   header {
+    position: relative;
+
     width: 100%;
     max-width: 1440px;
     padding: 50px 50px;
     @include mix.center($jc: space-between);
-    .logo {
+
+    .logo-wrapper {
+      position: relative;
+      .animation{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 120px;
+        animation: bg 3.5s ease-in-out forwards;
+      }
+
       img {
         width: 100px;
         height: 120px;
       }
+    }
+    .logo{
+      position: absolute;
+      animation: logoAnimation 2s ease-in-out forwards;
     }
   }
 
