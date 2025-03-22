@@ -30,77 +30,77 @@
 
     @if(signup){
 
-    <form onsubmit="event.preventDefault()" name="signup-form" class="login-form">
+    <form (ngSubmit)="onSubmit(signupform)" id="signupform" #signupform="ngForm"  name="signupform" class="login-form">
 
       <div class="passwortcontainer">
-        <input type="text" class="input-name" placeholder="Name" required id="signupname">
+        <input type="text" class="input-name" placeholder="Name" required id="signup_name" name="signup_name" #signup_name="ngModel" [(ngModel)]="signupData.signup_name">
         <br>
-        <label for="signupname" class="redtext d-none" id="signupnamelabel">Please insert a Name.</label>
+        <label for="signup_name" class="redtext d-none" id="signupnamelabel">Please insert a Name.</label>
       </div>
 
       <div class="passwortcontainer">
         <input type="email" class="input-mail" placeholder="Email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
-          required id="signupmail">
+          required id="signup_mail" name="signup_mail" #signup_mail="ngModel" [(ngModel)]="signupData.signup_mail">
         <br>
         <label for="signupmail" class="redtext d-none" id="signupmaillabel">Please insert a Email, example:
           my&#64;mail.com.</label>
       </div>
 
       <div class="passwortcontainer">
-        <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="setpassword" name="setpassword"
-          (keyup)="onKeyup()" [ngClass]="{'eye': setpassword, '': !setpassword}" class="input-password"
-          placeholder="Password" required>
-        <label for="setpassword" class="redtext d-none" id="setpasswordlabel">Please fill this field.</label>
-        <div class="eye-container" (click)="toggleShowPassword('pw')" [ngClass]="{'pointer': setpassword}"></div>
+        <input [type]="showPassword ? 'text' : 'password'"
+           [ngClass]="{'eye': signupData.signup_pw, '': !signupData.signup_pw}" class="input-password"
+          placeholder="Password" required
+          name="signup_pw" #signup_pw="ngModel" [(ngModel)]="signupData.signup_pw" id="signup_pw">
+        <label for="signup_pw" class="redtext d-none" id="setpasswordlabel">Please fill this field.</label>
+        <div class="eye-container" (click)="toggleShowPassword('pw')" [ngClass]="{'pointer': signupData.signup_pw}"></div>
       </div>
 
       <div class="passwortcontainer">
-        <input [type]="showRepeadetPassword ? 'text' : 'password'" [(ngModel)]="confirmPassword" name="confirmpassword"
-          (keyup)="onKeyup()" [ngClass]="{'eye': confirmPassword, '': !confirmPassword}" class="input-password"
-          placeholder="Confirm Password" required>
-        <label *ngIf="!passwordsMatch" for="confirmpassword" class="redtext d-none">Your password don't match. Please
+        <input [type]="showRepeadetPassword ? 'text' : 'password'"
+          [ngClass]="{'eye': signupData.signup_pw_confirm, '': !signupData.signup_pw_confirm}" class="input-password"
+          placeholder="Confirm Password" required
+          name="signup_pw_confirm" #signup_pw_confirm="ngModel" [(ngModel)]="signupData.signup_pw_confirm" id="signup_pw_confirm">
+        <label for="signup_pw_confirm" class="redtext d-none">Your password don't match. Please
           try again.</label>
-        <div class="eye-container" (click)="toggleShowPassword('repeat')" [ngClass]="{'pointer': confirmPassword}">
+        <div class="eye-container" (click)="toggleShowPassword('repeat')" [ngClass]="{'pointer': signupData.signup_pw_confirm}">
         </div>
       </div>
 
       <div class="confirmbox">
-        <input class="checkbox" type="checkbox" name="confirmread" required id="confirmread">
+        <input class="checkbox" type="checkbox" name="confirmread" required id="confirmread" [(ngModel)]="signupData.terms"
+        [checked]="this.signupData">
         <span class="checkmark"></span>
         <label for="confirmread">I confirm the <a href="./privacy.html" class="privacy-link">Privacy policy</a></label>
       </div>
       <label for="confirmread" class="redtext d-none" id="confirmreadlabel">Please confirm.</label>
-
     </form>
+
+    <div class="button-container">
+      <app-button text="Sign up" (clicked)="onSubmit(signupform)" for="signup-form" />
+    </div>
 
     } @else {
 
-    <form onsubmit="event.preventDefault()" name="login-form" class="login-form">
+    <form (ngSubmit)="onSubmit(loginForm)" id="login-form" #loginForm="ngForm" class="login-form">
 
       <div class="passwortcontainer">
-        <input type="email" class="input-mail" placeholder="Email" required id="email" autocomplete="on">
+        <input type="email" class="input-mail" placeholder="Email" required id="login_mail" name="login_mail" autocomplete="on" #login_mail="ngModel" [(ngModel)]="loginData.login_mail">
       </div>
 
       <div class="passwortcontainer">
-        <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="input_password" name="input_password"
-          (keyup)="onKeyup()" [ngClass]="{'eye': input_password, '': !input_password}" class="input-password"
-          placeholder="Password" required>
-        <label for="password" class="redtext d-none">Check your email and password. Please try again.</label>
-        <div class="eye-container" (click)="toggleShowPassword('pw')" [ngClass]="{'pointer': input_password}"></div>
+        <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="loginData.login_pw" name="login_pw"
+           [ngClass]="{'eye': loginData.login_pw, '': !loginData.login_pw}" #login_pw="ngModel" class="input-password"
+          placeholder="Password" required id="login_pw">
+        <div class="eye-container" (click)="toggleShowPassword('pw')" [ngClass]="{'pointer': loginData.login_pw }"></div>
       </div>
 
     </form>
-    }
-
 
     <div class="button-container">
-      @if(signup){
-      <app-button text="Sign up" (clicked)="signIn()" for="signup-form" />
-      } @else {
-      <app-button text="Log in" (clicked)="signIn()" for="login-form" />
-      <app-button text="Guest log in" type="secondary" (clicked)="signIn()" />
-      }
+      <app-button text="Log in" (clicked)="onSubmit(loginForm)"/>
+      <app-button text="Guest log in" type="secondary" (clicked)="signIn()"/>
     </div>
+    }
   </div>
 
   @if(isMobile){

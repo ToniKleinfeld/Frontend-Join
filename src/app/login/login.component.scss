@@ -19,7 +19,7 @@ section {
   }
 
   .wrapper {
-    @include mix.center($jc: space-between);
+    @include mix.center($jc:space-between);
     flex-direction: column;
     height: 610px;
     width: 600px;
@@ -67,6 +67,7 @@ section {
 .h1head {
   @include mix.center();
   width: 100%;
+  margin: auto;
 
   img {
     margin: 0 -33px 0 0;
@@ -96,4 +97,5 @@ section {
 
 .button-container {
   @include mix.center($x: 30px);
+  margin: auto;
 }
