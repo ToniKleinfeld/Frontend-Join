@@ -19,6 +19,35 @@
   }
 }
 
+@media (max-width:630px) {
+  :root {
+    --padding-s-logo:30px;
+    --padding-t-logo: 30px;
+    --h-logo: 78px;
+    --w-logo: 64px;
+
+    --normal-letter-size: 16px;
+    --mainheader-letter-size: 47px;
+    --input-letter-size: 19px;
+    --button-letter-size: 19px;
+  }
+}
+
+@media (max-width:390px) {
+  :root {
+    --padding-s-logo:15px;
+    --padding-t-logo: 15px;
+    --h-logo: 68px;
+    --w-logo: 54px;
+
+    --normal-letter-size: 14px;
+    --mainheader-letter-size: 38px;
+    --input-letter-size: 16px;
+    --button-letter-size: 17px;
+  }
+}
+
+
 @media (max-height: 600px) and (max-width: 1024px) {
   :root {
     --padding-t-logo: 15px;
