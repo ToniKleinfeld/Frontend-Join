@@ -41,6 +41,9 @@ button {
       color: mix.$third-color;
       border: 1px solid mix.$third-color;
     }
+    @media (max-width:630px) {
+      min-width: 180px;
+    }
   }
 
   &.deactive {
