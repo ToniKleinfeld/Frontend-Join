@@ -1,3 +1,14 @@
 @use "../shared/_mixin" as mix;
 
+@media (max-height: 600px) and (max-width: 1024px) {
 
+  section{
+    .wrapper{
+      padding: 20px 30px
+    }
+  }
+
+  .login-form {
+    gap: 4px;
+  }
+}

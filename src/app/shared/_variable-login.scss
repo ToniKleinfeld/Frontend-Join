@@ -3,18 +3,31 @@
   --padding-s-logo:50px;
   --h-logo: 120px;
   --w-logo: 100px;
+
+  --normal-letter-size: 16px;
+  --mainheader-letter-size: 48px;
+  --input-letter-size: 19px;
+  --button-letter-size: 23px;
 }
 
 @media (max-width:800px) {
   :root {
     --padding-t-logo: 30px;
+
+    --mainheader-letter-size: 47px;
+    --button-letter-size: 19px;
   }
 }
 
 @media (max-height: 600px) and (max-width: 1024px) {
   :root {
-    --padding-t-logo: 20px;
+    --padding-t-logo: 15px;
     --h-logo: 78px;
     --w-logo: 64px;
+
+    --mainheader-letter-size: 38px;
+    --button-letter-size: 17px;
+    --input-letter-size: 16px;
+    --normal-letter-size: 14px;
   }
 }

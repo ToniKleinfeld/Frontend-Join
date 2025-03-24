@@ -4,7 +4,7 @@ button {
   padding: 10px 35px;
   border: none;
   cursor: pointer;
-  font-size: 23px;
+  font-size: var(--button-letter-size);
   border-radius: 8px;
 
   &.primary {

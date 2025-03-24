@@ -57,18 +57,16 @@ input {
   outline: none;
   margin: 0;
   cursor: text;
-  font-size: 19px;
+  font-size: var(--input-letter-size);
 }
 
 .passwortcontainer {
-  font-size: 12px;
   position: relative;
   width: 85%;
 }
 
 .eye-container {
   cursor: text;
-  font-size: 20px;
   position: absolute;
   top: 13px;
   right: 10px;

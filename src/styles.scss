@@ -1,4 +1,4 @@
-// @use "./app/shared/_mixin.scss" as main;
+@use "./app/shared/_mixin.scss" as main;
 @use "./app/shared/animations.scss" as *;
 
 * {
@@ -6,7 +6,7 @@
   margin: 0;
   font-family: "Open Sans";
   font-weight: 400;
-  font-size: 16px;
+  font-size: var(--normal-letter-size);
   scroll-behavior: smooth;
 }
 
