@@ -1,4 +1,4 @@
-@use "./mixin" as main;
+@use "./_mixin" as main;
 
 @keyframes blinker {
   50% {
@@ -29,9 +29,9 @@
   }
   99% {
     position: absolute;
-    width: 100px;
-    height: 120px;
-    top: 50px;
+    height: var(--h-logo);
+    width: var(--w-logo);
+    top: var(--padding-t-logo);
     left: 50px;
     opacity: 1;
     z-index: 99;

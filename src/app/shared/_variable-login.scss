@@ -1,0 +1,20 @@
+:root {
+  --padding-t-logo: 50px;
+  --padding-s-logo:50px;
+  --h-logo: 120px;
+  --w-logo: 100px;
+}
+
+@media (max-width:800px) {
+  :root {
+    --padding-t-logo: 30px;
+  }
+}
+
+@media (max-height: 600px) and (max-width: 1024px) {
+  :root {
+    --padding-t-logo: 20px;
+    --h-logo: 78px;
+    --w-logo: 64px;
+  }
+}

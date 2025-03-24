@@ -7,7 +7,7 @@ import { FormsModule, NgForm } from '@angular/forms';
   selector: 'app-login',
   imports: [ButtonComponent, CommonModule, FormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss', './login-form.component.scss'],
+  styleUrls: ['./login.component.scss', './login-form.component.scss','./login-mobile.component.scss'],
 })
 export class LoginComponent {
   signup: boolean = false;
@@ -26,7 +26,7 @@ export class LoginComponent {
     terms: false,
   };
 
-  signIn() {
+  toogleToSignIn() {
     this.signup = this.signup ? false : true;
 
     this.loginData = {

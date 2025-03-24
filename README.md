@@ -4,7 +4,7 @@
   <img alt="Version" src="https://img.shields.io/badge/Framework-Angular-darkred?logo=angular" />
 </p>
 
-> This will be the new Join Frontend part , build in Angular this time with own build Django / DRF backend.
+> This will be the new Join Frontend part , build in Angular this time with own Django / DRF backend.
 
 ## Installation
 

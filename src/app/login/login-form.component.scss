@@ -1,4 +1,4 @@
-@use "../shared/mixin" as mix;
+@use "../shared/_mixin" as mix;
 
 .login-form {
   @include mix.center();
