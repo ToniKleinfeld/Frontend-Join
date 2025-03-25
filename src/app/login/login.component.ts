@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { ButtonComponent } from '../shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
+import { AuthService } from '../shared/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,8 @@ export class LoginComponent {
     signup_pw_confirm: '',
     terms: false,
   };
+
+  constructor(private authService: AuthService) { }
 
   toogleToSignIn() {
     this.signup = this.signup ? false : true;
@@ -59,8 +62,16 @@ export class LoginComponent {
   }
 
   onSubmitLogIn(ngForm: NgForm) {
-    if (ngForm.submitted && ngForm.form.valid) {
-
+    if (ngForm.form.valid) {
+      this.authService.login(this.loginData).subscribe({
+        next: (response) => {
+          console.log('Login erfolgreich', response);
+          sessionStorage.setItem('authToken', response.token);
+        },
+        error: (error) => {
+          console.error('Fehler beim Login', error);
+        }
+      });
     }
   }
 
@@ -69,4 +80,5 @@ export class LoginComponent {
 
     }
   }
+
 }
