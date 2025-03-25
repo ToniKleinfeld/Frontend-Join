@@ -17,7 +17,7 @@
     @if(!isMobile){
     <div class="change-to-signup" [ngClass]="{'d-none': signup}">
       <p>Not a join user?</p>
-      <app-button text="Sign up" (clicked)="toogleToSignIn()" />
+      <app-button text="Sign up" size="small" (clicked)="toogleToSignIn()" />
     </div>
     }
   </header>
@@ -81,28 +81,27 @@
           confirm the <a href="./privacy.html" class="privacy-link">Privacy policy</a></label>
       </div>
       <label for="confirmread" class="redtext d-none" id="confirmreadlabel">Please confirm.</label>
+
+      <div class="button-container">
+        @if(signupData.terms && signup_name.valid && signup_mail.valid && signup_pw.valid && (signup_pw_confirm.value ==
+        signup_pw.value)){
+        <app-button text="Sign up" type="submit" size="small" for="signup-form" />
+        } @else {
+
+        @if(!signup_name.valid && signup_name.touched){
+        <label for="signup_name">Please insert at least 3 letters.</label>
+        } @else if(!signup_mail.valid && signup_mail.touched && signup_name.valid){
+        <label for="signup_name">Example: mustermann&#64;gmail.com</label>
+        } @else if (!signup_pw.valid && signup_pw.touched && signup_name.valid && signup_mail.valid) {
+        <label for="signup_name">The password must consist of at least 8 letters, including at least 1 number.</label>
+        } @else if (!(signup_pw_confirm.value == signup_pw.value) && signup_pw_confirm.touched && signup_name.valid &&
+        signup_mail.valid && signup_pw.valid) {
+        <label for="signup_name">Check if your passwords match!</label>
+        }
+        <app-button text="Sign up" size="small" type="deactive" for="signup-form" />
+        }
+      </div>
     </form>
-
-    <div class="button-container">
-      @if(signupData.terms && signup_name.valid && signup_mail.valid && signup_pw.valid && (signup_pw_confirm.value ==
-      signup_pw.value)){
-      <app-button text="Sign up" (clicked)="onSubmitSignUp(signupform)" for="signup-form" />
-      } @else {
-
-      @if(!signup_name.valid && signup_name.touched){
-      <label for="signup_name">Please insert at least 3 letters.</label>
-      } @else if(!signup_mail.valid && signup_mail.touched && signup_name.valid){
-      <label for="signup_name">Example: mustermann&#64;gmail.com</label>
-      } @else if (!signup_pw.valid && signup_pw.touched && signup_name.valid && signup_mail.valid) {
-      <label for="signup_name">The password must consist of at least 8 letters, including at least 1 number.</label>
-      } @else if (!(signup_pw_confirm.value == signup_pw.value) && signup_pw_confirm.touched && signup_name.valid &&
-      signup_mail.valid && signup_pw.valid) {
-      <label for="signup_name">Check if your passwords match!</label>
-      }
-
-      <app-button text="Sign up" type="deactive" for="signup-form" />
-      }
-    </div>
 
     } @else {
 
@@ -121,19 +120,19 @@
         </div>
       </div>
 
-    </form>
+      <div class="button-container">
+        <app-button text="Log in" type="submit" size="large" />
+        <app-button text="Guest log in" type="secondary" size="large" (clicked)="toogleToSignIn()" />
+      </div>
 
-    <div class="button-container">
-      <app-button text="Log in" (clicked)="onSubmitLogIn(loginForm)" />
-      <app-button text="Guest log in" type="secondary" (clicked)="toogleToSignIn()" />
-    </div>
+    </form>
     }
   </div>
 
   @if(isMobile){
   <div class="change-to-signup" [ngClass]="{'d-none': signup}">
     <p>Not a join user?</p>
-    <app-button type="primary-small" text="Sign up" (clicked)="toogleToSignIn()" />
+    <app-button type="primary" size="small" text="Sign up" (clicked)="toogleToSignIn()" />
   </div>
   }
 

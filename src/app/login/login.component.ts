@@ -62,7 +62,7 @@ export class LoginComponent {
   }
 
   onSubmitLogIn(ngForm: NgForm) {
-    if (ngForm.form.valid) {
+    if (ngForm.form.valid && ngForm.submitted) {
       this.authService.login(this.loginData).subscribe({
         next: (response) => {
           console.log('Login erfolgreich', response);
@@ -77,7 +77,7 @@ export class LoginComponent {
 
   onSubmitSignUp(ngForm:NgForm){
     if (ngForm.submitted && ngForm.form.valid) {
-
+      console.log('test submit signup')
     }
   }
 

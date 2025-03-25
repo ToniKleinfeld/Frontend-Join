@@ -7,28 +7,13 @@ button {
   font-size: var(--button-letter-size);
   border-radius: 8px;
 
-  &.primary {
+  &.primary,
+  &.submit {
     background-color: mix.$main-color;
     color: mix.$secondary-color;
 
     &:hover {
       background-color: mix.$third-color;
-    }
-
-    @media (max-width:630px) {
-      min-width: 180px;
-    }
-  }
-
-  &.primary-small {
-    background-color: mix.$main-color;
-    color: mix.$secondary-color;
-
-    &:hover {
-      background-color: mix.$third-color;
-    }
-    @media (max-width:630px) {
-      padding: 10px 20px;
     }
   }
 
@@ -41,22 +26,32 @@ button {
       color: mix.$third-color;
       border: 1px solid mix.$third-color;
     }
-    @media (max-width:630px) {
-      min-width: 180px;
-    }
   }
 
   &.deactive {
-    background-color:  grey;
+    background-color: grey;
     color: mix.$secondary-color;
 
-    &:hover{
+    &:hover {
       cursor: unset;
     }
   }
 
-  &:hover{
-    -webkit-box-shadow: 0px 10px 5px -7px #000000, 1px 2px 26px -13px rgba(0,0,0,0.14);
-    box-shadow: 0px 5px 5px -5px #000000, 1px 2px 26px -13px rgba(0,0,0,0.14);
+  &:hover {
+    -webkit-box-shadow: 0px 10px 5px -7px #000000,
+      1px 2px 26px -13px rgba(0, 0, 0, 0.14);
+    box-shadow: 0px 5px 5px -5px #000000, 1px 2px 26px -13px rgba(0, 0, 0, 0.14);
+  }
+
+  &.small {
+    @media (max-width: 630px) {
+      padding: 10px 20px;
+    }
+  }
+
+  &.large {
+    @media (max-width: 630px) {
+      min-width: 180px;
+    }
   }
 }
