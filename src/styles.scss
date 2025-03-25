@@ -49,3 +49,7 @@ input {
   cursor: text;
   font-size: var(--input-letter-size);
 }
+
+@media (max-height: 599px) and (orientation: landscape) {
+  body{display: none;}
+}
