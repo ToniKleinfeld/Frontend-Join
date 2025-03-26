@@ -67,6 +67,8 @@ export class LoginComponent {
         next: (response) => {
           console.log('Login erfolgreich', response);
           sessionStorage.setItem('authToken', response.token);
+          sessionStorage.setItem('usermail', response.email);
+          sessionStorage.setItem('username', response.username);
         },
         error: (error) => {
           console.error('Fehler beim Login', error);
@@ -77,7 +79,14 @@ export class LoginComponent {
 
   onSubmitSignUp(ngForm:NgForm){
     if (ngForm.submitted && ngForm.form.valid) {
-      console.log('test submit signup')
+      this.authService.register(this.signupData).subscribe({
+        next: (response) => {
+          console.log('Registrierung erfolgreich', response);
+        },
+        error: (error) => {
+          console.error('Fehler bei der Registrierung', error);
+        }
+      });
     }
   }
 

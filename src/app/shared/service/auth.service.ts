@@ -12,10 +12,20 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(loginData: { login_mail: string; login_pw: string; }): Observable<any> {
-    return this.http.post(`${this.baseUrl}login/`, loginData);
+    const formattedData = {
+      email: loginData.login_mail.toLowerCase(),
+      password: loginData.login_pw
+  };
+    return this.http.post(`${this.baseUrl}login/`, formattedData);
   }
 
   register(signupData: { signup_name: string; signup_mail: string; signup_pw: string; signup_pw_confirm: string; terms: boolean; }): Observable<any> {
-    return this.http.post(`${this.baseUrl}registration/`, signupData);
+    const formattedData = {
+      username : signupData.signup_name.toLowerCase(),
+      email: signupData.signup_mail.toLowerCase(),
+      password: signupData.signup_pw,
+      repeated_password: signupData.signup_pw_confirm
+  };
+    return this.http.post(`${this.baseUrl}registration/`, formattedData);
   }
 }

@@ -36,7 +36,7 @@
     @if(signup){
 
     <form (ngSubmit)="onSubmitSignUp(signupform)" id="signupform" #signupform="ngForm" name="signupform"
-      class="login-form">
+      class="login-form" pattern="^[a-zA-Z0-9]+$">
 
       <div class="passwortcontainer">
         <input type="text" class="input-name" placeholder="Name" required id="signup_name" name="signup_name"
