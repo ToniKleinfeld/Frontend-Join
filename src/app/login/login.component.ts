@@ -8,7 +8,11 @@ import { AuthService } from '../shared/service/auth.service';
   selector: 'app-login',
   imports: [ButtonComponent, CommonModule, FormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss', './login-form.component.scss','./login-mobile.component.scss'],
+  styleUrls: [
+    './login.component.scss',
+    './login-form.component.scss',
+    './login-mobile.component.scss',
+  ],
 })
 export class LoginComponent {
   signup: boolean = false;
@@ -27,8 +31,12 @@ export class LoginComponent {
     terms: false,
   };
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
+  /**
+   * Clear the Form field when switch between sign up / and login
+   * And swtich the "aktive" state Login/Sign up
+   */
   toogleToSignIn() {
     this.signup = this.signup ? false : true;
 
@@ -50,9 +58,15 @@ export class LoginComponent {
   onResize() {
     this.isMobile = window.innerWidth < 1024;
   }
+
   showPassword: boolean = false;
   showRepeadetPassword: boolean = false;
 
+  /**
+   *Toogle the passwort atribute from passwort to text
+
+   * @param string
+   */
   toggleShowPassword(string: string): void {
     if (string == 'repeat') {
       this.showRepeadetPassword = !this.showRepeadetPassword;
@@ -65,34 +79,52 @@ export class LoginComponent {
     if (ngForm.form.valid && ngForm.submitted) {
       this.authService.login(this.loginData).subscribe({
         next: (response) => {
-          if (response.non_field_errors
-          ) {
-            console.log(`${response.non_field_errors[0]}`);
-          } else {
-            console.log('Login successfully.',response);
-            sessionStorage.setItem('authToken', response.token);
-            sessionStorage.setItem('usermail', response.email);
-            sessionStorage.setItem('username', response.username.replaceAll("-", " "));
-          }
+          console.log('Login successfully.', response);
+          this.saveSessionStorage(response);
         },
         error: (error) => {
-          console.error(`Login ${error}`, error);
-        }
+          if (error.error.email) {
+            console.log(`${error.error.email[0]}`);
+          } else {
+            console.log(`${error.error.error[0]}`);
+          }
+        },
       });
     }
   }
 
-  onSubmitSignUp(ngForm:NgForm){
+  /**
+   * Check if Form is Valid and send call POST funktion from service
+   * to Backend with filled Data
+   *
+   * @param ngForm
+   */
+  onSubmitSignUp(ngForm: NgForm) {
     if (ngForm.submitted && ngForm.form.valid) {
       this.authService.register(this.signupData).subscribe({
         next: (response) => {
-          console.log('You Signed Up successfully.');
+          console.log('You Signed Up successfully.', response);
+          this.saveSessionStorage(response);
         },
         error: (error) => {
-          console.error('Sorry something went wrong.', error);
-        }
+          if (error.error.email) {
+            console.log(`${error.error.email[0]}`);
+          } else {
+            console.log(`${error}`, error);
+          }
+        },
       });
     }
   }
 
+  /**
+   * Save the User Name / Mail and the token in sessionStorage
+   *
+   * @param response get the Data from user as Json
+   */
+  saveSessionStorage(response: any) {
+    sessionStorage.setItem('authToken', response.token);
+    sessionStorage.setItem('usermail', response.email);
+    sessionStorage.setItem('username', response.username.replaceAll('-', ' '));
+  }
 }
