@@ -36,12 +36,12 @@
     @if(signup){
 
     <form (ngSubmit)="onSubmitSignUp(signupform)" id="signupform" #signupform="ngForm" name="signupform"
-      class="login-form" pattern="^[a-zA-Z0-9]+$">
+      class="login-form">
 
       <div class="passwortcontainer">
         <input type="text" class="input-name" placeholder="Name" required id="signup_name" name="signup_name"
           #signup_name="ngModel" [(ngModel)]="signupData.signup_name"
-          [class.noValid]="!signup_name.valid && signup_name.touched" minlength="3">
+          [class.noValid]="!signup_name.valid && signup_name.touched" minlength="3" pattern="^[a-zA-Z0-9 ]+$">
       </div>
 
       <div class="passwortcontainer">
@@ -89,7 +89,7 @@
         } @else {
 
         @if(!signup_name.valid && signup_name.touched){
-        <label for="signup_name">Please insert at least 3 letters.</label>
+        <label for="signup_name">Only Letters, Numbers and spaces are valid. Minimum of 3 character .</label>
         } @else if(!signup_mail.valid && signup_mail.touched && signup_name.valid){
         <label for="signup_name">Example: mustermann&#64;gmail.com</label>
         } @else if (!signup_pw.valid && signup_pw.touched && signup_name.valid && signup_mail.valid) {
@@ -120,7 +120,7 @@
         </div>
       </div>
 
-      <div class="button-container">
+      <div class="button-container loginbutton">
         <app-button text="Log in" type="submit" size="large" />
         <app-button text="Guest log in" type="secondary" size="large" (clicked)="toogleToSignIn()" />
       </div>

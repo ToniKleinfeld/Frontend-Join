@@ -21,7 +21,7 @@ export class AuthService {
 
   register(signupData: { signup_name: string; signup_mail: string; signup_pw: string; signup_pw_confirm: string; terms: boolean; }): Observable<any> {
     const formattedData = {
-      username : signupData.signup_name.toLowerCase(),
+      username : signupData.signup_name.toLowerCase().replaceAll(" ", "-"),
       email: signupData.signup_mail.toLowerCase(),
       password: signupData.signup_pw,
       repeated_password: signupData.signup_pw_confirm

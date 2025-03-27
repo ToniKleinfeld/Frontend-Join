@@ -1,40 +1,30 @@
 @use "../shared/_mixin" as mix;
 
-@media (max-width:630px) {
-  section{
-    .wrapper{
+@media (max-width: 630px) {
+  section {
+    .wrapper {
       width: 90dvw;
-      padding: 20px 15px
+      padding: 20px 15px;
     }
   }
 
-  .passwortcontainer{
+  .passwortcontainer {
     width: 100%;
   }
 
-  .button-container{
+  .button-container {
     flex-direction: column;
     gap: 10px;
-  }
-}
-
-@media (max-width:390px) {
-  section{
-    .wrapper{
-      padding: 20px 15px
+    label{
+      max-width: 100%;
     }
   }
-
-  .login-form{
-    gap: 4px;
-  }
 }
 
-@media (max-height: 600px) and (max-width: 1024px) {
-
-  section{
-    .wrapper{
-      padding: 20px 30px
+@media (max-width: 390px) {
+  section {
+    .wrapper {
+      padding: 20px 15px;
     }
   }
 
@@ -42,3 +32,17 @@
     gap: 4px;
   }
 }
+
+@media (max-height: 900px) {
+  section {
+    .wrapper {
+      padding: 20px 30px;
+    }
+  }
+
+  .login-form {
+    gap: 4px;
+  }
+}
+
+

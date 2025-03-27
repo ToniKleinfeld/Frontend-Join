@@ -65,13 +65,18 @@ export class LoginComponent {
     if (ngForm.form.valid && ngForm.submitted) {
       this.authService.login(this.loginData).subscribe({
         next: (response) => {
-          console.log('Login erfolgreich', response);
-          sessionStorage.setItem('authToken', response.token);
-          sessionStorage.setItem('usermail', response.email);
-          sessionStorage.setItem('username', response.username);
+          if (response.non_field_errors
+          ) {
+            console.log(`${response.non_field_errors[0]}`);
+          } else {
+            console.log('Login successfully.',response);
+            sessionStorage.setItem('authToken', response.token);
+            sessionStorage.setItem('usermail', response.email);
+            sessionStorage.setItem('username', response.username.replaceAll("-", " "));
+          }
         },
         error: (error) => {
-          console.error('Fehler beim Login', error);
+          console.error(`Login ${error}`, error);
         }
       });
     }
@@ -81,10 +86,10 @@ export class LoginComponent {
     if (ngForm.submitted && ngForm.form.valid) {
       this.authService.register(this.signupData).subscribe({
         next: (response) => {
-          console.log('Registrierung erfolgreich', response);
+          console.log('You Signed Up successfully.');
         },
         error: (error) => {
-          console.error('Fehler bei der Registrierung', error);
+          console.error('Sorry something went wrong.', error);
         }
       });
     }

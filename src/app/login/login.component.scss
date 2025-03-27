@@ -110,7 +110,6 @@ section {
 .button-container {
   @include mix.center($x: 30px);
   width: 100%;
-  padding-top: 20px;
 
   label {
     max-width: 50%;
@@ -124,4 +123,8 @@ section {
     animation: blinker 2s linear infinite;
     -webkit-animation: blinker 2s linear infinite;
   }
+}
+
+.loginbutton {
+  padding: var(--padding-login-button);
 }
