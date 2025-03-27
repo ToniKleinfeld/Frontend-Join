@@ -86,3 +86,22 @@
 .noValid {
   border-bottom: 2px solid mix.$urgend-color;
 }
+
+.feeback-container{
+  padding: var(--padding-login-button);
+  @include mix.center();
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  min-width: 200px;
+  max-width: 50dvw;
+  background-color: mix.$main-color;
+  color: white;
+  border: 1px solid white;
+  border-radius: 20px;
+  word-break: break-all;
+  box-shadow: 2px 0 6px 0 rgb(0, 0, 0, 0.2);
+  animation: slide-in-top 2s ease-in;
+  -webkit-animation: slide-in-top 1s ease-in;
+}

@@ -129,6 +129,8 @@
     }
   </div>
 
+  <div class="feeback-container" [ngClass]="{'d-none': feedback_Login_SingUp == ''}">{{feedback_Login_SingUp}}</div>
+
   @if(isMobile){
   <div class="change-to-signup" [ngClass]="{'d-none': signup}">
     <p>Not a join user?</p>

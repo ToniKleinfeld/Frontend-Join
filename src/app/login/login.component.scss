@@ -17,6 +17,7 @@ section {
       position: relative;
       .animation {
         animation: bg 2s ease-in-out forwards;
+        -webkit-animation: bg 2s ease-in-out forwards;
       }
 
       img {
@@ -27,6 +28,7 @@ section {
     .logo {
       position: absolute;
       animation: logoAnimation 2s ease-in-out forwards;
+      -webkit-animation: logoAnimation 2s ease-in-out forwards;
     }
   }
 

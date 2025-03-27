@@ -17,6 +17,7 @@ import { AuthService } from '../shared/service/auth.service';
 export class LoginComponent {
   signup: boolean = false;
   isMobile: boolean = window.innerWidth < 1024;
+  feedback_Login_SingUp: string = '';
 
   loginData = {
     login_mail: '',
@@ -79,14 +80,15 @@ export class LoginComponent {
     if (ngForm.form.valid && ngForm.submitted) {
       this.authService.login(this.loginData).subscribe({
         next: (response) => {
-          console.log('Login successfully.', response);
+          let logedIn = 'Login successfully.';
+          this.showFeedbackMsg(logedIn);
           this.saveSessionStorage(response);
         },
         error: (error) => {
           if (error.error.email) {
-            console.log(`${error.error.email[0]}`);
+            this.showFeedbackMsg(error.error.email[0]);
           } else {
-            console.log(`${error.error.error[0]}`);
+            this.showFeedbackMsg(error.error.error[0]);
           }
         },
       });
@@ -103,18 +105,26 @@ export class LoginComponent {
     if (ngForm.submitted && ngForm.form.valid) {
       this.authService.register(this.signupData).subscribe({
         next: (response) => {
-          console.log('You Signed Up successfully.', response);
+          let signUp = 'You Signed Up successfully.';
+          this.showFeedbackMsg(signUp);
           this.saveSessionStorage(response);
         },
         error: (error) => {
           if (error.error.email) {
-            console.log(`${error.error.email[0]}`);
+            this.showFeedbackMsg(error.error.email[0]);
           } else {
-            console.log(`${error}`, error);
+            console.error(`${error}`, error);
           }
         },
       });
     }
+  }
+
+  showFeedbackMsg(msg: any) {
+    this.feedback_Login_SingUp = `${msg.charAt(0).toUpperCase()+msg.slice(1)}`;
+    setTimeout(() => {
+      this.feedback_Login_SingUp = ``;
+    }, 2000);
   }
 
   /**
