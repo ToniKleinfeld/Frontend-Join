@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -44,5 +45,18 @@ export class AuthService {
       repeated_password: signupData.signup_pw_confirm,
     };
     return this.http.post(`${this.baseUrl}registration/`, formattedData);
+  }
+
+  /**
+   * Post request to check if token still valid
+   *
+   * @param token token from storage
+   * @returns
+   */
+  verifyToken(token: string): Observable<boolean> {
+    return this.http.post(`${this.baseUrl}token/verify/`, { token }).pipe(
+      map(() => true),
+      catchError(() => of(false))
+    );
   }
 }
