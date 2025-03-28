@@ -3,6 +3,7 @@ import { ButtonComponent } from '../shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../shared/service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ import { AuthService } from '../shared/service/auth.service';
   ],
 })
 export class LoginComponent {
+  private guesttoken :string = '9b0b222592cec1c4553b9f9fec588a588350fcf8';
   signup: boolean = false;
   isMobile: boolean = window.innerWidth < 1024;
   feedback_Login_SingUp: string = '';
@@ -32,7 +34,7 @@ export class LoginComponent {
     terms: false,
   };
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   /**
    * Clear the Form field when switch between sign up / and login
@@ -83,6 +85,7 @@ export class LoginComponent {
           let logedIn = 'Login successfully.';
           this.showFeedbackMsg(logedIn);
           this.saveSessionStorage(response);
+          this.routeToSummary();
         },
         error: (error) => {
           if (error.error.email) {
@@ -108,6 +111,7 @@ export class LoginComponent {
           let signUp = 'You Signed Up successfully.';
           this.showFeedbackMsg(signUp);
           this.saveSessionStorage(response);
+          this.routeToSummary();
         },
         error: (error) => {
           if (error.error.email) {
@@ -120,8 +124,17 @@ export class LoginComponent {
     }
   }
 
+  /**
+   * Show massage in Feedbackbox ,
+   * when get Respond or error from backend request and clear
+   * and clear it after 2second to hide container again
+   *
+   * @param msg
+   */
   showFeedbackMsg(msg: any) {
-    this.feedback_Login_SingUp = `${msg.charAt(0).toUpperCase()+msg.slice(1)}`;
+    this.feedback_Login_SingUp = `${
+      msg.charAt(0).toUpperCase() + msg.slice(1)
+    }`;
     setTimeout(() => {
       this.feedback_Login_SingUp = ``;
     }, 2000);
@@ -136,5 +149,25 @@ export class LoginComponent {
     sessionStorage.setItem('authToken', response.token);
     sessionStorage.setItem('usermail', response.email);
     sessionStorage.setItem('username', response.username.replaceAll('-', ' '));
+  }
+
+  /**
+   * Navigate to Summary after a timeout , when login/signup succesful
+   */
+  routeToSummary() {
+    setTimeout(() => {
+      this.router.navigate(['/summary']);
+    }, 3000);
+  }
+
+  /**
+   * Guest login , with createt user in Backend "guest" , per token
+   */
+  guestLogIn(){
+    this.showFeedbackMsg('Login successfully.');
+    sessionStorage.setItem('authToken', this.guesttoken);
+    sessionStorage.setItem('usermail', 'guest@testmyjoin.me');
+    sessionStorage.setItem('username', 'guest');
+    this.routeToSummary();
   }
 }
