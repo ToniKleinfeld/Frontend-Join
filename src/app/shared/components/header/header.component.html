@@ -1,0 +1,26 @@
+<section>
+  <header>
+    <img class="logo" src="/assets/img/logobgblue.svg" alt="">
+
+    <div class="header-left-wrapper">
+
+      <p>Kanban Project Managment Tool</p>
+
+      <div class="help"><img src="/assets/img/help.svg" alt=""></div>
+
+      <div class="user-logo" (click)="dropDownMenu = dropDownMenu ? false : true">
+        <div class="shortusername">
+          G
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdownmenu" [ngClass]="{'d-none': !dropDownMenu}">
+
+      <a >Legal Notice</a>
+      <a >Privacy Policy</a>
+      <a (click)="logOut()" >Log out</a>
+
+    </div>
+  </header>
+</section>

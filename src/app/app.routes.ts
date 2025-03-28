@@ -2,11 +2,13 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { authGuard } from './guard/auth.guard';
+import { noauthGuard } from './guard/noauth.guard';
 
 export const routes: Routes = [
   {
     path: 'login',
     title: 'Login',
+    canActivate: [noauthGuard],
     component: LoginComponent,
   },
   {
@@ -36,5 +38,5 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '**', redirectTo: 'login' },
+  { path: '**', redirectTo: 'summary' },
 ];
