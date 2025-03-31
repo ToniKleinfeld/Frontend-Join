@@ -4,9 +4,11 @@
 
     <div class="header-left-wrapper">
 
+      @if(!isMobile){
       <p>Kanban Project Managment Tool</p>
 
       <div class="help"><img src="/assets/img/help.svg" alt=""></div>
+      }
 
       <div class="user-logo" (click)="dropDownMenu = dropDownMenu ? false : true">
         <div class="shortusername">
@@ -16,10 +18,12 @@
     </div>
 
     <div class="dropdownmenu" [ngClass]="{'d-none': !dropDownMenu}">
-
-      <a >Legal Notice</a>
-      <a >Privacy Policy</a>
-      <a (click)="logOut()" >Log out</a>
+      @if(isMobile){
+      <a>Help</a>
+      }
+      <a>Legal Notice</a>
+      <a>Privacy Policy</a>
+      <a (click)="logOut()">Log out</a>
 
     </div>
   </header>
