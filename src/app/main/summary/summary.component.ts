@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-summary',
@@ -8,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class SummaryComponent {
 
+  isMobile: boolean = window.innerWidth < 1024;
+
+  @HostListener('window:resize', [])
+  onResize() {
+    this.isMobile = window.innerWidth < 1024;
+  }
 }

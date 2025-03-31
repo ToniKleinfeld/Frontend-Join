@@ -1,6 +1,54 @@
 @use '../../shared/mixin' as mix;
 
 section{
+  @include mix.center();
+  flex-direction: column;
   height: var(--main-content-height);
   width: var(--main-content-width);
+}
+
+.welcome-wrapper{
+  width: 100%;
+  @include mix.center();
+
+  h1{
+    font-size: 64px;
+    font-weight: 700;
+  }
+}
+
+.side{
+  width: 100%;
+  height: 50%;
+  @include mix.center($jc:space-between,$x:15px);
+  flex-direction: row;
+}
+
+.wrapper{
+  width: 912px;
+  height: 442px;
+  @include mix.center($x:15px);
+  flex-direction: column;
+}
+
+.smallBox, .largeBox{
+  background: white;
+  height: 95%;
+  box-shadow: 2px 0 6px 0 rgb(0, 0, 0, 0.2);
+  border-radius: 30px;
+}
+
+.smallBox{
+  aspect-ratio: 1/1;
+}
+
+.toDo{
+  background-color: mix.$hover-button;
+  color: mix.$main-color;;
+}
+
+.largeBox{
+  aspect-ratio: 3.35/1;
+  background: mix.$main-color;
+  color: white;
 }

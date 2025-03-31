@@ -1,3 +1,32 @@
 <section>
-  <p>summary works!</p>
+  <div class="welcome-wrapper">
+    <h1>Good Morning</h1>
+  </div>
+  <div class="wrapper">
+    <div class="side top">
+
+      <div class="urgent largeBox"></div>
+
+      @if(isMobile){
+        <div class="toDo smallBox"></div>
+      } @else {
+        <div class="countalltask smallBox"></div>
+      }
+
+    </div>
+
+    <div class="side down">
+
+      @if(!isMobile){
+        <div class="toDo smallBox"></div>
+      } @else {
+        <div class="countalltask smallBox"></div>
+      }
+
+      <div class="inprogress smallBox"></div>
+      <div class="awaitfeedback smallBox"></div>
+      <div class="tasksdone smallBox"></div>
+
+    </div>
+  </div>
 </section>
