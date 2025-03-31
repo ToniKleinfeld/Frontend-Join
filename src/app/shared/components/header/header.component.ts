@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   selector: 'app-header',
   imports: [CommonModule],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss','./header-mobile.component.scss']
+  styleUrls: ['./header.component.scss', './header-mobile.component.scss'],
 })
 export class HeaderComponent {
   constructor(private router: Router) {}
@@ -25,8 +25,7 @@ export class HeaderComponent {
   }
 
   @HostListener('window:resize', [])
-onResize() {
-  this.isMobile = window.innerWidth < 800;
+  onResize() {
+    this.isMobile = window.innerWidth < 800;
+  }
 }
-}
-

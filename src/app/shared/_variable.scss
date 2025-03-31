@@ -9,12 +9,30 @@
   --mainheader-letter-size: 48px;
   --input-letter-size: 19px;
   --button-letter-size: 23px;
+
+  --header-height: 96px;
+  --sidemenu-width: 232px;
+  --sidemenu-height: calc(100dvh - var(--header-height));
+  --main-content-height: calc(100dvh - var(--header-height));
+  --main-content-width: calc(100dvw - var(--sidemenu-width));
+}
+
+@media (max-width: 1200px) {
+  :root {
+    --sidemenu-height: 76px;
+    --sidemenu-width: 100dvw;
+
+    --main-content-height: calc(
+      100dvh - (var(--header-height) + var(--sidemenu-height))
+    );
+    --main-content-width: 100dvw;
+  }
 }
 
 @media (max-width: 800px) {
   :root {
     --padding-t-logo: 30px;
-
+    --header-height: 80px;
     --mainheader-letter-size: 47px;
     --button-letter-size: 19px;
   }
@@ -60,4 +78,3 @@
     --normal-letter-size: 14px;
   }
 }
-

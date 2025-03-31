@@ -5,3 +5,13 @@ section{
   height: 100dvh;
   width: 100dvw;
 }
+
+.wrapper{
+  @include mix.center($jc:flex-start,$ai:flex-start);
+}
+
+@media (max-width:1200px) {
+  .wrapper{
+    flex-direction: column-reverse;
+  }
+}
