@@ -36,6 +36,7 @@ export const routes: Routes = [
         title: 'Contacts',
         loadComponent: () => import('./main/contacts/contacts.component').then(c => c.ContactsComponent),
       },
+      { path: '**', redirectTo: 'summary' },
     ],
   },
   { path: '**', redirectTo: 'summary' },

@@ -11,7 +11,7 @@ nav{
   width: 100%;
   @include mix.center($jc:space-between);
   flex-direction: column;
-  padding: 50px 30px;
+  padding: 50px 20px;
 }
 
 .nav-wrapper, .legal-privacy-wrapper{
@@ -21,7 +21,7 @@ nav{
 
   a{
     @include mix.center($jc:flex-start,$x:5px );
-    padding: 5px 30px;
+    padding: 8px 30px;
     width: 100%;
     color: mix.$text-color-nav;
 
@@ -29,6 +29,11 @@ nav{
       cursor: pointer;
     }
   }
+}
+
+.active{
+  background-color: mix.$hover-button;
+  border-radius: 8px;
 }
 
 .nav-wrapper{
