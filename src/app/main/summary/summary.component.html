@@ -3,30 +3,62 @@
     <h1>Good Morning</h1>
   </div>
   <div class="wrapper">
-    <div class="side top">
+    @if(isMobile){
+    @for(taskcount of summaryTasksMobile; track taskcount){
+    @if(taskcount.class == "largeBox"){
 
-      <div class="urgent largeBox"></div>
-
-      @if(isMobile){
-        <div class="toDo smallBox"></div>
-      } @else {
-        <div class="countalltask smallBox"></div>
-      }
-
+    <div class="{{taskcount.class}}">
+      <div class="largeBox-wrapper">
+        <div class="icon-wrapper">
+          <img src="/assets/img/{{taskcount.imgpath}}" alt="">
+          2
+        </div>
+        {{taskcount.task}}
+      </div>
+      <div class="urgendTaskInfo">
+        <h2>October 15, 2025</h2>
+        <p>Upcoming Deadline</p>
+      </div>
     </div>
-
-    <div class="side down">
-
-      @if(!isMobile){
-        <div class="toDo smallBox"></div>
-      } @else {
-        <div class="countalltask smallBox"></div>
-      }
-
-      <div class="inprogress smallBox"></div>
-      <div class="awaitfeedback smallBox"></div>
-      <div class="tasksdone smallBox"></div>
-
+    } @else {
+    <div class="{{taskcount.class}}">
+      <div class="icon-wrapper">
+        <img src="/assets/img/{{taskcount.imgpath}}" alt="">
+        2
+      </div>
+      {{taskcount.task}}
     </div>
+    }
+    }
+    } @else {
+    @for(taskcount of summaryTasksDesktop; track taskcount){
+
+    @if(taskcount.class == "largeBox"){
+
+    <div class="{{taskcount.class}}">
+      <div class="largeBox-wrapper">
+        <div class="icon-wrapper">
+          <img src="/assets/img/{{taskcount.imgpath}}" alt="">
+          2
+        </div>
+        {{taskcount.task}}
+      </div>
+      <div class="urgendTaskInfo">
+        <h2>October 15, 2025</h2>
+        <p>Upcoming Deadline</p>
+      </div>
+    </div>
+    } @else {
+    <div class="{{taskcount.class}}">
+      <div class="icon-wrapper">
+        <img src="/assets/img/{{taskcount.imgpath}}" alt="">
+        2
+      </div>
+      {{taskcount.task}}
+    </div>
+    }
+    }
+    }
+
   </div>
 </section>

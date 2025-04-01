@@ -17,29 +17,30 @@ section{
   }
 }
 
-.side{
-  width: 100%;
-  height: 50%;
-  @include mix.center($jc:space-between,$x:15px);
-  flex-direction: row;
-}
-
 .wrapper{
+  padding: 10px 20px;
   width: 912px;
   height: 442px;
-  @include mix.center($x:15px);
-  flex-direction: column;
+  @include mix.center($jc:space-between,$ai:flex-start);
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .smallBox, .largeBox{
   background: white;
-  height: 95%;
+  height: 45%;
   box-shadow: 2px 0 6px 0 rgb(0, 0, 0, 0.2);
   border-radius: 30px;
 }
 
 .smallBox{
   aspect-ratio: 1/1;
+  padding: 30px;
+  @include mix.center();
+  flex-direction: column;
+  font-size: var(--button-letter-size);
+  text-align: center;
+  color: mix.$main-color;
 }
 
 .toDo{
@@ -48,7 +49,41 @@ section{
 }
 
 .largeBox{
-  aspect-ratio: 3.35/1;
+  @include mix.center($jc:space-around);
+  aspect-ratio: 3.40/1;
   background: mix.$main-color;
   color: white;
+  .largeBox-wrapper{
+    font-size: var(--button-letter-size);
+    .icon-wrapper{color: white;}
+  }
+
+}
+
+.icon-wrapper{
+  @include mix.center($jc:space-around,$x:10px);
+  font-size: 48px;
+  font-weight: 700;
+  width: 100%;
+  color: black;
+  img{
+    width: 76px;
+    aspect-ratio: 1/1;
+  }
+}
+
+.urgendTaskInfo{
+  @include mix.center($ai:flex-start);
+  flex-direction: column;
+  border-left: 3px solid white;
+  padding-left: 30px;
+  height: 80%;
+
+  h2{
+    font-size: 33px;
+    font-weight: 700;
+  }
+  p{
+    font-size: var(--button-letter-size);
+  }
 }
