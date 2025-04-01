@@ -1,24 +1,18 @@
-import { Component, HostListener } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-summary',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './summary.component.html',
-  styleUrl: './summary.component.scss',
+  styleUrls: ['./summary.component.scss', './summary-mobile.component.scss'],
 })
-export class SummaryComponent {
-  isMobile: boolean = window.innerWidth < 1024;
+export class SummaryComponent implements OnInit {
+  isMobile: boolean = window.innerWidth < 920;
+  isLandscape:boolean = window.innerHeight < 601;
 
-  /**
-   * Watch for window size change under 1024px, call funktion to swap array.object positions
-   */
-  @HostListener('window:resize', [])
-  onResize() {
-    const newIsMobile = window.innerWidth < 1024;
-    if (newIsMobile !== this.isMobile) {
-      this.isMobile = newIsMobile;
-      this.swapTasks(1, 2);
-    }
+  ngOnInit() {
+    this.checkScreenSize();
   }
 
   summaryTasks = [
@@ -33,6 +27,31 @@ export class SummaryComponent {
     { task: 'Awaiting Feedback', imgpath: 'feedback', class: 'smallBox' },
     { task: 'Tasks Done', imgpath: 'taskdone', class: 'smallBox' },
   ];
+
+  /**
+   * Watch for window size change under 1024px, call funktion to swap array.object positions
+   */
+  @HostListener('window:resize', [])
+  onResize() {
+    const newIsMobile = window.innerWidth < 920;
+    const newIsLandscape = window.innerHeight < 601;
+
+    if (newIsMobile !== this.isMobile) {
+      this.isMobile = newIsMobile;
+      this.swapTasks(1, 2);
+    }
+
+    this.isLandscape = newIsLandscape;
+  }
+
+  /**
+   * Check on loading if screen-size under 920px , yes -> call swap-tasks
+   */
+  checkScreenSize() {
+    if (window.innerWidth < 920) {
+      this.swapTasks(1, 2);
+    }
+  }
 
   /**
    * Swap the position of object in the Array for mobile version

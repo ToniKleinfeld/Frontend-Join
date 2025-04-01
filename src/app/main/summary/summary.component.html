@@ -1,7 +1,11 @@
 <section>
-  <div class="welcome-wrapper">
+
+
+  <div class="welcome-wrapper" [ngClass]="{ 'd-none' : isMobile || isLandscape}">
     <h1>Good Morning</h1>
   </div>
+
+
   <div class="wrapper">
     @for(taskcount of summaryTasks; track taskcount){
 
@@ -22,7 +26,7 @@
     } @else {
     <div class="{{taskcount.class}}">
       <div class="icon-wrapper">
-         <div class="img {{taskcount.imgpath}}"></div>
+        <div class="img {{taskcount.imgpath}}"></div>
         2
       </div>
       {{taskcount.task}}
