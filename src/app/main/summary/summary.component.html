@@ -3,14 +3,13 @@
     <h1>Good Morning</h1>
   </div>
   <div class="wrapper">
-    @if(isMobile){
-    @for(taskcount of summaryTasksMobile; track taskcount){
-    @if(taskcount.class == "largeBox"){
+    @for(taskcount of summaryTasks; track taskcount){
 
+    @if(taskcount.class == "largeBox"){
     <div class="{{taskcount.class}}">
       <div class="largeBox-wrapper">
         <div class="icon-wrapper">
-          <img src="/assets/img/{{taskcount.imgpath}}" alt="">
+          <div class="img {{taskcount.imgpath}}"></div>
           2
         </div>
         {{taskcount.task}}
@@ -23,42 +22,13 @@
     } @else {
     <div class="{{taskcount.class}}">
       <div class="icon-wrapper">
-        <img src="/assets/img/{{taskcount.imgpath}}" alt="">
+         <div class="img {{taskcount.imgpath}}"></div>
         2
       </div>
       {{taskcount.task}}
+
     </div>
     }
     }
-    } @else {
-    @for(taskcount of summaryTasksDesktop; track taskcount){
-
-    @if(taskcount.class == "largeBox"){
-
-    <div class="{{taskcount.class}}">
-      <div class="largeBox-wrapper">
-        <div class="icon-wrapper">
-          <img src="/assets/img/{{taskcount.imgpath}}" alt="">
-          2
-        </div>
-        {{taskcount.task}}
-      </div>
-      <div class="urgendTaskInfo">
-        <h2>October 15, 2025</h2>
-        <p>Upcoming Deadline</p>
-      </div>
-    </div>
-    } @else {
-    <div class="{{taskcount.class}}">
-      <div class="icon-wrapper">
-        <img src="/assets/img/{{taskcount.imgpath}}" alt="">
-        2
-      </div>
-      {{taskcount.task}}
-    </div>
-    }
-    }
-    }
-
   </div>
 </section>
