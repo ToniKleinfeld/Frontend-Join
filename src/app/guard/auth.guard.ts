@@ -19,9 +19,7 @@ export const authGuard: CanActivateFn = (route, state) => {
       if (isValid) {
         return true;
       } else {
-        sessionStorage.removeItem('usermail');
-        sessionStorage.removeItem('username');
-        sessionStorage.removeItem('authToken');
+        sessionStorage.clear();
         router.navigate(['/login']);
         return false;
       }

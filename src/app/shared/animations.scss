@@ -151,3 +151,53 @@
     opacity: 1;
   }
 }
+
+@keyframes welcome {
+  0%{
+    background-color: white;
+    opacity: 1;
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100dvh;
+    width: 100dvw;
+    z-index: 90;
+  }
+  100%{
+    background-color: transparent;
+    opacity: 0;
+    display: none;
+    position: absolute;
+    top: -100dvh;
+    right: 0;
+    left: 0;
+    height: 0dvh;
+    width: 100dvw;
+    z-index: 90;
+  }
+}
+
+@-webkit-keyframes welcome {
+  0%{
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100dvh;
+    width: 100dvw;
+    z-index: 90;
+  }
+  100%{
+    display: none;
+    position: absolute;
+    top: -100dvh;
+    right: 0;
+    left: 0;
+    height: 0dvh;
+    width: 100dvw;
+    z-index: 90;
+  }
+}

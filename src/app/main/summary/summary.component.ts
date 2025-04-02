@@ -8,11 +8,13 @@ import { Component, HostListener, OnInit } from '@angular/core';
   styleUrls: ['./summary.component.scss', './summary-mobile.component.scss'],
 })
 export class SummaryComponent implements OnInit {
+  showAnimation = false;
   isMobile: boolean = window.innerWidth < 920;
   isLandscape:boolean = window.innerHeight < 601;
 
   ngOnInit() {
     this.checkScreenSize();
+    this.checkWelcomeAnimation();
   }
 
   summaryTasks = [
@@ -42,6 +44,19 @@ export class SummaryComponent implements OnInit {
     }
 
     this.isLandscape = newIsLandscape;
+  }
+
+  /**
+   * oninit check if Animation still played
+   */
+  checkWelcomeAnimation(){
+    const animationShown = sessionStorage.getItem('animationShown');
+    if (!animationShown) {
+      this.showAnimation = true;
+      setTimeout(() => {
+        sessionStorage.setItem('animationShown', 'true');
+      }, 2000);
+    }
   }
 
   /**

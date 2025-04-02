@@ -59,6 +59,7 @@ header {
 
 .dropdownmenu {
   position: absolute;
+  z-index: 70;
   @include mix.center($ai:unset ,$jc:space-around);
   flex-direction: column;
   width: 172px;

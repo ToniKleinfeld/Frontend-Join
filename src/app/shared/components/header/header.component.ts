@@ -18,9 +18,7 @@ export class HeaderComponent {
    * Log out , return to Login side an delete all sessionStorage strings
    */
   logOut() {
-    sessionStorage.removeItem('usermail');
-    sessionStorage.removeItem('username');
-    sessionStorage.removeItem('authToken');
+    sessionStorage.clear();
     this.router.navigate(['/login']);
   }
 

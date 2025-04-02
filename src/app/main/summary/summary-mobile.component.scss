@@ -53,4 +53,38 @@
       width: 50%;
     }
   }
+
+  .welcome-wrapper{
+    h1{
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .wrapper {
+    width: 310px;
+    height: auto;
+    gap: 10px;
+  }
+
+  .smallBox {
+    height: 110px;
+    padding: 10px 20px;
+  }
+
+  .largeBox {
+    height: 120px;
+  }
+
+  .toDo {
+    height: 90px;
+  }
+
+  .icon-wrapper {
+    font-size: 38px;
+    .img {
+      width: 52px;
+    }
+  }
 }

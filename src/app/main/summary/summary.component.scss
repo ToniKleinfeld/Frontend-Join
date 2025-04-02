@@ -5,6 +5,8 @@ section {
   flex-direction: column;
   height: var(--main-content-height);
   width: var(--main-content-width);
+  overflow: hidden;
+  position: relative;
 }
 
 .welcome-wrapper {
@@ -43,7 +45,7 @@ section {
   color: mix.$main-color;
 }
 
-.smallBox:hover{
+.smallBox:hover {
   scale: 1.1;
   background-color: mix.$third-color;
   color: white;
@@ -66,7 +68,7 @@ section {
   color: black;
   .img {
     border: solid 3px white;
-    background-size:contain;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 50%;
@@ -74,7 +76,6 @@ section {
     aspect-ratio: 1/1;
   }
 }
-
 
 .largeBox {
   @include mix.center($jc: space-around);
@@ -120,21 +121,26 @@ section {
   }
 }
 
-.urgent{
+.welcomeanimation{
+  animation: welcome 2.5s ease-in-out forwards;
+  -webkit-animation: welcome 2.5s ease-in-out forwards;
+}
+
+.urgent {
   background-image: url(/assets/img/urgent.svg);
 }
-.taskcount{
+.taskcount {
   background-image: url(/assets/img/taskcount.svg);
 }
-.todo{
+.todo {
   background-image: url(/assets/img/todo.svg);
 }
-.progresstasks{
+.progresstasks {
   background-image: url(/assets/img/progresstasks.svg);
 }
-.feedback{
+.feedback {
   background-image: url(/assets/img/feedback.svg);
 }
-.taskdone{
+.taskdone {
   background-image: url(/assets/img/taskdone.svg);
 }

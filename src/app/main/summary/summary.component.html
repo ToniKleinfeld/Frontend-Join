@@ -1,10 +1,11 @@
 <section>
 
-
-  <div class="welcome-wrapper" [ngClass]="{ 'd-none' : isMobile || isLandscape}">
+  <div class="welcome-wrapper" [ngClass]="{
+    'welcomeanimation': (isMobile || isLandscape) && showAnimation,
+    'd-none': isMobile && !showAnimation
+  }">
     <h1>Good Morning</h1>
   </div>
-
 
   <div class="wrapper">
     @for(taskcount of summaryTasks; track taskcount){
