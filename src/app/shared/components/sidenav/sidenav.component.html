@@ -1,10 +1,11 @@
 <section>
   <nav>
     <div class="nav-wrapper">
-      <a [routerLink]="['/summary']"  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><img src="/assets/img/summaryicon.svg" >Summary</a>
-      <a [routerLink]="['/addtask']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><img src="/assets/img/tasksicon.svg" >Add Task</a>
-      <a [routerLink]="['/board']"  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><img src="/assets/img/boardicon.svg" >Board</a>
-      <a [routerLink]="['/contacts']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><img src="/assets/img/contacticon.svg" >Contacts</a>
+      <a [routerLink]="['/summary']"  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" #summaryicon="routerLinkActive"><img
+        [src]="summaryicon.isActive && isMobile ? '/assets/img/summaryiconmobileactive.svg' : '/assets/img/summaryicon.svg'" >Summary</a>
+      <a [routerLink]="['/addtask']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" #addtaskicon="routerLinkActive"><img src="/assets/img/tasksicon.svg" [src]="addtaskicon.isActive && isMobile ? '/assets/img/tasksiconmobileactive.svg' : '/assets/img/tasksicon.svg'">Add Task</a>
+      <a [routerLink]="['/board']"  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" #boardicon="routerLinkActive"><img [src]="boardicon.isActive && isMobile ? '/assets/img/boardiconmobileactive.svg' : '/assets/img/boardicon.svg'">Board</a>
+      <a [routerLink]="['/contacts']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" #contacticon="routerLinkActive"><img [src]="contacticon.isActive && isMobile ? '/assets/img/contacticonmobileactive.svg' : '/assets/img/contacticon.svg'">Contacts</a>
     </div>
 
     @if (!isMobile) {

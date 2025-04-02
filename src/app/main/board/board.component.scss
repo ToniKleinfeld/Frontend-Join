@@ -1,0 +1,8 @@
+@use "../../shared/mixin" as mix;
+
+section {
+  @include mix.center();
+  flex-direction: column;
+  height: var(--main-content-height);
+  width: var(--main-content-width);
+}

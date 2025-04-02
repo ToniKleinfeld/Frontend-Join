@@ -6,62 +6,46 @@ section {
   box-shadow: 1px 0.1px 0px 0.5px rgb(0, 0, 0, 0.2);
 }
 
-nav{
+nav {
   height: 100%;
   width: 100%;
-  @include mix.center($jc:space-between);
+  @include mix.center($jc: space-between);
   flex-direction: column;
   padding: 50px 20px;
 }
 
-.nav-wrapper, .legal-privacy-wrapper{
-  @include mix.center($x:15px);
+.nav-wrapper,
+.legal-privacy-wrapper {
+  @include mix.center($x: 15px);
   flex-direction: column;
   width: 100%;
 
-  a{
-    @include mix.center($jc:flex-start,$x:5px );
+  a {
+    @include mix.center($jc: flex-start, $x: 5px);
     padding: 8px 30px;
     width: 100%;
     color: mix.$text-color-nav;
 
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
   }
 }
 
-.active{
+.active {
   background-color: mix.$hover-button;
   border-radius: 8px;
 }
 
-.nav-wrapper{
- a:hover{
-  background-color: mix.$hover-button;
-  border-radius: 8px;
- }
+.nav-wrapper {
+  a:hover {
+    background-color: mix.$hover-button;
+    border-radius: 8px;
+  }
 }
 
-.legal-privacy-wrapper{
-  a:hover{
+.legal-privacy-wrapper {
+  a:hover {
     color: mix.$main-color;
-  }
-}
-
-@media (max-width:1200px) {
-
-  nav{
-    padding: 10px;
-  }
-
-  .nav-wrapper{
-    flex-direction: row;
-    justify-content: space-around;
-    a{
-      padding: 5px 30px;
-      width: unset;
-      flex-direction: column;
-    }
   }
 }

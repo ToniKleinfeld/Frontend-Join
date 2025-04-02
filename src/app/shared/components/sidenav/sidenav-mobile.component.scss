@@ -1,0 +1,44 @@
+@use "../../mixin" as mix;
+
+@media (max-width: 1200px) {
+  nav {
+    padding: 10px;
+    justify-content: center;
+  }
+
+  .nav-wrapper {
+    flex-direction: row;
+    justify-content: space-around;
+    a {
+      padding: 5px 30px;
+      width: unset;
+      flex-direction: column;
+    }
+  }
+
+  .active {
+    background-color: transparent;
+    border-radius: 8px;
+    color: mix.$main-color !important;
+  }
+}
+
+@media (max-width: 560px) {
+  nav {
+    padding: 5px;
+  }
+  
+  .nav-wrapper {
+    gap: 5px;
+    a {
+      padding: 0px 5px;
+      font-size: 15px;
+      white-space: nowrap;
+
+      img {
+        width: 22px;
+        aspect-ratio: 1/1;
+      }
+    }
+  }
+}
