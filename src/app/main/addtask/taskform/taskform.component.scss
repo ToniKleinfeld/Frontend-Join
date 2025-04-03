@@ -15,6 +15,9 @@ h1 {
 
 h2 {
   font-size: 20px;
+}
+
+.input-title {
   margin-bottom: 5px;
 }
 
@@ -31,6 +34,10 @@ h2 {
   @include mix.center($jc: space-between);
 }
 
+.task-footer-button-container {
+  @include mix.center($x: 20px);
+}
+
 .text-area-container {
   padding: 10px;
 }
@@ -40,12 +47,12 @@ textarea {
   width: 422px;
 }
 
-textarea:focus{
-  border: 1px solid mix.$main-color !important
+textarea:focus {
+  border: 1px solid mix.$main-color !important;
 }
 
-input:focus{
-  border-bottom: 1px solid mix.$main-color !important
+input:focus {
+  border-bottom: 1px solid mix.$main-color !important;
 }
 
 textarea {
@@ -188,7 +195,7 @@ textarea {
   }
 }
 
-.showassignedcontacts{
+.showassignedcontacts {
   padding: 5px 0 0 15px;
   width: 100%;
   max-width: 410px;
@@ -196,3 +203,95 @@ textarea {
   display: flex;
   overflow: auto;
 }
+
+.check-button-container {
+  @include mix.center($jc: space-between);
+}
+
+.check-button-container div {
+  @include mix.center($x:5px);
+  font-size: var(--input-letter-size);
+  font-weight: 400;
+  height: 48px;
+  width: 31%;
+  border: solid 1px #d1d1d1;
+  border-radius: 10px;
+
+  &:hover {
+    box-shadow: 0px 5px 2px 0 rgb(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+}
+
+.urgentprio::after {
+  content: url(/assets/img/priohigh.svg);
+  margin-left: 7px;
+}
+
+.urgentprioaktive {
+  background-color: #ff3d00;
+  color: white;
+
+  &:after {
+    content: url(/assets/img/priohighwhite.svg);
+    margin: 3px 3px 0 3px;
+  }
+
+  &:hover {
+    box-shadow: none !important;
+    cursor: unset !important;
+  }
+}
+
+.mediumprio::after {
+  content: url(/assets/img/priomedium.svg);
+  margin-left: 7px;
+  margin-bottom: 5px;
+}
+
+.mediumprioaktive {
+  background-color: #ffa800;
+  color: white;
+
+  &:after {
+    content: url(/assets/img/priomediumwhite.svg);
+    margin: 3px 3px 6px 4px;
+  }
+
+  &:hover {
+    box-shadow: none !important;
+    cursor: unset !important;
+  }
+}
+
+.lowprio::after {
+  content: url(/assets/img/priolow.svg);
+  margin-left: 7px;
+}
+
+.lowprioaktive {
+  background-color: #7ae229;
+  color: white;
+
+  &:after {
+    content: url(/assets/img/priolowwhite.svg);
+    margin: 3px 3px 0 3px;
+  }
+
+  &:hover {
+    box-shadow: none !important;
+    cursor: unset !important;
+  }
+}
+
+.required::after,
+.required-info::before {
+  content: "*";
+  color: red;
+}
+
+.required-info {
+  font-size: var(--input-letter-size);
+}
+
+
