@@ -1,0 +1,198 @@
+@use "../../../shared/mixin" as mix;
+
+.wrapper {
+  height: calc(var(--main-content-height) - 20dvh);
+  border-radius: 20px;
+  @include mix.center($jc: flex-start, $ai: flex-start);
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 64px;
+  font-weight: 700;
+  text-align: start;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.form-wrapper {
+  @include mix.center($jc: flex-start, $ai: flex-start, $x: 20px);
+}
+
+.form-single-part {
+  width: 100%;
+}
+
+.form-footer {
+  width: 100%;
+  @include mix.center($jc: space-between);
+}
+
+.text-area-container {
+  padding: 10px;
+}
+
+input,
+textarea {
+  width: 422px;
+}
+
+textarea:focus{
+  border: 1px solid mix.$main-color !important
+}
+
+input:focus{
+  border-bottom: 1px solid mix.$main-color !important
+}
+
+textarea {
+  height: 136px;
+  width: 422px;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: var(--input-letter-size);
+  outline: none;
+  resize: none;
+}
+
+.input-container {
+  padding: 10px;
+}
+
+.dropdown-check-list-contacts {
+  position: relative;
+}
+
+.dropdown-check-list-contacts .anchor {
+  position: relative;
+  display: inline-block;
+  height: 38px;
+  width: 422px;
+  border-bottom: 1px solid #d1d1d1;
+  padding: 10px 16px 0 16px;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  font-size: var(--input-letter-size);
+  background-color: white;
+
+  &::after {
+    position: absolute;
+    content: url(/assets/img/smallarrowicon.svg);
+    padding: 0px;
+    right: 15px;
+    top: 10px;
+  }
+}
+
+.arrowupanchorinput {
+  content: url(/assets/img/smallarrowicon.svg);
+  transform: rotate(180deg);
+  position: absolute;
+  padding: 5px;
+  top: 52px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.dropdown-check-list-contacts.visible .items {
+  display: block;
+}
+
+.dropdown-check-list-contacts ul.items {
+  padding: 0;
+  display: none;
+  width: 422px;
+  height: auto;
+  border: 1px solid #d1d1d1;
+  border-radius: 0 0 10px 10px;
+}
+
+.dropdown-check-list-contacts ul.items li {
+  list-style: none;
+  padding: 12px 16px;
+  position: relative;
+  @include mix.center($jc: space-between);
+  font-size: var(--input-letter-size);
+  height: 50px;
+  flex-direction: row-reverse;
+
+  &:hover {
+    background-color: mix.$hover-button;
+    border-radius: 10px;
+  }
+}
+
+.contactslistassign input {
+  position: absolute;
+  right: 21px;
+  height: auto;
+  width: auto;
+  cursor: pointer;
+  scale: 1.2;
+  z-index: 15;
+  opacity: 0;
+}
+
+.items {
+  max-height: 200px;
+  overflow-x: auto;
+}
+
+.checkmark {
+  content: url(/assets/img/checkboxunchecked.svg);
+}
+
+.contactslistassign input:hover ~ .checkmark,
+.checkbox-title-container input:hover ~ .checkmark {
+  scale: 1.1;
+}
+
+.contactslistassign input:checked ~ .checkmark {
+  content: url(/assets/img/assigntocheckboxcheck.svg);
+}
+
+.dropdown-check-list-contacts ul.items li label {
+  @include mix.center($jc: flex-start, $x: 12px);
+  width: 95%;
+  cursor: pointer;
+}
+
+.contacticon {
+  @include mix.center();
+  width: 42px;
+  height: 42px;
+  font-size: 12px !important;
+  font-weight: 300 !important;
+  color: white !important;
+  background: lightcoral;
+  border: solid 2px white;
+  border-radius: 50%;
+  padding: 15px;
+}
+
+.contactslistassign:has(input:checked) {
+  color: white;
+  border-radius: 10px;
+  background-color: mix.$main-color;
+
+  &:hover {
+    background-color: mix.$third-color !important;
+    color: white;
+    border-radius: 10px;
+  }
+}
+
+.showassignedcontacts{
+  padding: 5px 0 0 15px;
+  width: 100%;
+  max-width: 410px;
+  height: 60px;
+  display: flex;
+  overflow: auto;
+}

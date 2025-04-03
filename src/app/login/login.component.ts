@@ -78,6 +78,11 @@ export class LoginComponent {
     }
   }
 
+  /**
+   * Call the servicelogin with the form data login , to get reponse
+   *
+   * @param ngForm
+   */
   onSubmitLogIn(ngForm: NgForm) {
     if (ngForm.form.valid && ngForm.submitted) {
       this.authService.login(this.loginData).subscribe({
@@ -137,7 +142,7 @@ export class LoginComponent {
     }`;
     setTimeout(() => {
       this.feedback_Login_SingUp = ``;
-    }, 2000);
+    }, 900);
   }
 
   /**
@@ -157,7 +162,7 @@ export class LoginComponent {
   routeToSummary() {
     setTimeout(() => {
       this.router.navigate(['/summary']);
-    }, 3000);
+    }, 1000);
   }
 
   /**

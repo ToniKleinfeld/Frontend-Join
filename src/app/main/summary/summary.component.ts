@@ -47,7 +47,7 @@ export class SummaryComponent implements OnInit {
   }
 
   /**
-   * oninit check if Animation still played
+   * oninit check sessional storage if animationShown still played on this login, only on mobile
    */
   checkWelcomeAnimation(){
     const animationShown = sessionStorage.getItem('animationShown');

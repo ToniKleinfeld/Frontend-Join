@@ -2,7 +2,7 @@
 
   <div class="welcome-wrapper" [ngClass]="{
     'welcomeanimation': (isMobile || isLandscape) && showAnimation,
-    'd-none': isMobile && !showAnimation
+    'd-none': (isMobile || isLandscape)  && !showAnimation
   }">
     <h1>Good Morning</h1>
   </div>

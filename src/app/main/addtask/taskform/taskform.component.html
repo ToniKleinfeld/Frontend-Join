@@ -1,0 +1,100 @@
+<form class="wrapper">
+  <h1>Add Task</h1>
+
+  <div class="form-wrapper">
+
+    <div class="form-single-part">
+
+      <div class="input-container">
+        <h2 class="required input-title">Title</h2>
+        <input type="text" placeholder="Enter a title" autocomplete="off">
+      </div>
+
+      <div class="text-area-container">
+        <h2 class="input-title">Description</h2>
+        <textarea placeholder="Enter a Description"></textarea>
+      </div>
+
+      <div class="input-container dropdown-check-list-contacts" [ngClass]="{'visible' : showAssingedToList }">
+        <!-- visible <--class -->
+        <h2 class="input-title">Assigned to</h2>
+
+        <span class="anchor" [ngClass]="{'d-none' : showAssingedToList }" (click)="showAssingedToList = !showAssingedToList">Select contacts to
+          assign</span>
+
+        <input type="text" class="anchorinput" [ngClass]="{'d-none' : !showAssingedToList }" autocomplete="off">
+        <i class="arrowupanchorinput" [ngClass]="{'d-none' : !showAssingedToList }" (click)="showAssingedToList = !showAssingedToList"></i>
+
+        <ul class="items">
+          <!-- später hier mit der li und daten aus backend for schleifen der user | style im label span durch backend daten für verschiedene farben-->
+          <li class="contactslistassign">
+            <input type="checkbox" name="test_dummy" id="test_dummy">
+            <span class="checkmark"></span>
+            <label for="test_dummy"><span class="contacticon" style="background-color: #6E52FF;">TD</span>Test Dummy</label>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="showassignedcontacts">
+        <!-- rendern der zugewiesenen user evtl vor absenden erstmal in einem seperaten array , wenn dort nicht 0 , dann hier for schleife -->
+        <div class="contacticon" style="background-color: #6E52FF;">TD</div>
+      </div>
+    </div>
+
+    <div class="form-single-part">
+
+      <div class="input-container">
+        <h2 class="required input-title">Due date</h2>
+        <input type="date" class="input-date">
+      </div>
+
+      <div class="input-container">
+        <h2 class="input-title">Prio</h2>
+        <div class="check-button-container">
+          <button class="button-empty-small-2 urgentprio">Urgent</button>
+          <button class="button-empty-small-2 mediumprio mediumprioaktive">Medium</button>
+          <button class="button-empty-small-2 lowprio">Low</button>
+        </div>
+      </div>
+      <div class="input-container">
+        <h2 class="required input-title">Category</h2>
+        <select name="category">
+          <option value="" selected hidden disabled>Select task category</option>
+          <option value="Technical Task">Technical Task</option>
+          <option value="User Story">User Story</option>
+        </select>
+      </div>
+      <div class="subtask input-container ">
+        <h2 class="input-title">Subtasks</h2>
+        <input class="input-subtask input-title" type="text" autocomplete="off" placeholder="Add new subtask">
+        <div class="iconssubtask center d-none">
+          <i class="clearsubtask"></i>
+          <i class="addsubtask"></i>
+        </div>
+      </div>
+      <ul class="showsubtasks">
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="form-footer">
+
+    <p class="required-info">This field is required</p>
+    <div class="task-footer-button-container">
+
+      <button class="button-empty-small mobileoff">Clear
+        <span class="input-and-button-icons closex"></span>
+      </button>
+
+      <button class="button-filled-large" disabled >
+        <span>Create Task</span>
+        <img class="input-and-button-icons">
+      </button>
+
+    </div>
+
+  </div>
+
+</form>
