@@ -13,6 +13,7 @@ showAssingedToList:boolean = false;
 
 addtaskdata = {
   prio : 'medium',
+  subtask: '',
 }
 
 }

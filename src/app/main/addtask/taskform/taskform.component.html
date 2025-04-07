@@ -1,4 +1,4 @@
-<form class="wrapper" #addtaskdata="ngForm">
+<form class="wrapper" #addtaskform="ngForm" name="addtaskform" (ngSubmit)="(addtaskform)">
   <h1>Add Task</h1>
 
   <div class="form-wrapper">
@@ -71,13 +71,28 @@
 
       <div class="subtask input-container ">
         <h2 class="input-title">Subtasks</h2>
-        <input class="input-subtask input-title" type="text" autocomplete="off" placeholder="Add new subtask">
-        <div class="iconssubtask center d-none">
-          <i class="clearsubtask"></i>
+        <input class="input-subtask input-title" type="text" autocomplete="off" placeholder="Add new subtask" #subtask="ngModel" [(ngModel)]="addtaskdata.subtask" name="subtask">
+        <div class="iconssubtask center d-none" [ngClass]="{'d-none': this.addtaskdata.subtask == ''}">
+          <i class="clearsubtask" (click)="this.addtaskdata.subtask = '' "></i>
           <i class="addsubtask"></i>
         </div>
       </div>
       <ul class="showsubtasks">
+        <!-- for schleife von array mit einzelnen tasks, die erstellt wurden -->
+        <li>
+          <span class="dot" id="dotsub${i}"></span>
+          <div class="subtaskslable">
+              <input class="subtasksli" type="text" disabled value="${subtask}" id="subtask${i}" onkeypress="checkPressEnter(event,'edit',)">
+              <span id="subhover${i}">
+                  <i class="editbutton" onclick="editSubTask()"></i>
+                  <i class="deletebutton" onclick="delteSubTask()"></i>
+              </span>
+              <span class="subtaskediticons d-none" id="subtaskediticons${i}">
+                  <i class="deletebuton" onclick="renderSubTasks()"></i>
+                  <i class="addsubtask" onclick="saveEditSubtask()"></i>
+              </span>
+          </div>
+        </li>
       </ul>
 
     </div>
