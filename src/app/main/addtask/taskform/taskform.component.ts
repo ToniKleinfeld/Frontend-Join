@@ -7,10 +7,10 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
   selector: 'app-taskform',
   imports: [CommonModule, FormsModule, ButtonComponent],
   templateUrl: './taskform.component.html',
-  styleUrl: './taskform.component.scss',
+  styleUrls: ['./taskform.component.scss','./taskform-assignto.component.scss','./taskform-prio-buttons.component.scss','./taskform-subtask.component.scss'],
 })
 export class TaskformComponent {
-  isMobile: boolean = window.innerWidth < 910;
+  isMobile: boolean = window.innerWidth < 1200;
   showAssingedToList: boolean = false;
   editingIndex: number = -1;
   editingSubtaskValue: string = '';
@@ -27,7 +27,7 @@ export class TaskformComponent {
 
   @HostListener('window:resize', [])
   onResize() {
-    this.isMobile = window.innerWidth < 910;
+    this.isMobile = window.innerWidth < 1200;
   }
 
   /**

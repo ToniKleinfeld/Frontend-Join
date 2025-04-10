@@ -6,3 +6,18 @@ section {
   height: var(--main-content-height);
   width: var(--main-content-width);
 }
+
+@media (max-width:1200px) {
+  section{
+    overflow-y: scroll;
+  }
+}
+
+@media (max-width:1281px) {
+  @media (max-height:801px) {
+    section{
+      justify-content: flex-start;
+      overflow-y: scroll;
+    }
+  }
+}

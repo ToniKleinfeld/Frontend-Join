@@ -49,7 +49,6 @@ input:focus {
 
 textarea {
   height: 136px;
-  width: 422px;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   padding: 12px 16px;
@@ -60,236 +59,6 @@ textarea {
 
 .input-container {
   padding: 10px;
-}
-
-// assigned to
-
-.dropdown-check-list-contacts,
-.subtask,
-.subtaskslable {
-  position: relative;
-}
-
-.dropdown-check-list-contacts .anchor {
-  position: relative;
-  display: inline-block;
-  height: 38px;
-  width: 100%;
-  border-bottom: 1px solid #d1d1d1;
-  padding: 10px 16px 0 16px;
-  cursor: pointer;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-  font-size: var(--input-letter-size);
-  background-color: white;
-
-  &::after {
-    position: absolute;
-    content: url(/assets/img/smallarrowicon.svg);
-    padding: 0px;
-    right: 15px;
-    top: 10px;
-  }
-}
-
-.arrowupanchorinput {
-  content: url(/assets/img/smallarrowicon.svg);
-  transform: rotate(180deg);
-  position: absolute;
-  padding: 5px;
-  top: 52px;
-  right: 20px;
-  cursor: pointer;
-}
-
-.dropdown-check-list-contacts.visible .items {
-  display: block;
-}
-
-.dropdown-check-list-contacts ul.items {
-  padding: 0;
-  display: none;
-  width: 422px;
-  height: auto;
-  border: 1px solid #d1d1d1;
-  border-radius: 0 0 10px 10px;
-}
-
-.dropdown-check-list-contacts ul.items li {
-  list-style: none;
-  padding: 12px 16px;
-  position: relative;
-  @include mix.center($jc: space-between);
-  font-size: var(--input-letter-size);
-  height: 50px;
-  flex-direction: row-reverse;
-
-  &:hover {
-    background-color: mix.$hover-button;
-    border-radius: 10px;
-  }
-}
-
-.contactslistassign input {
-  position: absolute;
-  right: 21px;
-  height: auto;
-  width: auto;
-  cursor: pointer;
-  scale: 1.2;
-  z-index: 15;
-  opacity: 0;
-}
-
-.items {
-  max-height: 200px;
-  overflow-x: auto;
-}
-
-.checkmark {
-  content: url(/assets/img/checkboxunchecked.svg);
-}
-
-.contactslistassign input:hover ~ .checkmark,
-.checkbox-title-container input:hover ~ .checkmark {
-  scale: 1.1;
-}
-
-.contactslistassign input:checked ~ .checkmark {
-  content: url(/assets/img/assigntocheckboxcheck.svg);
-}
-
-.dropdown-check-list-contacts ul.items li label {
-  @include mix.center($jc: flex-start, $x: 12px);
-  width: 95%;
-  cursor: pointer;
-}
-
-.contacticon {
-  @include mix.center();
-  width: 42px;
-  height: 42px;
-  font-size: 12px !important;
-  font-weight: 300 !important;
-  color: white !important;
-  background: lightcoral;
-  border: solid 2px white;
-  border-radius: 50%;
-  padding: 15px;
-}
-
-.contactslistassign:has(input:checked) {
-  color: white;
-  border-radius: 10px;
-  background-color: mix.$main-color;
-
-  &:hover {
-    background-color: mix.$third-color !important;
-    color: white;
-    border-radius: 10px;
-  }
-}
-
-.showassignedcontacts {
-  padding: 5px 0 0 15px;
-  width: 100%;
-  max-width: 410px;
-  height: 60px;
-  display: flex;
-  overflow: auto;
-}
-
-// prio buttons
-
-.check-button-container {
-  @include mix.center($jc: space-between);
-}
-
-.check-button-container div {
-  @include mix.center($x: 5px);
-  font-size: var(--input-letter-size);
-  font-weight: 400;
-  height: 48px;
-  width: 31%;
-  border: solid 1px #d1d1d1;
-  border-radius: 10px;
-
-  &:hover {
-    box-shadow: 0px 5px 2px 0 rgb(0, 0, 0, 0.2);
-    cursor: pointer;
-  }
-}
-
-.urgentprio::after {
-  content: url(/assets/img/priohigh.svg);
-  margin-left: 7px;
-}
-
-.urgentprioaktive {
-  background-color: #ff3d00;
-  color: white;
-
-  &:after {
-    content: url(/assets/img/priohighwhite.svg);
-    margin: 3px 3px 0 3px;
-  }
-
-  &:hover {
-    box-shadow: none !important;
-    cursor: unset !important;
-  }
-}
-
-.mediumprio::after {
-  content: url(/assets/img/priomedium.svg);
-  margin-left: 7px;
-  margin-bottom: 5px;
-}
-
-.mediumprioaktive {
-  background-color: #ffa800;
-  color: white;
-
-  &:after {
-    content: url(/assets/img/priomediumwhite.svg);
-    margin: 3px 3px 6px 4px;
-  }
-
-  &:hover {
-    box-shadow: none !important;
-    cursor: unset !important;
-  }
-}
-
-.lowprio::after {
-  content: url(/assets/img/priolow.svg);
-  margin-left: 7px;
-}
-
-.lowprioaktive {
-  background-color: #7ae229;
-  color: white;
-
-  &:after {
-    content: url(/assets/img/priolowwhite.svg);
-    margin: 3px 3px 0 3px;
-  }
-
-  &:hover {
-    box-shadow: none !important;
-    cursor: unset !important;
-  }
-}
-
-.required::after,
-.required-info::before {
-  content: "*";
-  color: red;
-}
-
-.required-info {
-  font-size: var(--input-letter-size);
 }
 
 // date and select
@@ -326,128 +95,6 @@ select {
   font-size: var(--input-letter-size);
 }
 
-
-// subtask
-
-.input-subtask {
-  background-image: url(/assets/img/subtaskadd.svg);
-}
-
-.addsubtask {
-  content: url(/assets/img/subtaskcheck.svg);
-  height: 22px;
-  border-left: solid 1px lightgrey;
-  padding-left: 5px;
-  cursor: pointer;
-}
-
-.iconssubtask {
-  position: absolute;
-  bottom: 14px;
-  right: 24px;
-  z-index: 4;
-  background-color: white;
-}
-
-.clearsubtask {
-  content: url(/assets/img/closeicon.svg);
-  height: 22px;
-  padding-right: 5px;
-  cursor: pointer;
-}
-
-.deletebuton {
-  content: url(/assets/img/delete.svg);
-  padding-right: 5px;
-  cursor: pointer;
-}
-
-.subtaskslable {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
-}
-
-.subtasksli:enabled {
-  width: 100%;
-  padding-left: 15px;
-  border-bottom: 1px solid #539cbc;
-}
-
-.subtaskediticons {
-  position: absolute;
-  right: 5px;
-}
-
-.showsubtasks {
-  width: 100%;
-  margin: 0;
-  list-style: none;
-  padding: 0 10px 10px 10px !important;
-  height: 152px;
-  overflow-y: auto;
-
-  li {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-
-  }
-}
-
-.subtask {
-  padding-bottom: 0 !important;
-}
-
-.subtasksli {
-  border: none;
-  cursor: default;
-  height: auto;
-  padding: 10px 8px;
-  width: 80%;
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.showsubtasks li:hover {
-  background-color: mix.$hover-button;
-  border-radius: 10px;
-  @include mix.center();
-
-  .editbutton {
-    content: url(/assets/img/edit.svg);
-    cursor: pointer;
-    padding-right: 8px;
-  }
-
-  .deletebutton {
-    content: url(/assets/img/delete.svg);
-    border-left: 1px solid grey;
-    padding-left: 10px;
-    cursor: pointer;
-  }
-
-  .subtasksli:disabled {
-    background-color: mix.$hover-button;
-  }
-}
-
-.subtasksli:disabled {
-  background-color: white;
-}
-
-.dot {
-  content: url(/assets/img/dot.svg);
-  height: 30px;
-}
-
-.editbutton,
-.deletebutton {
-  padding: 4px;
-}
-
-
 // ---form footer
 
 .form-footer {
@@ -457,4 +104,52 @@ select {
 
 .task-footer-button-container {
   @include mix.center($x: 20px);
+}
+
+@media (max-width: 1200px) {
+  .wrapper {
+    height: var(--main-content-height);
+    position: relative;
+  }
+
+  .form-wrapper {
+    flex-direction: column;
+  }
+
+  .form-footer {
+    background-color: white;
+    position: sticky;
+    bottom: 1px;
+    padding-bottom: 5px;
+    margin: auto;
+    max-width: 422px;
+  }
+}
+
+@media (max-width: 450px) {
+  h1 {
+    font-size: 47px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  .wrapper {
+    width: 99dvw;
+  }
+
+  .form-wrapper {
+    width: 97%;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+  }
+
+  .form-footer {
+    max-width: 95dvw;
+  }
 }

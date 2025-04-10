@@ -1,0 +1,120 @@
+@use "../../../shared/mixin" as mix;
+
+.input-subtask {
+  background-image: url(/assets/img/subtaskadd.svg);
+}
+
+.addsubtask {
+  content: url(/assets/img/subtaskcheck.svg);
+  height: 22px;
+  border-left: solid 1px lightgrey;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.iconssubtask {
+  position: absolute;
+  bottom: 14px;
+  right: 24px;
+  z-index: 4;
+  background-color: white;
+}
+
+.clearsubtask {
+  content: url(/assets/img/closeicon.svg);
+  height: 22px;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+.deletebuton {
+  content: url(/assets/img/delete.svg);
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+.subtaskslable {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.subtasksli:enabled {
+  width: 100%;
+  padding-left: 15px;
+  border-bottom: 1px solid #539cbc;
+}
+
+.subtaskediticons {
+  position: absolute;
+  right: 5px;
+}
+
+.showsubtasks {
+  width: 100%;
+  margin: 0;
+  margin-bottom: 10px;
+  list-style: none;
+  padding: 0 10px 10px 10px !important;
+  height: 152px;
+  overflow-y: auto;
+
+  li {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+  }
+}
+
+.subtask {
+  padding-bottom: 0 !important;
+}
+
+.subtasksli {
+  border: none;
+  cursor: default;
+  height: auto;
+  padding: 10px 8px;
+  width: 80%;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.showsubtasks li:hover {
+  background-color: mix.$hover-button;
+  border-radius: 10px;
+  @include mix.center();
+
+  .editbutton {
+    content: url(/assets/img/edit.svg);
+    cursor: pointer;
+    padding-right: 8px;
+  }
+
+  .deletebutton {
+    content: url(/assets/img/delete.svg);
+    border-left: 1px solid grey;
+    padding-left: 10px;
+    cursor: pointer;
+  }
+
+  .subtasksli:disabled {
+    background-color: mix.$hover-button;
+  }
+}
+
+.subtasksli:disabled {
+  background-color: white;
+}
+
+.dot {
+  content: url(/assets/img/dot.svg);
+  height: 30px;
+}
+
+.editbutton,
+.deletebutton {
+  padding: 4px;
+}
