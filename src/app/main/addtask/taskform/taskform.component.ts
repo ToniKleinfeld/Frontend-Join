@@ -2,12 +2,19 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { AddTaskData } from '../../../shared/interfaces/task.model';
+import { Subtask } from '../../../shared/interfaces/task.model';
 
 @Component({
   selector: 'app-taskform',
   imports: [CommonModule, FormsModule, ButtonComponent],
   templateUrl: './taskform.component.html',
-  styleUrls: ['./taskform.component.scss','./taskform-assignto.component.scss','./taskform-prio-buttons.component.scss','./taskform-subtask.component.scss'],
+  styleUrls: [
+    './taskform.component.scss',
+    './taskform-assignto.component.scss',
+    './taskform-prio-buttons.component.scss',
+    './taskform-subtask.component.scss',
+  ],
 })
 export class TaskformComponent {
   isMobile: boolean = window.innerWidth < 1200;
@@ -15,12 +22,19 @@ export class TaskformComponent {
   editingIndex: number = -1;
   editingSubtaskValue: string = '';
 
-  addtaskdata: { prio: string; subtasks: { task: string; done: boolean }[] } = {
+  addTaskData: AddTaskData = {
+    rubric: 'To do',
+    title: '',
+    description: '',
+    assignedusers: [],
+    duedate: '',
     prio: 'medium',
     subtasks: [],
   };
 
-  subtask: { task: string; done: boolean } = {
+  deflaultAddTaks: AddTaskData = { ...this.addTaskData };
+
+  subtask: Subtask = {
     task: '',
     done: false,
   };
@@ -35,7 +49,7 @@ export class TaskformComponent {
    */
   createSubTask() {
     if (this.subtask.task && this.subtask.task != '') {
-      this.addtaskdata.subtasks.push({ ...this.subtask });
+      this.addTaskData.subtasks.push({ ...this.subtask });
     }
     this.subtask.task = '';
   }
@@ -46,7 +60,7 @@ export class TaskformComponent {
    */
   editSubTask(index: number) {
     this.editingIndex = index;
-    this.editingSubtaskValue = this.addtaskdata.subtasks[index].task;
+    this.editingSubtaskValue = this.addTaskData.subtasks[index].task;
   }
 
   /**
@@ -54,7 +68,7 @@ export class TaskformComponent {
    * @param index
    */
   delteSubTask(index: number) {
-    this.addtaskdata.subtasks.splice(index, 1);
+    this.addTaskData.subtasks.splice(index, 1);
 
     if (this.editingIndex === index) {
       this.editingIndex = -1;
@@ -67,8 +81,14 @@ export class TaskformComponent {
    * @param index
    */
   saveEditSubtask(index: number) {
-    this.addtaskdata.subtasks[index].task = this.editingSubtaskValue;
+    this.addTaskData.subtasks[index].task = this.editingSubtaskValue;
     this.editingIndex = -1;
     this.editingSubtaskValue = '';
+  }
+
+  clearAll(){
+
+
+    console.log(this.deflaultAddTaks, this.addTaskData)
   }
 }

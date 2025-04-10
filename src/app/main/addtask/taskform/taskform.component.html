@@ -57,13 +57,13 @@
         <div class="check-button-container">
 
           <div class="button-empty-small-2 urgentprio"
-            [ngClass]="{'urgentprioaktive' : this.addtaskdata.prio == 'urgent'}"
-            (click)="this.addtaskdata.prio = 'urgent'">Urgent</div>
+            [ngClass]="{'urgentprioaktive' : this.addTaskData.prio == 'urgent'}"
+            (click)="this.addTaskData.prio = 'urgent'">Urgent</div>
           <div class="button-empty-small-2 mediumprio"
-            [ngClass]="{'mediumprioaktive' : this.addtaskdata.prio == 'medium'}"
-            (click)="this.addtaskdata.prio = 'medium'">Medium</div>
-          <div class="button-empty-small-2 lowprio" [ngClass]="{'lowprioaktive' : this.addtaskdata.prio == 'low'}"
-            (click)="this.addtaskdata.prio = 'low'">Low</div>
+            [ngClass]="{'mediumprioaktive' : this.addTaskData.prio == 'medium'}"
+            (click)="this.addTaskData.prio = 'medium'">Medium</div>
+          <div class="button-empty-small-2 lowprio" [ngClass]="{'lowprioaktive' : this.addTaskData.prio == 'low'}"
+            (click)="this.addTaskData.prio = 'low'">Low</div>
 
         </div>
       </div>
@@ -89,7 +89,7 @@
       </div>
       <ul class="showsubtasks">
 
-        @for(singleSubtask of addtaskdata.subtasks; track singleSubtask; let index = $index){
+        @for(singleSubtask of addTaskData.subtasks; track singleSubtask; let index = $index){
         <li>
           <span class="dot" [class.d-none]="editingIndex === index"></span>
           <div class="subtaskslable">
@@ -123,7 +123,7 @@
     <div class="task-footer-button-container">
 
       @if(!isMobile){
-        <app-button type="secondary" size="small" text="Clear" icon="clear"/>
+        <app-button type="secondary" size="small" text="Clear" icon="clear" (click)="clearAll()"/>
       }
       @if(addtaskform.valid){
         <app-button type="submit" size="small" text="Create Task" icon="check"/>
