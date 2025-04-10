@@ -1,3 +1,33 @@
 <section>
-  <p>board works!</p>
+  <div class="wrapper">
+
+    <div class="search-wrapper">
+      <div class="search-box">
+        <input class="search" type="text">
+      </div>
+
+      <app-button text="Add Task" size="small" type="primary" for="addtaskform" icon="add" />
+    </div>
+
+    <div class="board-wrapper">
+
+      @for(board of taskboards; track board; let index = $index){
+        <div class="tablerow">
+          <div class="tablehead">
+            <h3>{{board}}</h3>
+            <i [ngClass]="{'addtaskicon': board != 'Done'}"></i>
+          </div>
+          <div class="taskwrapper">
+            <div class="emptyboard">
+              No tasks {{board}}
+            </div>
+            <!-- for schleife für einzele tasks hier -->
+          </div>
+        </div>
+      }
+
+
+    </div>
+
+  </div>
 </section>

@@ -6,7 +6,7 @@ button {
   cursor: pointer;
   font-size: var(--button-letter-size);
   border-radius: 8px;
-  @include mix.center($x:5px);
+  @include mix.center($x: 5px);
 
   &.primary,
   &.submit {
@@ -57,7 +57,8 @@ button {
   }
 
   .clear,
-  .check {
+  .check,
+  .add {
     background-position: center;
     background-size: contain;
     width: 24px;
@@ -68,11 +69,15 @@ button {
     background-image: url(/assets/img/blackcloseicon.svg);
   }
 
-  &:hover .clear{
+  &:hover .clear {
     background-image: url(/assets/img/closeicon.svg);
   }
 
   .check {
     background-image: url(/assets/img/checktask.svg);
+  }
+
+  .add{
+    background-image: url(/assets/img/addtask.svg);
   }
 }

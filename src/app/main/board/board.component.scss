@@ -2,7 +2,75 @@
 
 section {
   @include mix.center();
-  flex-direction: column;
   height: var(--main-content-height);
   width: var(--main-content-width);
+  position: relative;
+  padding: 30px;
+}
+
+.wrapper {
+  @include mix.center($jc: flex-start, $ai: flex-start);
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.search-wrapper {
+  @include mix.center($x: 30px);
+  padding: 30px;
+}
+
+.search {
+  background-image: url(/assets/img/search.svg);
+  width: 321px;
+}
+
+input {
+  border: solid 1px #d1d1d1;
+  border-radius: 10px;
+}
+
+.board-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  @include mix.center($jc: space-between, $ai: flex-start, $x: 20px);
+}
+
+.tablerow{
+  width: 25%;
+}
+
+.tablehead{
+  @include mix.center($jc:space-between);
+  width: 100%;
+}
+
+h3{
+  font-size: var(--button-letter-size);
+  font-weight: 700;
+}
+
+.addtaskicon {
+  width: 24px;
+  height: 24px;
+  background-image: url(/assets/img/addnewtask.svg);
+
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.taskwrapper{
+  padding-top: 30px;
+  width: 100%;
+}
+
+.emptyboard{
+  @include mix.center();
+  background-color: #E7E7E7;
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  color: #A8A8A8;
 }
