@@ -11,6 +11,7 @@ export class ButtonComponent {
   @Input() text: string = 'Button';
   @Input() type: 'primary' | 'secondary' | 'deactive' | 'submit' = 'primary';
   @Input() size: 'small'| 'large' = 'small';
+  @Input() icon: '' | 'clear' | 'check' = ''
   @Output() clicked = new EventEmitter<void>();
 
   onClick() {

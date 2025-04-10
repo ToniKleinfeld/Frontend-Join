@@ -7,7 +7,7 @@
 
       <div class="input-container">
         <h2 class="required input-title">Title</h2>
-        <input type="text" placeholder="Enter a title" autocomplete="off">
+        <input type="text" placeholder="Enter a title" autocomplete="off" required minlength="3">
       </div>
 
       <div class="text-area-container">
@@ -80,14 +80,14 @@
       <div class="subtask input-container ">
         <h2 class="input-title">Subtasks</h2>
         <input class="input-subtask input-title" type="text" autocomplete="off" placeholder="Add new subtask"
-          #subtask="ngModel" [(ngModel)]="this.subtask.task"  [ngModelOptions]="{ standalone: true }" (keydown.enter)="createSubTask()">
+          #subtask="ngModel" [(ngModel)]="this.subtask.task" [ngModelOptions]="{ standalone: true }"
+          (keydown.enter)="createSubTask()">
         <div class="iconssubtask center d-none" [ngClass]="{'d-none': this.subtask.task == ''}">
           <i class="clearsubtask" (click)="this.subtask.task = '' "></i>
           <i class="addsubtask" (click)="createSubTask()"></i>
         </div>
       </div>
       <ul class="showsubtasks">
-
 
         @for(singleSubtask of addtaskdata.subtasks; track singleSubtask; let index = $index){
         <li>
@@ -110,8 +110,6 @@
         </li>
         }
 
-
-
       </ul>
 
     </div>
@@ -121,16 +119,17 @@
   <div class="form-footer">
 
     <p class="required-info">This field is required</p>
+
     <div class="task-footer-button-container">
 
-      <button class="button-empty-small mobileoff">Clear
-        <span class="input-and-button-icons closex"></span>
-      </button>
-
-      <button class="button-filled-large" disabled>
-        <span>Create Task</span>
-        <img class="input-and-button-icons">
-      </button>
+      @if(!isMobile){
+        <app-button type="secondary" size="small" text="clear" icon="clear"/>
+      }
+      @if(addtaskform.valid){
+        <app-button type="submit" size="large" text="Create Task" icon="check"/>
+      } @else {
+        <app-button text="Create Task" size="large" type="deactive" for="addtaskform" icon="check"/>
+      }
 
     </div>
 

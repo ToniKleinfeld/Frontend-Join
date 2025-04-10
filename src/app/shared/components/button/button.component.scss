@@ -6,6 +6,7 @@ button {
   cursor: pointer;
   font-size: var(--button-letter-size);
   border-radius: 8px;
+  @include mix.center($x:5px);
 
   &.primary,
   &.submit {
@@ -53,5 +54,25 @@ button {
     @media (max-width: 630px) {
       min-width: 180px;
     }
+  }
+
+  .clear,
+  .check {
+    background-position: center;
+    background-size: contain;
+    width: 24px;
+    height: 24px;
+  }
+
+  .clear {
+    background-image: url(/assets/img/blackcloseicon.svg);
+  }
+
+  &:hover .clear{
+    background-image: url(/assets/img/closeicon.svg);
+  }
+
+  .check {
+    background-image: url(/assets/img/checktask.svg);
   }
 }

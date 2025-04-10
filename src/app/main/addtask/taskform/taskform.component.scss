@@ -29,15 +29,6 @@ h2 {
   width: 100%;
 }
 
-.form-footer {
-  width: 100%;
-  @include mix.center($jc: space-between);
-}
-
-.task-footer-button-container {
-  @include mix.center($x: 20px);
-}
-
 .text-area-container {
   padding: 10px;
 }
@@ -454,4 +445,16 @@ select {
 .editbutton,
 .deletebutton {
   padding: 4px;
+}
+
+
+// ---form footer
+
+.form-footer {
+  width: 100%;
+  @include mix.center($jc: space-between);
+}
+
+.task-footer-button-container {
+  @include mix.center($x: 20px);
 }

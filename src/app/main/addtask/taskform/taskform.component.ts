@@ -1,14 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
 
 @Component({
   selector: 'app-taskform',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ButtonComponent],
   templateUrl: './taskform.component.html',
   styleUrl: './taskform.component.scss',
 })
 export class TaskformComponent {
+  isMobile: boolean = window.innerWidth < 910;
   showAssingedToList: boolean = false;
   editingIndex: number = -1;
   editingSubtaskValue: string = '';
@@ -22,6 +24,11 @@ export class TaskformComponent {
     task: '',
     done: false,
   };
+
+  @HostListener('window:resize', [])
+  onResize() {
+    this.isMobile = window.innerWidth < 910;
+  }
 
   /**
    * Add the subtask to addtaskdata when taks is filled
