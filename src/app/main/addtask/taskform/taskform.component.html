@@ -1,4 +1,4 @@
-<form class="wrapper" #addtaskform="ngForm" name="addtaskform" (ngSubmit)="(addtaskform)">
+<form class="wrapper" #addtaskform="ngForm" name="addtaskform" (ngSubmit)="submitAddTask(addtaskform)">
   <h1>Add Task</h1>
 
   <div class="form-wrapper">
@@ -7,12 +7,12 @@
 
       <div class="input-container">
         <h2 class="required input-title">Title</h2>
-        <input type="text" placeholder="Enter a title" autocomplete="off" required minlength="3">
+        <input type="text" placeholder="Enter a title" autocomplete="off" required minlength="3" #task_title="ngModel" [(ngModel)]="addTaskData.title" name="task_title">
       </div>
 
       <div class="text-area-container">
         <h2 class="input-title">Description</h2>
-        <textarea placeholder="Enter a Description"></textarea>
+        <textarea placeholder="Enter a Description" #task_description="ngModel" [(ngModel)]="addTaskData.description" name="task_description"></textarea>
       </div>
 
       <div class="input-container dropdown-check-list-contacts" [ngClass]="{'visible' : showAssingedToList }">
@@ -49,7 +49,7 @@
 
       <div class="input-container">
         <h2 class="required input-title">Due date</h2>
-        <input type="date" class="input-date">
+        <input type="date" class="input-date" #task_duedate="ngModel" [(ngModel)]="addTaskData.duedate" name="task_duedate" required [min]="today">
       </div>
 
       <div class="input-container">
@@ -125,6 +125,7 @@
       @if(!isMobile){
         <app-button type="secondary" size="small" text="Clear" icon="clear" (click)="clearAll()"/>
       }
+
       @if(addtaskform.valid){
         <app-button type="submit" size="small" text="Create Task" icon="check"/>
       } @else {

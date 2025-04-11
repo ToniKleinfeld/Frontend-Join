@@ -21,8 +21,9 @@ export class TaskformComponent {
   showAssingedToList: boolean = false;
   editingIndex: number = -1;
   editingSubtaskValue: string = '';
+  today: string = new Date().toISOString().split('T')[0];
 
-  addTaskData: AddTaskData = {
+  defaultAddTask: AddTaskData = {
     rubric: 'To do',
     title: '',
     description: '',
@@ -32,12 +33,12 @@ export class TaskformComponent {
     subtasks: [],
   };
 
-  deflaultAddTaks: AddTaskData = { ...this.addTaskData };
-
   subtask: Subtask = {
     task: '',
     done: false,
   };
+
+  addTaskData: AddTaskData = JSON.parse(JSON.stringify(this.defaultAddTask));
 
   @HostListener('window:resize', [])
   onResize() {
@@ -86,9 +87,11 @@ export class TaskformComponent {
     this.editingSubtaskValue = '';
   }
 
-  clearAll(){
+  clearAll() {
+    this.addTaskData = JSON.parse(JSON.stringify(this.defaultAddTask));
+  }
 
-
-    console.log(this.deflaultAddTaks, this.addTaskData)
+  submitAddTask(form: any) {
+    console.log(form, form.valid);
   }
 }
