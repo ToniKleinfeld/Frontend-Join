@@ -1,4 +1,4 @@
-<form class="wrapper" #addtaskform="ngForm" name="addtaskform" (ngSubmit)="submitAddTask(addtaskform)">
+<form class="wrapper" #addtaskform="ngForm" name="addtaskform">
   <h1>Add Task</h1>
 
   <div class="form-wrapper">
@@ -7,12 +7,15 @@
 
       <div class="input-container">
         <h2 class="required input-title">Title</h2>
-        <input type="text" placeholder="Enter a title" autocomplete="off" required minlength="3" #task_title="ngModel" [(ngModel)]="addTaskData.title" name="task_title">
+        <input type="text" placeholder="Enter a title" autocomplete="off" required minlength="1" #task_title="ngModel"
+          [(ngModel)]="addTaskData.title" name="task_title"
+          [ngClass]="{ 'red-underline': !task_title.valid && task_title.touched}">
       </div>
 
       <div class="text-area-container">
         <h2 class="input-title">Description</h2>
-        <textarea placeholder="Enter a Description" #task_description="ngModel" [(ngModel)]="addTaskData.description" name="task_description"></textarea>
+        <textarea placeholder="Enter a Description" #task_description="ngModel" [(ngModel)]="addTaskData.description"
+          name="task_description"></textarea>
       </div>
 
       <div class="input-container dropdown-check-list-contacts" [ngClass]="{'visible' : showAssingedToList }">
@@ -49,7 +52,10 @@
 
       <div class="input-container">
         <h2 class="required input-title">Due date</h2>
-        <input type="date" class="input-date" #task_duedate="ngModel" [(ngModel)]="addTaskData.duedate" name="task_duedate" required [min]="today">
+        <input type="date" class="input-date"
+          [ngClass]="{ 'red-underline': !task_duedate.valid && task_duedate.touched && task_title.valid}"
+          #task_duedate="ngModel" [(ngModel)]="addTaskData.duedate" name="task_duedate" required [min]="today"
+          (ngModelChange)="onDateChange(task_duedate)">
       </div>
 
       <div class="input-container">
@@ -70,7 +76,8 @@
 
       <div class="input-container">
         <h2 class="required input-title">Category</h2>
-        <select name="category">
+        <select name="category" [(ngModel)]="addTaskData.category" #category="ngModel" required
+          [ngClass]="{ 'red-underline': !category.valid  && task_duedate.valid && task_duedate.touched && task_title.valid}">
           <option value="" selected hidden disabled>Select task category</option>
           <option value="Technical Task">Technical Task</option>
           <option value="User Story">User Story</option>
@@ -123,13 +130,13 @@
     <div class="task-footer-button-container">
 
       @if(!isMobile){
-        <app-button type="secondary" size="small" text="Clear" icon="clear" (click)="clearAll()"/>
+      <app-button design="secondary" size="small" text="Clear" icon="clear" (click)="clearAll()"/>
       }
 
       @if(addtaskform.valid){
-        <app-button type="submit" size="small" text="Create Task" icon="check"/>
+      <app-button design="submit" size="small" text="Create Task" icon="check" (clicked)="submitAddTask(addtaskform)"  />
       } @else {
-        <app-button text="Create Task" size="small" type="deactive" for="addtaskform" icon="check"/>
+      <app-button text="Create Task" size="small" design="deactive" for="addtaskform" icon="check" />
       }
 
     </div>

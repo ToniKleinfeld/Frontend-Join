@@ -9,7 +9,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ButtonComponent {
   @Input() text: string = 'Button';
-  @Input() type: 'primary' | 'secondary' | 'deactive' | 'submit' = 'primary';
+  @Input() design: 'primary' | 'secondary' | 'deactive' | 'submit' = 'primary';
+  @Input() type: 'button' | 'submit' = 'button';
   @Input() size: 'small'| 'large' = 'small';
   @Input() icon: '' | 'clear' | 'check' | 'add' = ''
   @Output() clicked = new EventEmitter<void>();

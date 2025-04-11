@@ -11,6 +11,7 @@ export interface AddTaskData {
   description: string;
   assignedusers: User[];
   duedate:string,
+  category:string,
   prio: string;
   subtasks: Subtask[];
 }

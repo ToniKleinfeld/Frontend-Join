@@ -85,7 +85,7 @@
       <div class="button-container">
         @if(signupData.terms && signup_name.valid && signup_mail.valid && signup_pw.valid && (signup_pw_confirm.value ==
         signup_pw.value)){
-        <app-button text="Sign up" type="submit" size="small" for="signup-form" />
+        <app-button text="Sign up" design="submit" type="submit" size="small" for="signup-form" />
         } @else {
 
         @if(!signup_name.valid && signup_name.touched){
@@ -98,7 +98,7 @@
         signup_mail.valid && signup_pw.valid) {
         <label for="signup_name">Check if your passwords match!</label>
         }
-        <app-button text="Sign up" size="small" type="deactive" for="signup-form" />
+        <app-button text="Sign up" size="small" design="deactive" for="signup-form" type="submit" />
         }
       </div>
     </form>
@@ -121,8 +121,8 @@
       </div>
 
       <div class="button-container loginbutton">
-        <app-button text="Log in" type="submit" size="large" />
-        <app-button text="Guest log in" type="secondary" size="large" (clicked)="guestLogIn()" />
+        <app-button text="Log in" design="submit" type="submit" size="large" />
+        <app-button text="Guest log in" design="secondary" size="large" (clicked)="guestLogIn()" />
       </div>
 
     </form>
@@ -134,7 +134,7 @@
   @if(isMobile){
   <div class="change-to-signup" [ngClass]="{'d-none': signup}">
     <p>Not a join user?</p>
-    <app-button type="primary" size="small" text="Sign up" (clicked)="toogleToSignIn()" />
+    <app-button design="primary" size="small" text="Sign up" (clicked)="toogleToSignIn()" />
   </div>
   }
 

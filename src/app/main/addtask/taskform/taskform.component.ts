@@ -29,6 +29,7 @@ export class TaskformComponent {
     description: '',
     assignedusers: [],
     duedate: '',
+    category: '',
     prio: 'medium',
     subtasks: [],
   };
@@ -87,11 +88,44 @@ export class TaskformComponent {
     this.editingSubtaskValue = '';
   }
 
+  /**
+   * Own Validation, if DueDate input is before current date
+   *
+   * @param control input.value dueData
+   * @returns obj or null
+   */
+  validateDueDate(control: any): { [key: string]: any } | null {
+    const inputDate = new Date(control);
+    const today = new Date();
+
+    today.setHours(0, 0, 0, 0);
+    inputDate.setHours(0, 0, 0, 0);
+
+    if (inputDate < today) {
+      return { pastDate: true };
+    }
+
+    return null;
+  }
+
+  /**
+   *calls funktion to get feeback if input is valid or not
+   * @param control input.value dueData
+   */
+  onDateChange(control: any): void {
+    const error = this.validateDueDate(control.control.value);
+    control.control.setErrors(error);
+  }
+
+  /**
+   * Reset the Form to default
+   */
   clearAll() {
     this.addTaskData = JSON.parse(JSON.stringify(this.defaultAddTask));
   }
 
   submitAddTask(form: any) {
     console.log(form, form.valid);
+    console.log(this.addTaskData);
   }
 }
