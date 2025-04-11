@@ -130,17 +130,13 @@ select {
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 460px) {
   h1 {
     font-size: 47px;
   }
 
   h2 {
     font-size: 16px;
-  }
-
-  .wrapper {
-    width: 99dvw;
   }
 
   .form-wrapper {
@@ -154,6 +150,6 @@ select {
   }
 
   .form-footer {
-    max-width: 95dvw;
+    width: 93dvw;
   }
 }
