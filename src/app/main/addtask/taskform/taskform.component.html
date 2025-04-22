@@ -54,7 +54,7 @@
         <h2 class="required input-title">Due date</h2>
         <input type="date" class="input-date"
           [ngClass]="{ 'red-underline': !task_duedate.valid && task_duedate.touched && task_title.valid}"
-          #task_duedate="ngModel" [(ngModel)]="addTaskData.duedate" name="task_duedate" required [min]="today"
+          #task_duedate="ngModel" [(ngModel)]="addTaskData.due_date" name="task_duedate" required [min]="today"
           (ngModelChange)="onDateChange(task_duedate)">
       </div>
 

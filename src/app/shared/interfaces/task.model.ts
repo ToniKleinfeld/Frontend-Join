@@ -9,8 +9,8 @@ export interface AddTaskData {
   rubric: string;
   title: string;
   description: string;
-  assignedusers: User[];
-  duedate:string,
+  assigned_users: User[];
+  due_date:string,
   category:string,
   prio: string;
   subtasks: Subtask[];
