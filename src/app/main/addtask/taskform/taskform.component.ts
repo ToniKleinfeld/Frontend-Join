@@ -122,6 +122,7 @@ export class TaskformComponent {
    */
   clearAll() {
     this.addTaskData = JSON.parse(JSON.stringify(this.defaultAddTask));
+    // TODO: Form untouched
   }
 
   submitAddTask(form: any) {
