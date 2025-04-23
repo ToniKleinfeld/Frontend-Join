@@ -165,3 +165,20 @@ export class TaskformComponent {
 //       }
 //   ]
 // }    BSP : POST aufbau api/join/tasks/     Bis auf title , category und due_date alle optional.
+
+
+// TODO:
+// Example Subtasks create :
+// {
+//   "title": "Test create subtask ",
+// }
+// http://127.0.0.1:8000/api/join/tasks/3/subtasks liste aller subtasks , hier von taks id 3
+//
+// Put / Patch :
+// {
+//   "title": "Test put subtask ",
+//   "done": true
+// }
+// "done"= deflault -> false
+// Delte (PUT UND PATCH)
+// http://127.0.0.1:8000/api/join/tasks/3/subtasks/6/ singleview
