@@ -130,3 +130,38 @@ export class TaskformComponent {
     console.log(this.addTaskData);
   }
 }
+
+
+
+
+// TODO: {
+//     "rubric": "Done",
+//     "prio": "urgent",
+//     "assigned_users": [
+//         1 , 6 , 10
+//     ]
+// }  BSP PATCH api/join/tasks/<id>/ user hier id nur alten müssen vorher ausgelsen werden und in die neue liste eingefügt werden, wen diese weiterhin in der liste erscheinen sollen
+
+// TODO: {
+//   "title":
+//       "Test 2"
+//   ,
+//   "description": "Test 2 description",
+//   "rubric": "Done",
+//   "category":
+//       "User Story"
+//   ,
+//   "prio":"low",
+//   "due_date":
+//       "2026-05-25"
+//   ,
+//   "assigned_users": [1,6,10],
+//   "subtasks" : [
+//       {
+//           "title": "Test subtask 2"
+//       },
+//       {
+//           "title": "Test POST tasks"
+//       }
+//   ]
+// }    BSP : POST aufbau api/join/tasks/     Bis auf title , category und due_date alle optional.
