@@ -1,4 +1,4 @@
-# TODO: Angular Frontend
+# TODO: JOIN Angular Frontend
 
 ## 📋 Allgemein
 

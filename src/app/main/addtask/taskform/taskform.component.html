@@ -19,7 +19,6 @@
       </div>
 
       <div class="input-container dropdown-check-list-contacts" [ngClass]="{'visible' : showAssingedToList }">
-        <!-- visible <--class -->
         <h2 class="input-title">Assigned to</h2>
 
         <span class="anchor" [ngClass]="{'d-none' : showAssingedToList }"
@@ -31,7 +30,7 @@
           (click)="showAssingedToList = !showAssingedToList"></i>
 
         <ul class="items">
-          <!-- später hier mit der li und daten aus backend for schleifen der user | style im label span durch backend daten für verschiedene farben-->
+          <!-- TODO: später hier mit der li und daten aus backend for schleifen der user | style im label span durch backend daten für verschiedene farben-->
           <li class="contactslistassign">
             <input type="checkbox" name="test_dummy" id="test_dummy">
             <span class="checkmark"></span>
@@ -43,7 +42,7 @@
       </div>
 
       <div class="showassignedcontacts">
-        <!-- rendern der zugewiesenen user evtl vor absenden erstmal in einem seperaten array , wenn dort nicht 0 , dann hier for schleife -->
+        <!-- TODO: rendern der zugewiesenen user evtl vor absenden erstmal in einem seperaten array , wenn dort nicht 0 , dann hier for schleife -->
         <div class="contacticon" style="background-color: #6E52FF;">TD</div>
       </div>
     </div>
@@ -130,11 +129,11 @@
     <div class="task-footer-button-container">
 
       @if(!isMobile){
-      <app-button design="secondary" size="small" text="Clear" icon="clear" (click)="clearAll()"/>
+      <app-button design="secondary" size="small" text="Clear" icon="clear" (click)="clearAll()" />
       }
 
       @if(addtaskform.valid){
-      <app-button design="submit" size="small" text="Create Task" icon="check" (clicked)="submitAddTask(addtaskform)"  />
+      <app-button design="submit" size="small" text="Create Task" icon="check" (clicked)="submitAddTask(addtaskform)" />
       } @else {
       <app-button text="Create Task" size="small" design="deactive" for="addtaskform" icon="check" />
       }
