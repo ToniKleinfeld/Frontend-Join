@@ -21,6 +21,8 @@ export class LoginComponent {
   isMobile: boolean = window.innerWidth < 1024;
   feedback_Login_SingUp: string = '';
 
+  // TODO: Gäste login überarbeiten! da jetzt HTTP only Cookie , evtl im backend was machbar?
+
   loginData = {
     login_mail: '',
     login_pw: '',

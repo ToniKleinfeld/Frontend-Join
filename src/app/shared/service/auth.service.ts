@@ -60,3 +60,5 @@ export class AuthService {
     );
   }
 }
+
+// TODO: Vertify überarbeiten , HTTP only token nun , Logout für cookie löschung hier noch mit einfügen ( einbindung in header )

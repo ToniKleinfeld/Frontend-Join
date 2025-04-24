@@ -182,3 +182,8 @@ export class TaskformComponent {
 // "done"= deflault -> false
 // Delte (PUT UND PATCH)
 // http://127.0.0.1:8000/api/join/tasks/3/subtasks/6/ singleview
+
+
+// TODO: HTTP ONLY COOKIE ---> token hier lagern und mitsenden? informieren! beim logout token 'blacklisten'
+
+// TODO: Simple -JWT auth als alternative?

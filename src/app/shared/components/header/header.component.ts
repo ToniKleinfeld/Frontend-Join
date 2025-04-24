@@ -21,6 +21,7 @@ export class HeaderComponent {
     sessionStorage.clear();
     this.router.navigate(['/login']);
   }
+  // TODO: Logout überarbeiten für cookie löschung (token)
 
   @HostListener('window:resize', [])
   onResize() {
