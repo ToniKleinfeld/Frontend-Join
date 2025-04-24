@@ -22,7 +22,9 @@ export class AuthService {
       email: loginData.login_mail.toLowerCase(),
       password: loginData.login_pw,
     };
-    return this.http.post(`${this.baseUrl}login/`, formattedData, { withCredentials: true })
+    return this.http.post(`${this.baseUrl}login/`, formattedData, {
+      withCredentials: true,
+    });
   }
 
   /**
@@ -44,7 +46,9 @@ export class AuthService {
       password: signupData.signup_pw,
       repeated_password: signupData.signup_pw_confirm,
     };
-    return this.http.post(`${this.baseUrl}registration/`, formattedData);
+    return this.http.post(`${this.baseUrl}registration/`, formattedData, {
+      withCredentials: true,
+    });
   }
 
   /**
@@ -64,6 +68,8 @@ export class AuthService {
         catchError(() => of(false))
       );
   }
+
+  // TODO: hier scheint etwas mit den verifyToken oder den guards noch nicht zu stimmen , login --> true aber mit den verlinken klappt es gerade nicht evtl async
 
   /**
    * send the cookies to server to delete token
