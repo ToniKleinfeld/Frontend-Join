@@ -89,9 +89,10 @@ export class LoginComponent {
     if (ngForm.form.valid && ngForm.submitted) {
       this.authService.login(this.loginData).subscribe({
         next: (response) => {
-          let logedIn = 'Login successfully.';
+          let user = response.username.replaceAll('-', ' ');
+          let logedIn = `Login successfully ${user}`;
           this.showFeedbackMsg(logedIn);
-          this.saveSessionStorage(response);
+          this.saveSessionStorage(response);  // TODO: evtl unützt siehe unten todo funktion
           this.routeToSummary();
         },
         error: (error) => {
@@ -148,15 +149,16 @@ export class LoginComponent {
   }
 
   /**
-   * Save the User Name / Mail and the token in sessionStorage
+   * Save the User Name / Mail in sessionStorage
    *
    * @param response get the Data from user as Json
    */
   saveSessionStorage(response: any) {
-    sessionStorage.setItem('authToken', response.token);
     sessionStorage.setItem('usermail', response.email);
     sessionStorage.setItem('username', response.username.replaceAll('-', ' '));
   }
+
+  // TODO: evtl abfrage userdaten als service user request anstelle von Storage (falls zugriff eingeschränkt)
 
   /**
    * Navigate to Summary after a timeout , when login/signup succesful

@@ -22,7 +22,7 @@ export class AuthService {
       email: loginData.login_mail.toLowerCase(),
       password: loginData.login_pw,
     };
-    return this.http.post(`${this.baseUrl}login/`, formattedData);
+    return this.http.post(`${this.baseUrl}login/`, formattedData, { withCredentials: true })
   }
 
   /**
@@ -50,13 +50,31 @@ export class AuthService {
   /**
    * Post request to check if token still valid
    *
-   * @param token token from storage
-   * @returns
+   * @returns POST Request zu server
    */
-  verifyToken(token: string): Observable<boolean> {
-    return this.http.post(`${this.baseUrl}token/verify/`, { token }).pipe(
-      map(() => true),
-      catchError(() => of(false))
+  verifyToken(): Observable<boolean> {
+    return this.http
+      .post<{ detail: string }>(
+        `${this.baseUrl}token/verify/`,
+        {},
+        { withCredentials: true }
+      )
+      .pipe(
+        map(() => true),
+        catchError(() => of(false))
+      );
+  }
+
+  /**
+   * send the cookies to server to delete token
+   *
+   * @returns return withCredentials to server
+   */
+  logout() {
+    return this.http.post(
+      `${this.baseUrl}logout/`,
+      {},
+      { withCredentials: true }
     );
   }
 }

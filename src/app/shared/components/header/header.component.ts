@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss', './header-mobile.component.scss'],
 })
 export class HeaderComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService,) {}
 
   dropDownMenu: boolean = false;
   isMobile: boolean = window.innerWidth < 800;
@@ -19,9 +20,10 @@ export class HeaderComponent {
    */
   logOut() {
     sessionStorage.clear();
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
-  // TODO: Logout überarbeiten für cookie löschung (token)
+  // TODO: Logout überarbeiten für cookie löschung (token) || Pürfen funkt !
 
   @HostListener('window:resize', [])
   onResize() {

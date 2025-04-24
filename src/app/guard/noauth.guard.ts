@@ -7,13 +7,8 @@ import { map, catchError } from 'rxjs/operators';
 export const noauthGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthService);
-  const token = sessionStorage.getItem('authToken');
 
-  if (!token) {
-    return true;
-  }
-
-  return authService.verifyToken(token).pipe(
+  return authService.verifyToken().pipe(
     map((isValid: boolean) => {
       if (isValid) {
         router.navigate(['/summary']);
@@ -27,3 +22,5 @@ export const noauthGuard: CanActivateFn = (route, state) => {
     })
   );
 };
+
+// TODO: Testen ob umschrieb erfolgreich!
