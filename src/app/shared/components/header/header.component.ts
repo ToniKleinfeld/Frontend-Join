@@ -19,11 +19,13 @@ export class HeaderComponent {
    * Log out , return to Login side an delete all sessionStorage strings
    */
   logOut() {
-    sessionStorage.clear();
-    this.authService.logout();
-    this.router.navigate(['/login']);
+
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
+      }
+    });
   }
-  // TODO: Logout überarbeiten für cookie löschung (token) || Pürfen funkt !
 
   @HostListener('window:resize', [])
   onResize() {

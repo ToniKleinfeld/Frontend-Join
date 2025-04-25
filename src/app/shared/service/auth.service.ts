@@ -7,7 +7,7 @@ import { map, catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://127.0.0.1:8000/api/auth/';
+  private baseUrl = 'http://localhost:8000/api/auth/';
 
   constructor(private http: HttpClient) {}
 
@@ -59,7 +59,7 @@ export class AuthService {
   verifyToken(): Observable<boolean> {
     return this.http
       .post<{ detail: string }>(
-        `${this.baseUrl}token/verify/`,
+        `${this.baseUrl}verify/`,
         {},
         { withCredentials: true }
       )
@@ -68,8 +68,6 @@ export class AuthService {
         catchError(() => of(false))
       );
   }
-
-  // TODO: hier scheint etwas mit den verifyToken oder den guards noch nicht zu stimmen , login --> true aber mit den verlinken klappt es gerade nicht evtl async
 
   /**
    * send the cookies to server to delete token
@@ -84,5 +82,3 @@ export class AuthService {
     );
   }
 }
-
-// TODO: Vertify überarbeiten , HTTP only token nun , Logout für cookie löschung hier noch mit einfügen ( einbindung in header )

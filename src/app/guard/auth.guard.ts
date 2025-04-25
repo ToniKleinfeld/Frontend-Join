@@ -13,16 +13,12 @@ export const authGuard: CanActivateFn = (route, state) => {
       if (isValid) {
         return true;
       } else {
-        sessionStorage.clear();
         router.navigate(['/login']);
         return false;
       }
     }),
     catchError(() => {
-      router.navigate(['/login']);
       return of(false);
     })
   );
 };
-
-// TODO: Testen ob umschrieb erfolgreich!

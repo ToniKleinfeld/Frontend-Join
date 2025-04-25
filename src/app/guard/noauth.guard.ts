@@ -18,9 +18,7 @@ export const noauthGuard: CanActivateFn = (route, state) => {
       }
     }),
     catchError(() => {
-      return of(true);
+      return of(false);
     })
   );
 };
-
-// TODO: Testen ob umschrieb erfolgreich!
