@@ -70,6 +70,21 @@ export class AuthService {
   }
 
   /**
+   * check if there is already a http only Cookie
+   *
+   * @returns true , when Cookie exist
+   */
+  pingCookie(): Observable<boolean> {
+    return this.http
+      .post<void>(
+        `${this.baseUrl}ping-cookie/`,
+        {},
+        { withCredentials: true, observe: 'response' }
+      )
+      .pipe(map((resp) => resp.status === 200));
+  }
+
+  /**
    * send the cookies to server to delete token
    *
    * @returns return withCredentials to server

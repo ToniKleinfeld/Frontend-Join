@@ -8,17 +8,14 @@ export const noauthGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthService);
 
-  return authService.verifyToken().pipe(
-    map((isValid: boolean) => {
-      if (isValid) {
+  return authService.pingCookie().pipe(
+    map((hasCookie) => {
+      if (hasCookie) {
         router.navigate(['/summary']);
         return false;
       } else {
         return true;
       }
-    }),
-    catchError(() => {
-      return of(false);
     })
   );
 };
