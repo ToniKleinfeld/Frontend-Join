@@ -4,6 +4,7 @@
 
 - [x] Projektstruktur anlegen (Modules, Components, Services)
 - [ ] GitHub Issues für größere Tasks anlegen
+- [ ] .env anlegen!
 
 ## 🔐 Authentifizierung
 
