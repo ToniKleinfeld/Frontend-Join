@@ -21,8 +21,6 @@ export class LoginComponent {
   isMobile: boolean = window.innerWidth < 1024;
   feedback_Login_SingUp: string = '';
 
-  // TODO: Gäste login überarbeiten! da jetzt HTTP only Cookie , evtl im backend was machbar?
-
   loginData = {
     login_mail: '',
     login_pw: '',
@@ -90,9 +88,9 @@ export class LoginComponent {
       this.authService.login(this.loginData).subscribe({
         next: (response) => {
           let user = response.username.replaceAll('-', ' ');
-          let logedIn = `Login successfully ${user}`;
+          let username = user.charAt(0).toUpperCase() + user.slice(1)
+          let logedIn = `Login successfully ${username}`;
           this.showFeedbackMsg(logedIn);
-          this.saveSessionStorage(response);  // TODO: evtl unützt siehe unten todo funktion
           this.routeToSummary();
         },
         error: (error) => {
@@ -115,10 +113,9 @@ export class LoginComponent {
   onSubmitSignUp(ngForm: NgForm) {
     if (ngForm.submitted && ngForm.form.valid) {
       this.authService.register(this.signupData).subscribe({
-        next: (response) => {
+        next: () => {
           let signUp = 'You Signed Up successfully.';
           this.showFeedbackMsg(signUp);
-          this.saveSessionStorage(response);
           this.routeToSummary();
         },
         error: (error) => {
@@ -149,18 +146,6 @@ export class LoginComponent {
   }
 
   /**
-   * Save the User Name / Mail in sessionStorage
-   *
-   * @param response get the Data from user as Json
-   */
-  saveSessionStorage(response: any) {
-    sessionStorage.setItem('usermail', response.email);
-    sessionStorage.setItem('username', response.username.replaceAll('-', ' '));
-  }
-
-  // TODO: evtl abfrage userdaten als service user request anstelle von Storage (falls zugriff eingeschränkt)
-
-  /**
    * Navigate to Summary after a timeout , when login/signup succesful
    */
   routeToSummary() {
@@ -174,9 +159,8 @@ export class LoginComponent {
    */
   guestLogIn(){
     this.showFeedbackMsg('Login successfully.');
-    sessionStorage.setItem('authToken', this.guesttoken);
-    sessionStorage.setItem('usermail', 'guest@testmyjoin.me');
-    sessionStorage.setItem('username', 'guest');
     this.routeToSummary();
   }
+
+    // TODO: Gäste login überarbeiten! da jetzt HTTP only Cookie , evtl im backend was machbar?
 }
