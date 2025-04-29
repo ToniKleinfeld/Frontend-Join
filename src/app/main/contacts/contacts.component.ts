@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BackendService } from '../../shared/service/backend.service';
 
 @Component({
   selector: 'app-contacts',
@@ -6,6 +7,19 @@ import { Component } from '@angular/core';
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss'
 })
-export class ContactsComponent {
+export class ContactsComponent implements OnInit, OnDestroy {
 
+  constructor(private backendService: BackendService) {}
+
+  ngOnInit(): void {
+    this.backendService.GetRequest('contacts').subscribe({
+      next: (resonse) => {
+        console.log(resonse)
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+
+  }
 }
