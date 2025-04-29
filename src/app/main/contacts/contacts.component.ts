@@ -20,11 +20,13 @@ export class ContactsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {}
 
+  //TODO: interface für contact hinzufügen
+
   createContact() {
     let newContact = {
       name: 'Toni',
       email: 'Test@post.de',
-      phone: '01735451636',
+      phone: '0173544636',
     };
     this.backendService.postRequest('contacts', newContact).subscribe({
       next: (resonse) => {

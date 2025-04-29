@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
-import { AddTaskData } from '../../../shared/interfaces/task.model';
-import { Subtask } from '../../../shared/interfaces/task.model';
+import { AddTaskData } from '../../../shared/interfaces/interfaces.model';
+import { Subtask } from '../../../shared/interfaces/interfaces.model';
 
 @Component({
   selector: 'app-taskform',
