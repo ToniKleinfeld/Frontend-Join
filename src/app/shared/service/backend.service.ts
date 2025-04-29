@@ -28,13 +28,13 @@ export class BackendService {
     id: string,
     jsonData: object
   ): Observable<any> {
-    return this.http.patch(`${this.baseUrl + category + '/' + id}/`, jsonData, {
+    return this.http.patch(`${this.baseUrl + category}/`, jsonData, {
       withCredentials: true,
     });
   }
 
-  deleteRequest(category: string, id: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl + category + '/' + id}/`, {
+  deleteRequest(category: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl + category}/`, {
       withCredentials: true,
     });
   }

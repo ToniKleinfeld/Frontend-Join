@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BackendService } from '../../shared/service/backend.service';
+import { Contact } from '../../shared/interfaces/interfaces.model';
 
 @Component({
   selector: 'app-contacts',
@@ -20,14 +21,13 @@ export class ContactsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {}
 
-  //TODO: interface für contact hinzufügen
-
   createContact() {
-    let newContact = {
+    let newContact: Contact = {
       name: 'Toni',
       email: 'Test@post.de',
       phone: '0173544636',
     };
+    
     this.backendService.postRequest('contacts', newContact).subscribe({
       next: (resonse) => {
         console.log(resonse);
@@ -36,7 +36,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
   }
 
   deleteContact(id: string) {
-    this.backendService.deleteRequest('contacts', id).subscribe({
+    this.backendService.deleteRequest(`contacts/${id}`).subscribe({
       next: (resonse) => {
         console.log(resonse);
       },
