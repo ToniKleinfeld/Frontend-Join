@@ -5,21 +5,39 @@ import { BackendService } from '../../shared/service/backend.service';
   selector: 'app-contacts',
   imports: [],
   templateUrl: './contacts.component.html',
-  styleUrl: './contacts.component.scss'
+  styleUrl: './contacts.component.scss',
 })
 export class ContactsComponent implements OnInit, OnDestroy {
-
   constructor(private backendService: BackendService) {}
 
   ngOnInit(): void {
-    this.backendService.GetRequest('contacts').subscribe({
+    this.backendService.getRequest('contacts').subscribe({
       next: (resonse) => {
-        console.log(resonse)
-      }
-    })
+        console.log(resonse);
+      },
+    });
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy(): void {}
 
+  createContact() {
+    let newContact = {
+      name: 'Toni',
+      email: 'Test@post.de',
+      phone: '01735451636',
+    };
+    this.backendService.postRequest('contacts', newContact).subscribe({
+      next: (resonse) => {
+        console.log(resonse);
+      },
+    });
+  }
+
+  deleteContact(id: string) {
+    this.backendService.deleteRequest('contacts', id).subscribe({
+      next: (resonse) => {
+        console.log(resonse);
+      },
+    });
   }
 }

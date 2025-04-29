@@ -11,8 +11,30 @@ export class BackendService {
 
   constructor(private http: HttpClient) {}
 
-  GetRequest(category:string): Observable<any> {
+  getRequest(category: string): Observable<any> {
     return this.http.get(`${this.baseUrl + category}/`, {
+      withCredentials: true,
+    });
+  }
+
+  postRequest(category: string, jsonData: object): Observable<any> {
+    return this.http.post(`${this.baseUrl + category}/`, jsonData, {
+      withCredentials: true,
+    });
+  }
+
+  patchRequest(
+    category: string,
+    id: string,
+    jsonData: object
+  ): Observable<any> {
+    return this.http.patch(`${this.baseUrl + category + '/' + id}/`, jsonData, {
+      withCredentials: true,
+    });
+  }
+
+  deleteRequest(category: string, id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl + category + '/' + id}/`, {
       withCredentials: true,
     });
   }
