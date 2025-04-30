@@ -11,8 +11,8 @@
       }
 
       <div class="user-logo" (click)="dropDownMenu = dropDownMenu ? false : true">
-        <div class="shortusername">
-          G
+        <div class="shortusername" *ngIf="user$ | async as user;">
+          {{user.username | initials }}
         </div>
       </div>
     </div>

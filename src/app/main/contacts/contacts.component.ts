@@ -27,7 +27,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
       email: 'Test@post.de',
       phone: '0173544636',
     };
-    
+
     this.backendService.postRequest('contacts', newContact).subscribe({
       next: (resonse) => {
         console.log(resonse);

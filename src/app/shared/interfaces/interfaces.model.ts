@@ -18,8 +18,8 @@ export interface AddTaskData {
 
 export interface User {
   id?: string;
-  name: string;
-  mail: string;
+  username: string;
+  mail?: string;
 }
 
 export interface Contact {
