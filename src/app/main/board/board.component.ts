@@ -27,11 +27,31 @@ export class BoardComponent {
       switchMap(() => this.backendService.getRequest<AddTaskData[]>('tasks')),
       takeUntil(this.destroy$)
     );
-    this.tasks$.subscribe({
-      next: tasks => console.log('Aktuelle Tasks:', tasks),
-      error: err => console.error('Fehler bei Tasks:', err)
-    });
   }
 
   ngOnDestroy(): void {}
 }
+
+// TODO: {
+//     "rubric": "Done",
+//     "prio": "urgent",
+//     "assigned_users": [
+//         1 , 6 , 10
+//     ]
+// }  BSP PATCH api/join/tasks/<id>/ user hier id nur alten müssen vorher ausgelsen werden und in die neue liste eingefügt werden, wen diese weiterhin in der liste erscheinen sollen
+
+// TODO:
+// Example Subtasks create :
+// {
+//   "title": "Test create subtask ",
+// }
+// http://127.0.0.1:8000/api/join/tasks/3/subtasks liste aller subtasks , hier von taks id 3
+//
+// Put / Patch :
+// {
+//   "title": "Test put subtask ",
+//   "done": true
+// }
+// "done"= deflault -> false
+// Delte (PUT UND PATCH)
+// http://127.0.0.1:8000/api/join/tasks/3/subtasks/6/ singleview

@@ -1,4 +1,4 @@
-<form class="wrapper" #addtaskform="ngForm" name="addtaskform">
+<form class="wrapper" #formRef="ngForm" name="addtaskform">
   <h1>Add Task</h1>
 
   <div class="form-wrapper">
@@ -46,10 +46,10 @@
 
       <div class="showassignedcontacts" *ngIf="users$ | async as users;">
         @for( user of users; track user; let index = $index){
-          @if( addTaskData.assigned_users.includes(user.id!)){
-            <div class="contacticon" style="background-color: #6E52FF;">{{user.username |
-                initials}}</div>
-          }
+        @if( addTaskData.assigned_users.includes(user.id!)){
+        <div class="contacticon" style="background-color: #6E52FF;">{{user.username |
+          initials}}</div>
+        }
         }
       </div>
     </div>
@@ -93,10 +93,10 @@
       <div class="subtask input-container ">
         <h2 class="input-title">Subtasks</h2>
         <input class="input-subtask input-title" type="text" autocomplete="off" placeholder="Add new subtask"
-          #subtask="ngModel" [(ngModel)]="this.subtask.task" [ngModelOptions]="{ standalone: true }"
+          #subtask="ngModel" [(ngModel)]="this.subtask.title" [ngModelOptions]="{ standalone: true }"
           (keydown.enter)="createSubTask()">
-        <div class="iconssubtask center d-none" [ngClass]="{'d-none': this.subtask.task == ''}">
-          <i class="clearsubtask" (click)="this.subtask.task = '' "></i>
+        <div class="iconssubtask center d-none" [ngClass]="{'d-none': this.subtask.title == ''}">
+          <i class="clearsubtask" (click)="this.subtask.title = '' "></i>
           <i class="addsubtask" (click)="createSubTask()"></i>
         </div>
       </div>
@@ -106,8 +106,8 @@
         <li>
           <span class="dot" [class.d-none]="editingIndex === index"></span>
           <div class="subtaskslable">
-            <input class="subtasksli" type="text" [disabled]="editingIndex !== index" [value]="singleSubtask.task"
-              [ngModel]="editingIndex === index ? editingSubtaskValue : singleSubtask.task"
+            <input class="subtasksli" type="text" [disabled]="editingIndex !== index" [value]="singleSubtask.title"
+              [ngModel]="editingIndex === index ? editingSubtaskValue : singleSubtask.title"
               (ngModelChange)="editingIndex === index ? editingSubtaskValue = $event : null"
               [ngModelOptions]="{ standalone: true }" (keydown.enter)="saveEditSubtask(index)">
             <span *ngIf="editingIndex !== index">
@@ -136,11 +136,11 @@
     <div class="task-footer-button-container">
 
       @if(!isMobile){
-      <app-button design="secondary" size="small" text="Clear" icon="clear" (click)="clearAll()" />
+      <app-button design="secondary" size="small" text="Clear" icon="clear" (click)="clearAll(formRef)" />
       }
 
-      @if(addtaskform.valid){
-      <app-button design="submit" size="small" text="Create Task" icon="check" (clicked)="submitAddTask(addtaskform)" />
+      @if(formRef.valid){
+      <app-button design="submit" size="small" text="Create Task" icon="check" (clicked)="submitAddTask(formRef)" />
       } @else {
       <app-button text="Create Task" size="small" design="deactive" for="addtaskform" icon="check" />
       }

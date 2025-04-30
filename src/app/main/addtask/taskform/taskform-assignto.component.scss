@@ -41,6 +41,9 @@
 
 .dropdown-check-list-contacts.visible .items {
   display: block;
+  position: absolute;
+  z-index: 30;
+  background-color: white;
 }
 
 .dropdown-check-list-contacts ul.items {

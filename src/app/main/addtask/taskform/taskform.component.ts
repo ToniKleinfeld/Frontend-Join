@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AddTaskData } from '../../../shared/interfaces/interfaces.model';
 import { Subtask } from '../../../shared/interfaces/interfaces.model';
@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 import { BackendService } from '../../../shared/service/backend.service';
 import { User } from '../../../shared/interfaces/interfaces.model';
 import { InitialsPipe } from '../../../shared/pipes/initials.pipe';
-
 
 @Component({
   selector: 'app-taskform',
@@ -21,7 +20,7 @@ import { InitialsPipe } from '../../../shared/pipes/initials.pipe';
     './taskform-subtask.component.scss',
   ],
 })
-export class TaskformComponent implements OnInit{
+export class TaskformComponent implements OnInit {
   users$!: Observable<User[]>;
   constructor(private backendService: BackendService) {}
 
@@ -43,12 +42,18 @@ export class TaskformComponent implements OnInit{
   };
 
   subtask: Subtask = {
-    task: '',
+    title: '',
     done: false,
   };
 
   addTaskData: AddTaskData = JSON.parse(JSON.stringify(this.defaultAddTask));
 
+  /**
+   * Add/remove the choosen User.id to the array : assigned_users when checkbox checked/unchecked
+   *
+   * @param userId  User.id
+   * @param checked Checkbox
+   */
   onAssignUser(userId: string, checked: boolean): void {
     const list = this.addTaskData.assigned_users;
     const index = list.indexOf(userId);
@@ -64,6 +69,9 @@ export class TaskformComponent implements OnInit{
     this.isMobile = window.innerWidth < 1200;
   }
 
+  /**
+   * OnInit request userdata
+   */
   ngOnInit(): void {
     this.users$ = this.backendService.getRequest<User[]>('users');
   }
@@ -72,10 +80,10 @@ export class TaskformComponent implements OnInit{
    * Add the subtask to addtaskdata when taks is filled
    */
   createSubTask() {
-    if (this.subtask.task && this.subtask.task != '') {
+    if (this.subtask.title && this.subtask.title != '') {
       this.addTaskData.subtasks.push({ ...this.subtask });
     }
-    this.subtask.task = '';
+    this.subtask.title = '';
   }
 
   /**
@@ -84,7 +92,7 @@ export class TaskformComponent implements OnInit{
    */
   editSubTask(index: number) {
     this.editingIndex = index;
-    this.editingSubtaskValue = this.addTaskData.subtasks[index].task;
+    this.editingSubtaskValue = this.addTaskData.subtasks[index].title;
   }
 
   /**
@@ -105,7 +113,7 @@ export class TaskformComponent implements OnInit{
    * @param index
    */
   saveEditSubtask(index: number) {
-    this.addTaskData.subtasks[index].task = this.editingSubtaskValue;
+    this.addTaskData.subtasks[index].title = this.editingSubtaskValue;
     this.editingIndex = -1;
     this.editingSubtaskValue = '';
   }
@@ -142,62 +150,20 @@ export class TaskformComponent implements OnInit{
   /**
    * Reset the Form to default
    */
-  clearAll() {
+  clearAll(form: NgForm) {
     this.addTaskData = JSON.parse(JSON.stringify(this.defaultAddTask));
-    // TODO: Form untouched
+    form.resetForm();
   }
 
-  submitAddTask(form: any) {
-    console.log(form, form.valid);
-    console.log(this.addTaskData);
+  submitAddTask(form: NgForm) {
+    if (form.valid) {
+      this.backendService.postRequest('tasks', this.addTaskData).subscribe({
+        next: (resonse) => {
+          console.log(resonse);
+          //TODO: Erfolgreich erstell Message (Container)
+          this.clearAll(form);
+        },
+      });
+    }
   }
-
 }
-
-// TODO: {
-//     "rubric": "Done",
-//     "prio": "urgent",
-//     "assigned_users": [
-//         1 , 6 , 10
-//     ]
-// }  BSP PATCH api/join/tasks/<id>/ user hier id nur alten müssen vorher ausgelsen werden und in die neue liste eingefügt werden, wen diese weiterhin in der liste erscheinen sollen
-
-// TODO: {
-//   "title":
-//       "Test 2"
-//   ,
-//   "description": "Test 2 description",
-//   "rubric": "Done",
-//   "category":
-//       "User Story"
-//   ,
-//   "prio":"low",
-//   "due_date":
-//       "2026-05-25"
-//   ,
-//   "assigned_users": [1,6,10],
-//   "subtasks" : [
-//       {
-//           "title": "Test subtask 2"
-//       },
-//       {
-//           "title": "Test POST tasks"
-//       }
-//   ]
-// }    BSP : POST aufbau api/join/tasks/     Bis auf title , category und due_date alle optional.
-
-// TODO:
-// Example Subtasks create :
-// {
-//   "title": "Test create subtask ",
-// }
-// http://127.0.0.1:8000/api/join/tasks/3/subtasks liste aller subtasks , hier von taks id 3
-//
-// Put / Patch :
-// {
-//   "title": "Test put subtask ",
-//   "done": true
-// }
-// "done"= deflault -> false
-// Delte (PUT UND PATCH)
-// http://127.0.0.1:8000/api/join/tasks/3/subtasks/6/ singleview

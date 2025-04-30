@@ -1,6 +1,6 @@
 export interface Subtask {
   id?: string;
-  task: string;
+  title: string;
   done: boolean;
 }
 
@@ -10,8 +10,8 @@ export interface AddTaskData {
   title: string;
   description: string;
   assigned_users: string[];
-  due_date:string,
-  category:string,
+  due_date: string;
+  category: string;
   prio: string;
   subtasks: Subtask[];
 }
