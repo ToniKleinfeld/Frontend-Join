@@ -1,13 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AddTaskData } from '../../../shared/interfaces/interfaces.model';
 import { Subtask } from '../../../shared/interfaces/interfaces.model';
+import { Observable } from 'rxjs';
+import { BackendService } from '../../../shared/service/backend.service';
+import { User } from '../../../shared/interfaces/interfaces.model';
+import { InitialsPipe } from '../../../shared/pipes/initials.pipe';
+
 
 @Component({
   selector: 'app-taskform',
-  imports: [CommonModule, FormsModule, ButtonComponent],
+  imports: [CommonModule, FormsModule, ButtonComponent, InitialsPipe],
   templateUrl: './taskform.component.html',
   styleUrls: [
     './taskform.component.scss',
@@ -16,7 +21,10 @@ import { Subtask } from '../../../shared/interfaces/interfaces.model';
     './taskform-subtask.component.scss',
   ],
 })
-export class TaskformComponent {
+export class TaskformComponent implements OnInit{
+  users$!: Observable<User[]>;
+  constructor(private backendService: BackendService) {}
+
   isMobile: boolean = window.innerWidth < 1200;
   showAssingedToList: boolean = false;
   editingIndex: number = -1;
@@ -41,9 +49,23 @@ export class TaskformComponent {
 
   addTaskData: AddTaskData = JSON.parse(JSON.stringify(this.defaultAddTask));
 
+  onAssignUser(userId: string, checked: boolean): void {
+    const list = this.addTaskData.assigned_users;
+    const index = list.indexOf(userId);
+    if (checked && index === -1) {
+      list.push(userId);
+    } else if (!checked && index !== -1) {
+      list.splice(index, 1);
+    }
+  }
+
   @HostListener('window:resize', [])
   onResize() {
     this.isMobile = window.innerWidth < 1200;
+  }
+
+  ngOnInit(): void {
+    this.users$ = this.backendService.getRequest<User[]>('users');
   }
 
   /**
@@ -129,10 +151,8 @@ export class TaskformComponent {
     console.log(form, form.valid);
     console.log(this.addTaskData);
   }
+
 }
-
-
-
 
 // TODO: {
 //     "rubric": "Done",
@@ -166,7 +186,6 @@ export class TaskformComponent {
 //   ]
 // }    BSP : POST aufbau api/join/tasks/     Bis auf title , category und due_date alle optional.
 
-
 // TODO:
 // Example Subtasks create :
 // {
@@ -182,6 +201,3 @@ export class TaskformComponent {
 // "done"= deflault -> false
 // Delte (PUT UND PATCH)
 // http://127.0.0.1:8000/api/join/tasks/3/subtasks/6/ singleview
-
-
-

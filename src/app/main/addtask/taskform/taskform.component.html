@@ -29,21 +29,28 @@
         <i class="arrowupanchorinput" [ngClass]="{'d-none' : !showAssingedToList }"
           (click)="showAssingedToList = !showAssingedToList"></i>
 
-        <ul class="items">
-          <!-- TODO: später hier mit der li und daten aus backend for schleifen der user | style im label span durch backend daten für verschiedene farben-->
-          <li class="contactslistassign">
-            <input type="checkbox" name="test_dummy" id="test_dummy">
-            <span class="checkmark"></span>
-            <label for="test_dummy"><span class="contacticon" style="background-color: #6E52FF;">TD</span>Test
-              Dummy</label>
-          </li>
+        <ul class="items" *ngIf="users$ | async as users;">
 
+          @for( user of users; track user; let index = $index){
+          <li class="contactslistassign">
+            <input type="checkbox" name="{{user.id}}" id="{{user.id}}"
+              [checked]="addTaskData.assigned_users.includes(user.id!)" (ngModelChange)="onAssignUser(user.id!, $event)"
+              [ngModel]="addTaskData.assigned_users.includes(user.id!)">
+            <span class="checkmark"></span>
+            <label for="{{user.id}}"><span class="contacticon" style="background-color: #6E52FF;">{{user.username |
+                initials}}</span>{{ user.username}}</label>
+          </li>
+          }
         </ul>
       </div>
 
-      <div class="showassignedcontacts">
-        <!-- TODO: rendern der zugewiesenen user evtl vor absenden erstmal in einem seperaten array , wenn dort nicht 0 , dann hier for schleife -->
-        <div class="contacticon" style="background-color: #6E52FF;">TD</div>
+      <div class="showassignedcontacts" *ngIf="users$ | async as users;">
+        @for( user of users; track user; let index = $index){
+          @if( addTaskData.assigned_users.includes(user.id!)){
+            <div class="contacticon" style="background-color: #6E52FF;">{{user.username |
+                initials}}</div>
+          }
+        }
       </div>
     </div>
 

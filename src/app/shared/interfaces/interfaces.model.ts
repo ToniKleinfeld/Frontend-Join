@@ -9,7 +9,7 @@ export interface AddTaskData {
   rubric: string;
   title: string;
   description: string;
-  assigned_users: User[];
+  assigned_users: string[];
   due_date:string,
   category:string,
   prio: string;
@@ -19,7 +19,7 @@ export interface AddTaskData {
 export interface User {
   id?: string;
   username: string;
-  mail?: string;
+  email?: string;
 }
 
 export interface Contact {
