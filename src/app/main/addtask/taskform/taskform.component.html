@@ -29,9 +29,9 @@
         <i class="arrowupanchorinput" [ngClass]="{'d-none' : !showAssingedToList }"
           (click)="showAssingedToList = !showAssingedToList"></i>
 
-        <ul class="items" *ngIf="users$ | async as users;">
+        <ul class="items" *ngIf="users().length;">
 
-          @for( user of users; track user; let index = $index){
+          @for( user of users(); track user; let index = $index){
           <li class="contactslistassign">
             <input type="checkbox" name="{{user.id}}" id="{{user.id}}"
               [checked]="addTaskData.assigned_users.includes(user.id!)" (ngModelChange)="onAssignUser(user.id!, $event)"
@@ -44,8 +44,8 @@
         </ul>
       </div>
 
-      <div class="showassignedcontacts" *ngIf="users$ | async as users;">
-        @for( user of users; track user; let index = $index){
+      <div class="showassignedcontacts" *ngIf="users().length;">
+        @for( user of users(); track user; let index = $index){
         @if( addTaskData.assigned_users.includes(user.id!)){
         <div class="contacticon" style="background-color: #6E52FF;">{{user.username |
           initials}}</div>

@@ -12,7 +12,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
   constructor(private backendService: BackendService) {}
 
   ngOnInit(): void {
-    this.backendService.getRequest('contacts').subscribe({
+    this.backendService.getRequest<Contact[]>('contacts').subscribe({
       next: (resonse) => {
         console.log(resonse);
       },

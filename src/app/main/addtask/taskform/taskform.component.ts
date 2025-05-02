@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, signal, WritableSignal } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AddTaskData } from '../../../shared/interfaces/interfaces.model';
 import { Subtask } from '../../../shared/interfaces/interfaces.model';
-import { Observable } from 'rxjs';
+import { Subscription  } from 'rxjs';
 import { BackendService } from '../../../shared/service/backend.service';
 import { User } from '../../../shared/interfaces/interfaces.model';
 import { InitialsPipe } from '../../../shared/pipes/initials.pipe';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-taskform',
@@ -20,9 +21,20 @@ import { InitialsPipe } from '../../../shared/pipes/initials.pipe';
     './taskform-subtask.component.scss',
   ],
 })
-export class TaskformComponent implements OnInit {
-  users$!: Observable<User[]>;
-  constructor(private backendService: BackendService) {}
+export class TaskformComponent implements OnDestroy {
+  users: WritableSignal<User[]> = signal<User[]>([]);
+  private subUser = new Subscription();
+
+  constructor(private backendService: BackendService) {
+    this.subUser.add(
+      this.backendService
+        .getRequest<User[]>('users')
+        .subscribe({
+          next: users => this.users.set(users),
+          error: err => console.error('Fehler beim Laden der Nutzer:', err)
+        })
+    );
+  }
 
   isMobile: boolean = window.innerWidth < 1200;
   showAssingedToList: boolean = false;
@@ -69,11 +81,8 @@ export class TaskformComponent implements OnInit {
     this.isMobile = window.innerWidth < 1200;
   }
 
-  /**
-   * OnInit request userdata
-   */
-  ngOnInit(): void {
-    this.users$ = this.backendService.getRequest<User[]>('users');
+  ngOnDestroy(): void {
+    this.subUser.unsubscribe();
   }
 
   /**
@@ -157,7 +166,7 @@ export class TaskformComponent implements OnInit {
 
   submitAddTask(form: NgForm) {
     if (form.valid) {
-      this.backendService.postRequest('tasks', this.addTaskData).subscribe({
+      this.backendService.postRequest<AddTaskData>('tasks', this.addTaskData).subscribe({
         next: (resonse) => {
           console.log(resonse);
           //TODO: Erfolgreich erstell Message (Container)
