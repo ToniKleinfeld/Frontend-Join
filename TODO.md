@@ -4,7 +4,7 @@
 
 - [x] Projektstruktur anlegen (Modules, Components, Services)
 - [ ] GitHub Issues für größere Tasks anlegen
-- [ ] .env anlegen!
+- [x] environment.ts / environment.prod.ts anlegen!
 
 ## 🔐 Authentifizierung
 
@@ -17,8 +17,8 @@
 ## 🎯 Summary-Bereich
 
 - [x] SummaryComponent erstellen
-- [ ] Service-Methoden: Anzahl der Tasks pro Rubric abfragen
-- [ ] Anzeige der Zähler in Kacheln (To Do, In Progress, Await Feedback, Done)
+- [x] Service-Methoden: Anzahl der Tasks pro Rubric abfragen
+- [x] Anzeige der Zähler in Kacheln (To Do, In Progress, Await Feedback, Done)
 
 ## ➕ Add Task Bereich
 
@@ -80,7 +80,7 @@
 - [x] `GET /api/users` → Liste aller User
 - [x] `GET /api/users/me` → Welcher User ist eingelogt / bin ich?
 
-- [ ] `GET /api/tasks` → Alle Tasks inkl. Subtasks
+- [x] `GET /api/tasks` → Alle Tasks inkl. Subtasks
 - [ ] `GET /api/tasks/:id` → Einzelne Task
 - [x] `POST /api/tasks` → Neue Task anlegen
 - [ ] `PUT /api/tasks/:id` → Task bearbeiten
