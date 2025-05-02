@@ -12,7 +12,7 @@
 - [x] AuthService implementieren
   - [x] Methoden für `login(credentials)` und `register(data)`
   - [x] Token im LocalStorage speichern und auslesen
-  - [ ] HTTP Interceptor für das Hinzufügen des Tokens zu Requests
+  - [x] HTTP Interceptor für das Hinzufügen des Tokens zu Requests
 
 ## 🎯 Summary-Bereich
 
@@ -35,7 +35,8 @@
 - [x] Dynamische Subtask-Felder
 - [x] Dropdown für Assigned-Auswahl
 - [x] Datepicker für `due_date`
-- [ ] POST-Request an Backend senden
+- [x] POST-Request an Backend senden
+- [x] Assigned to Suche nach user funktion
 
 ## 🗂️ Kanban-Board
 
@@ -46,6 +47,7 @@
   - Await Feedback
   - Done
 - [ ] Tasks als kleine Karten rendern
+- [ ] Drag and Drop kleine Karten
 - [ ] Klick auf Karte:
   - Overlay/Modal öffnen mit Task-Details
   - Bearbeiten (PUT)
@@ -69,22 +71,23 @@
 ## 🔗 Services & Endpunkte
 
 ### AuthService
+
 - [x] `POST /api/auth/login` → Login
 - [x] `POST /api/auth/regestration` → Registrierung
 
-### UserService
-- [ ] `GET /api/users` → Liste aller User
+### BackendService
 
-### ContactService
-- [ ] `GET /api/contacts` → Alle Contacts
+- [x] `GET /api/users` → Liste aller User
+- [x] `GET /api/users/me` → Welcher User ist eingelogt / bin ich?
+
+- [ ] `GET /api/tasks` → Alle Tasks inkl. Subtasks
+- [ ] `GET /api/tasks/:id` → Einzelne Task
+- [x] `POST /api/tasks` → Neue Task anlegen
+- [ ] `PUT /api/tasks/:id` → Task bearbeiten
+- [ ] `DELETE /api/tasks/:id` → Task löschen
+
+- [x] `GET /api/contacts` → Alle Contacts
 - [ ] `GET /api/contacts/:id` → Einzelner Contact
 - [ ] `POST /api/contacts` → Neuen Contact anlegen
 - [ ] `PUT /api/contacts/:id` → Contact bearbeiten
-- [ ] `DELETE /api/contacts/:id` → Contact löschen
-
-### TaskService
-- [ ] `GET /api/tasks` → Alle Tasks inkl. Subtasks
-- [ ] `GET /api/tasks/:id` → Einzelne Task
-- [ ] `POST /api/tasks` → Neue Task anlegen
-- [ ] `PUT /api/tasks/:id` → Task bearbeiten
-- [ ] `DELETE /api/tasks/:id` → Task löschen
+- [x] `DELETE /api/contacts/:id` → Contact löschen

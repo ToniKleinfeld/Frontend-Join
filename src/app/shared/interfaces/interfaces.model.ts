@@ -28,3 +28,11 @@ export interface Contact {
   email: string;
   phone: string;
 }
+
+export interface SummaryItem {
+  task: string;
+  imgpath: string;
+  class: string;
+  count: number | null;
+  date?: string | null;
+}

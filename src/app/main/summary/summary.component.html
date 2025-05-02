@@ -8,19 +8,19 @@
   </div>
 
   <div class="wrapper">
-    @for(taskcount of summaryTasks; track taskcount){
+    @for(taskcount of summaryTasks(); track taskcount.task){
 
     @if(taskcount.class == "largeBox"){
     <div class="{{taskcount.class}}">
       <div class="largeBox-wrapper">
         <div class="icon-wrapper">
           <div class="img {{taskcount.imgpath}}"></div>
-          2
+          {{taskcount.count}}
         </div>
         {{taskcount.task}}
       </div>
       <div class="urgendTaskInfo">
-        <h2>October 15, 2025</h2>
+        <h2>{{ taskcount.date | date:'MMM d, y':'':'en' }}</h2>
         <p>Upcoming Deadline</p>
       </div>
     </div>
