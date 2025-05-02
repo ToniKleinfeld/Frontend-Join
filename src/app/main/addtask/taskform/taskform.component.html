@@ -29,7 +29,7 @@
         <i class="arrowupanchorinput" [ngClass]="{'d-none' : !showAssingedToList }"
           (click)="showAssingedToList = !showAssingedToList"></i>
 
-        <ul class="items" *ngIf="users().length;">
+        <ul class="items">
 
           @for( user of users(); track user; let index = $index){
           <li class="contactslistassign">
@@ -44,7 +44,7 @@
         </ul>
       </div>
 
-      <div class="showassignedcontacts" *ngIf="users().length;">
+      <div class="showassignedcontacts">
         @for( user of users(); track user; let index = $index){
         @if( addTaskData.assigned_users.includes(user.id!)){
         <div class="contacticon" style="background-color: #6E52FF;">{{user.username |

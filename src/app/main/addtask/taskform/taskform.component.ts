@@ -1,14 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, OnDestroy, signal, WritableSignal } from '@angular/core';
+import { Component, HostListener, OnDestroy, signal } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AddTaskData } from '../../../shared/interfaces/interfaces.model';
 import { Subtask } from '../../../shared/interfaces/interfaces.model';
-import { Subscription  } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { BackendService } from '../../../shared/service/backend.service';
 import { User } from '../../../shared/interfaces/interfaces.model';
 import { InitialsPipe } from '../../../shared/pipes/initials.pipe';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-taskform',
@@ -22,17 +21,17 @@ import { toSignal } from '@angular/core/rxjs-interop';
   ],
 })
 export class TaskformComponent implements OnDestroy {
-  users: WritableSignal<User[]> = signal<User[]>([]);
+  private _users = signal<User[]>([]);
+  readonly users = this._users.asReadonly();
+
   private subUser = new Subscription();
 
   constructor(private backendService: BackendService) {
     this.subUser.add(
-      this.backendService
-        .getRequest<User[]>('users')
-        .subscribe({
-          next: users => this.users.set(users),
-          error: err => console.error('Fehler beim Laden der Nutzer:', err)
-        })
+      this.backendService.getRequest<User[]>('users').subscribe({
+        next: (users) => this._users.set(users),
+        error: (err) => console.error('Fehler beim Laden der Nutzer:', err),
+      })
     );
   }
 
@@ -81,6 +80,9 @@ export class TaskformComponent implements OnDestroy {
     this.isMobile = window.innerWidth < 1200;
   }
 
+  /**
+   * Destroy subUser
+   */
   ngOnDestroy(): void {
     this.subUser.unsubscribe();
   }
@@ -166,13 +168,15 @@ export class TaskformComponent implements OnDestroy {
 
   submitAddTask(form: NgForm) {
     if (form.valid) {
-      this.backendService.postRequest<AddTaskData>('tasks', this.addTaskData).subscribe({
-        next: (resonse) => {
-          console.log(resonse);
-          //TODO: Erfolgreich erstell Message (Container)
-          this.clearAll(form);
-        },
-      });
+      this.backendService
+        .postRequest<AddTaskData>('tasks', this.addTaskData)
+        .subscribe({
+          next: (resonse) => {
+            console.log(resonse);
+            //TODO: Erfolgreich erstell Message (Container)
+            this.clearAll(form);
+          },
+        });
     }
   }
 }
