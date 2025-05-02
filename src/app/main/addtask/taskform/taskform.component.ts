@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, OnDestroy, signal } from '@angular/core';
+import { Component, HostListener, OnDestroy, signal, WritableSignal, computed  } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AddTaskData } from '../../../shared/interfaces/interfaces.model';
@@ -8,10 +8,11 @@ import { Subscription } from 'rxjs';
 import { BackendService } from '../../../shared/service/backend.service';
 import { User } from '../../../shared/interfaces/interfaces.model';
 import { InitialsPipe } from '../../../shared/pipes/initials.pipe';
+import { FormatUserNamePipe } from '../../../shared/pipes/format-user-name.pipe';
 
 @Component({
   selector: 'app-taskform',
-  imports: [CommonModule, FormsModule, ButtonComponent, InitialsPipe],
+  imports: [CommonModule, FormsModule, ButtonComponent, InitialsPipe, FormatUserNamePipe],
   templateUrl: './taskform.component.html',
   styleUrls: [
     './taskform.component.scss',
@@ -23,7 +24,6 @@ import { InitialsPipe } from '../../../shared/pipes/initials.pipe';
 export class TaskformComponent implements OnDestroy {
   private _users = signal<User[]>([]);
   readonly users = this._users.asReadonly();
-
   private subUser = new Subscription();
 
   constructor(private backendService: BackendService) {
@@ -58,6 +58,18 @@ export class TaskformComponent implements OnDestroy {
   };
 
   addTaskData: AddTaskData = JSON.parse(JSON.stringify(this.defaultAddTask));
+  filterText: WritableSignal<string> = signal('');
+
+  filteredUsers = computed(() => {
+    const txt = this.filterText().trim().toLowerCase();
+    if (!txt) {
+      return this.users();
+    }
+
+    return this.users().filter(u =>
+      u.username.toLowerCase().includes(txt)
+    );
+  });
 
   /**
    * Add/remove the choosen User.id to the array : assigned_users when checkbox checked/unchecked
@@ -163,6 +175,7 @@ export class TaskformComponent implements OnDestroy {
    */
   clearAll(form: NgForm) {
     this.addTaskData = JSON.parse(JSON.stringify(this.defaultAddTask));
+    this.filterText.set('');
     form.resetForm();
   }
 

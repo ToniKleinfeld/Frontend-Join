@@ -25,20 +25,22 @@
           (click)="showAssingedToList = !showAssingedToList">Select contacts to
           assign</span>
 
-        <input type="text" class="anchorinput" [ngClass]="{'d-none' : !showAssingedToList }" autocomplete="off">
+        <input type="text" class="anchorinput" [ngClass]="{'d-none' : !showAssingedToList }" autocomplete="off"
+          placeholder="Search for ..." [value]="filterText()" (input)="filterText.set($any($event.target).value)">
+
         <i class="arrowupanchorinput" [ngClass]="{'d-none' : !showAssingedToList }"
           (click)="showAssingedToList = !showAssingedToList"></i>
 
         <ul class="items">
 
-          @for( user of users(); track user; let index = $index){
+          @for( user of filteredUsers(); track user; let index = $index){
           <li class="contactslistassign">
             <input type="checkbox" name="{{user.id}}" id="{{user.id}}"
               [checked]="addTaskData.assigned_users.includes(user.id!)" (ngModelChange)="onAssignUser(user.id!, $event)"
               [ngModel]="addTaskData.assigned_users.includes(user.id!)">
             <span class="checkmark"></span>
-            <label for="{{user.id}}"><span class="contacticon" style="background-color: #6E52FF;">{{user.username |
-                initials}}</span>{{ user.username}}</label>
+            <label for="{{user.id }}"><span class="contacticon" style="background-color: #6E52FF;">{{ user.username |
+                initials }}</span>{{ user.username | formatUserName }}</label>
           </li>
           }
         </ul>
