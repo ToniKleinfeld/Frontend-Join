@@ -60,6 +60,9 @@ export class TaskformComponent implements OnDestroy {
   addTaskData: AddTaskData = JSON.parse(JSON.stringify(this.defaultAddTask));
   filterText: WritableSignal<string> = signal('');
 
+  /**
+   * Filter the users when inputfiel have value , or return full users()
+   */
   filteredUsers = computed(() => {
     const txt = this.filterText().trim().toLowerCase();
     if (!txt) {
@@ -77,7 +80,7 @@ export class TaskformComponent implements OnDestroy {
    * @param userId  User.id
    * @param checked Checkbox
    */
-  onAssignUser(userId: string, checked: boolean): void {
+  toggleAssignUser(userId: string, checked: boolean): void {
     const list = this.addTaskData.assigned_users;
     const index = list.indexOf(userId);
     if (checked && index === -1) {

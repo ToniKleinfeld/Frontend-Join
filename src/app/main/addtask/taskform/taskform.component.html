@@ -36,7 +36,7 @@
           @for( user of filteredUsers(); track user; let index = $index){
           <li class="contactslistassign">
             <input type="checkbox" name="{{user.id}}" id="{{user.id}}"
-              [checked]="addTaskData.assigned_users.includes(user.id!)" (ngModelChange)="onAssignUser(user.id!, $event)"
+              [checked]="addTaskData.assigned_users.includes(user.id!)" (ngModelChange)="toggleAssignUser(user.id!, $event)"
               [ngModel]="addTaskData.assigned_users.includes(user.id!)">
             <span class="checkmark"></span>
             <label for="{{user.id }}"><span class="contacticon" style="background-color: #6E52FF;">{{ user.username |
