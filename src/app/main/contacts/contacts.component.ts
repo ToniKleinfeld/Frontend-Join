@@ -5,9 +5,10 @@ import { Subscription } from 'rxjs';
 import { ButtonComponent } from "../../shared/components/button/button.component";
 import { InitialsPipe } from '../../shared/pipes/initials.pipe';
 import { FormatUserNamePipe } from '../../shared/pipes/format-user-name.pipe';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-contacts',
-  imports: [ButtonComponent,InitialsPipe,FormatUserNamePipe],
+  imports: [ButtonComponent,InitialsPipe,FormatUserNamePipe, CommonModule],
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss',
 })
@@ -15,6 +16,7 @@ export class ContactsComponent implements OnDestroy {
   private _contacts = signal<Contact[]>([]);
   readonly contacts = this._contacts.asReadonly();
   private subContact = new Subscription();
+  activeContact:string = '-1';
 
   constructor(private backendService: BackendService) {
     this.subContact.add(
@@ -27,6 +29,12 @@ export class ContactsComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.subContact.unsubscribe();
+  }
+
+  setActiveContact(id:string|undefined){
+    if(id){
+      this.activeContact = id
+    }
   }
 
   createContact() {
