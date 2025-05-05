@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ButtonComponent } from "../../shared/components/button/button.component";
 import { CommonModule } from '@angular/common';
 import { AddTaskData } from '../../shared/interfaces/interfaces.model';
@@ -13,7 +13,7 @@ import { BackendService } from '../../shared/service/backend.service';
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
-export class BoardComponent {
+export class BoardComponent implements OnInit, OnDestroy{
   tasks$!: Observable<AddTaskData[]>;
   private destroy$ = new Subject<void>();
 
@@ -29,7 +29,9 @@ export class BoardComponent {
     );
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    
+  }
 }
 
 // TODO: {

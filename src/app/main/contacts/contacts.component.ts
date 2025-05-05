@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, signal } from '@angular/core';
 import { BackendService } from '../../shared/service/backend.service';
 import { Contact } from '../../shared/interfaces/interfaces.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contacts',
@@ -8,24 +9,29 @@ import { Contact } from '../../shared/interfaces/interfaces.model';
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss',
 })
-export class ContactsComponent implements OnInit, OnDestroy {
-  constructor(private backendService: BackendService) {}
+export class ContactsComponent implements OnDestroy {
+  private _contacts = signal<Contact[]>([]);
+  readonly contacts = this._contacts.asReadonly();
+  private subContact = new Subscription();
 
-  ngOnInit(): void {
-    this.backendService.getRequest<Contact[]>('contacts').subscribe({
-      next: (resonse) => {
-        console.log(resonse);
-      },
-    });
+  constructor(private backendService: BackendService) {
+    this.subContact.add(
+      this.backendService.getRequest<Contact[]>('contacts').subscribe({
+        next: (contacts) => this._contacts.set(contacts),
+        error: (err) => console.error('Fehler beim Laden der Nutzer:', err),
+      })
+    );
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.subContact.unsubscribe();
+  }
 
   createContact() {
     let newContact: Contact = {
-      name: 'Toni',
-      email: 'Test@post.de',
-      phone: '0173544636',
+      name: 'Antonio',
+      email: 'Test2@post.de',
+      phone: '0173534636',
     };
 
     this.backendService.postRequest('contacts', newContact).subscribe({
