@@ -1,22 +1,26 @@
-import { Component, OnDestroy, signal } from '@angular/core';
+import { Component, OnDestroy, signal, computed } from '@angular/core';
 import { BackendService } from '../../shared/service/backend.service';
 import { Contact } from '../../shared/interfaces/interfaces.model';
 import { Subscription } from 'rxjs';
-import { ButtonComponent } from "../../shared/components/button/button.component";
+import { ButtonComponent } from '../../shared/components/button/button.component';
 import { InitialsPipe } from '../../shared/pipes/initials.pipe';
 import { FormatUserNamePipe } from '../../shared/pipes/format-user-name.pipe';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-contacts',
-  imports: [ButtonComponent,InitialsPipe,FormatUserNamePipe, CommonModule],
+  imports: [ButtonComponent, InitialsPipe, FormatUserNamePipe, CommonModule],
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss',
 })
 export class ContactsComponent implements OnDestroy {
   private _contacts = signal<Contact[]>([]);
-  readonly contacts = this._contacts.asReadonly();
+  readonly contacts = computed(() => {
+    return [...this._contacts()].sort((a, b) =>
+      a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+    );
+  });
   private subContact = new Subscription();
-  activeContact:string = '-1';
+  activeContact: string = '-1';
 
   constructor(private backendService: BackendService) {
     this.subContact.add(
@@ -31,12 +35,15 @@ export class ContactsComponent implements OnDestroy {
     this.subContact.unsubscribe();
   }
 
-  setActiveContact(id:string|undefined){
-    if(id){
-      this.activeContact = id
-    }
+  setActiveContact(contact: Contact) {
+    this.activeContact = contact.id || '-1';
   }
 
+  get selectedContact(): Contact | null {
+    return this.contacts().find((c) => c.id === this.activeContact) ?? null;
+  }
+
+  //TODO: Farbe für Contact im Frontend schon erstellen oder im backend?
   createContact() {
     let newContact: Contact = {
       name: 'Antonio',

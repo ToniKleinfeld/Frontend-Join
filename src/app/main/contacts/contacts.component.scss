@@ -1,14 +1,14 @@
 @use "../../shared/mixin" as mix;
 
 section {
-  @include mix.center($jc:flex-start, $ai:flex-start);
-  flex-direction: column;
+  @include mix.center($jc: flex-start, $ai: flex-start);
+  flex-direction: row;
   height: var(--main-content-height);
   width: var(--main-content-width);
 }
 
-.contactList-wrapper{
-  @include mix.center($jc:flex-start);
+.contactList-wrapper {
+  @include mix.center($jc: flex-start);
   flex-direction: column;
   max-width: 450px;
   width: 40%;
@@ -29,7 +29,7 @@ section {
 }
 
 .contact {
-  @include mix.center($jc:flex-start);
+  @include mix.center($jc: flex-start);
   height: auto;
   width: 100%;
   font-size: 20px;
@@ -44,34 +44,35 @@ section {
   background-color: mix.$hover-button;
   cursor: pointer;
 
-  .initials{
+  .initials {
     border: 3px solid white;
   }
 }
 
-.contactfields{
-  p{
+.contactfields {
+  p {
     font-size: var(--input-letter-size);
   }
-  a{
+  a {
     font-size: var(--normal-letter-size);
   }
 }
 
-.activeContact{
+.activeContact {
   background-color: mix.$main-color;
 
-  .initials{
+  .initials {
     border: 3px solid white;
   }
 
-  .contactfields{
-    p,a{
+  .contactfields {
+    p,
+    a {
       color: white;
     }
   }
 
-  &:hover{
+  &:hover {
     background-color: mix.$main-color;
   }
 }
