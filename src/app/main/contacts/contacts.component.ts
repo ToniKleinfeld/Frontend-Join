@@ -2,10 +2,12 @@ import { Component, OnDestroy, signal } from '@angular/core';
 import { BackendService } from '../../shared/service/backend.service';
 import { Contact } from '../../shared/interfaces/interfaces.model';
 import { Subscription } from 'rxjs';
-
+import { ButtonComponent } from "../../shared/components/button/button.component";
+import { InitialsPipe } from '../../shared/pipes/initials.pipe';
+import { FormatUserNamePipe } from '../../shared/pipes/format-user-name.pipe';
 @Component({
   selector: 'app-contacts',
-  imports: [],
+  imports: [ButtonComponent,InitialsPipe,FormatUserNamePipe],
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss',
 })

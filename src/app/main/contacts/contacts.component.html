@@ -1,3 +1,27 @@
 <section>
 
+
+    <div class="contactList-wrapper">
+      <app-button/>
+
+      @for( contact of contacts(); track contact; let index = $index){
+
+        <div class="contact">
+          <div class="initials "style="background-color:lightblue">
+            {{ contact.name| initials }}
+          </div>
+          <div class="contactfields">
+              <p>{{ contact.name| formatUserName }}<p>
+              <a type="e-mail" href="mailto:${contact.mail}">{{contact.email}}</a>
+          </div>
+        </div>
+
+      }
+    </div>
+
+    <div class="bigContactInfo">
+
+    </div>
+
+
 </section>

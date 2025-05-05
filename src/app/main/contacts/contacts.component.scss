@@ -1,8 +1,77 @@
 @use "../../shared/mixin" as mix;
 
 section {
-  @include mix.center();
+  @include mix.center($jc:flex-start, $ai:flex-start);
   flex-direction: column;
   height: var(--main-content-height);
   width: var(--main-content-width);
+}
+
+.contactList-wrapper{
+  @include mix.center($jc:flex-start);
+  flex-direction: column;
+  max-width: 450px;
+  width: 40%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 32px 24px;
+  box-shadow: 2px 0.1px 4px 0.1px rgba(0, 0, 0, 0.1);
+}
+
+.initials {
+  @include mix.center();
+  height: 42px;
+  aspect-ratio: 1/1;
+  color: white;
+  font-size: var(--initials-size);
+  font-weight: 400;
+  border-radius: 50%;
+}
+
+.contact {
+  @include mix.center($jc:flex-start);
+  height: auto;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 400;
+  border-radius: 10px;
+  padding: 10px;
+  gap: 5%;
+  transition: background-color 0.3s ease;
+}
+
+.contact:hover {
+  background-color: mix.$hover-button;
+  cursor: pointer;
+
+  .initials{
+    border: 3px solid white;
+  }
+}
+
+.contactfields{
+  p{
+    font-size: var(--input-letter-size);
+  }
+  a{
+    font-size: var(--normal-letter-size);
+  }
+}
+
+.activeContact{
+  background-color: mix.$main-color;
+
+  .initials{
+    border: 3px solid white;
+  }
+
+  .contactfields{
+    p,a{
+      color: white;
+    }
+  }
+
+  &:hover{
+    background-color: mix.$main-color;
+  }
 }
