@@ -43,6 +43,31 @@ export class ContactsComponent implements OnDestroy {
     return this.contacts().find((c) => c.id === this.activeContact) ?? null;
   }
 
+  /**
+   * filter for current Contact index
+   * @param contact Contact list
+   * @returns First letter of Name to uppercase
+   */
+  getInitial(contact: Contact): string {
+    return contact.name.charAt(0).toUpperCase();
+  }
+
+  /**
+   *Check if this is the first Contact with the Nameletter , return first Letter when , yes
+   * @param index Conctact index
+   * @returns
+   */
+  isNewGroup(index: number): boolean {
+    const contacts = this.contacts();
+    if (index === 0) {
+      return true;
+    }
+    const prevInitial = this.getInitial(contacts[index - 1]);
+    const currInitial = this.getInitial(contacts[index]);
+    return prevInitial !== currInitial;
+  }
+  //TODO; später mir mehreren Testen !
+
   //TODO: Farbe für Contact im Frontend schon erstellen oder im backend?
   createContact() {
     let newContact: Contact = {
