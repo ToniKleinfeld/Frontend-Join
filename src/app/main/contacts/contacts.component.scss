@@ -28,6 +28,12 @@ section {
   border-radius: 50%;
 }
 
+.initials--open-contact {
+  height: 120px;
+  font-size: 47px;
+  font-weight: 500;
+}
+
 .contact {
   @include mix.center($jc: flex-start);
   height: auto;
@@ -75,4 +81,75 @@ section {
   &:hover {
     background-color: mix.$main-color;
   }
+}
+
+.bigContactInfo{
+  @include mix.center($jc:flex-start,$ai:flex-start, $x:16px);
+  flex-direction: column;
+  padding: 5vh 5vw;
+  z-index: 9;
+}
+
+ .contactcardinfo {
+  font-size: var( --button-letter-size);
+  font-weight: 700;
+}
+
+.open-contact-headline {
+  @include mix.center($jc:flex-start,$x:3vw);
+}
+
+.open-contact-name-and-icons {
+  @include mix.center($ai:start);
+  flex-direction: column;
+
+  p {
+      font-size: 47px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+  }
+}
+
+.icons {
+  @include mix.center($x:16px);
+
+  & a {
+      font-size: value( --normal-letter-size);
+      font-weight: 400;
+  }
+}
+
+.icons a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.icons a::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-right: 7px;
+  background-color: mix.$main-color;;
+  mask-size: contain;
+}
+
+.icons .edit::before {
+  mask: url('/assets/img/edit.svg') no-repeat center;
+}
+
+.icons .delete::before {
+  mask: url('/assets/img/delete.svg') no-repeat center;
+}
+
+.icons a:hover {
+  color: mix.$main-color;
+  font-weight: 400;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.phone-and-e-mail-container p{
+  font-weight:700 ;
+  padding: 10px 0 10px 0;
 }

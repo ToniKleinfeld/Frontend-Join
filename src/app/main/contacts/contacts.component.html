@@ -23,11 +23,36 @@
 
   <div class="bigContactInfo">
 
-    @if(selectedContact){
 
-    {{ selectedContact.name}}
+    <img class="back-arrow d-none" alt="backbutton" src="./assets/icons/arrowleft.svg">
 
-    }
+      @if(selectedContact){
+
+      <div class="open-contact-headline">
+        <div class="initials initials--open-contact" style="background-color:lightblue;">
+          {{selectedContact.name| initials}}
+        </div>
+
+        <div class="open-contact-name-and-icons">
+          <p> {{selectedContact.name}} </p>
+          <div class="icons">
+            <a class="edit">Edit</a>
+            <a class="delete">Delete</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="contactcardinfo">Contact Information</p>
+      <div class="phone-and-e-mail-container">
+        <p>Email</p>
+        <a href="mailto:{{selectedContact.email}}" class="e-mail-card" >{{selectedContact.email}}</a>
+      </div>
+      <div class="phone-and-e-mail-container">
+        <p>Phone</p>
+        <a href="tel:+49{{selectedContact.phone}}" style="color: black;">+49 {{selectedContact.phone}}</a>
+      </div>
+
+      }
 
   </div>
 
