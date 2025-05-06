@@ -21,6 +21,8 @@ export class ContactsComponent implements OnDestroy {
   });
   private subContact = new Subscription();
   activeContact: string = '-1';
+  overlayActive: boolean = false;
+  overlayContent: string = '';
 
   constructor(private backendService: BackendService) {
     this.subContact.add(
@@ -35,12 +37,36 @@ export class ContactsComponent implements OnDestroy {
     this.subContact.unsubscribe();
   }
 
+  /**
+   * add shown contact id to --> activeContact
+   * @param contact
+   */
   setActiveContact(contact: Contact) {
     this.activeContact = contact.id || '-1';
   }
 
   get selectedContact(): Contact | null {
     return this.contacts().find((c) => c.id === this.activeContact) ?? null;
+  }
+
+  /**
+   * toggle state of overlay , and content shown
+   * @param state
+   */
+  toggleOverlay(state: string): void {
+    this.overlayActive = !this.overlayActive;
+
+    switch (state) {
+      case 'add':
+        this.overlayContent = 'add'
+        break;
+      case 'edit':
+        this.overlayContent = 'edit'
+        break;
+      default:
+        this.overlayContent = ''
+        break;
+    }
   }
 
   /**

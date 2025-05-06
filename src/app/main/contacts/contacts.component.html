@@ -2,7 +2,8 @@
 
   <div class="contactList-wrapper">
 
-    <app-button text="Add new contact" size="large" design="fullsize" icon="addcontact" style="width: 100%;"/>
+    <app-button text="Add new contact" size="large" design="fullsize" icon="addcontact" style="width: 100%;"
+      (clicked)="toggleOverlay('add')" />
 
     @for( contact of contacts() ; track contact; let index = $index){
 
@@ -39,7 +40,7 @@
       <div class="open-contact-name-and-icons">
         <p> {{selectedContact.name}} </p>
         <div class="icons">
-          <a class="edit">Edit</a>
+          <a class="edit" (click)="toggleOverlay('edit')">Edit</a>
           <a class="delete">Delete</a>
         </div>
       </div>
@@ -58,5 +59,47 @@
 
   </div>
 
-  <div class="overlay"></div>
+  <div class="overlay" [ngClass]="{'d-none': !overlayActive}">
+    <div class="overlay-header">
+      <img src="assets/img/logobgblue.svg" alt="">
+      <h2>
+        @if(overlayContent == 'add'){
+          Add contact
+        } @else if (overlayContent == 'edit') {
+          Edit contact
+        }
+      </h2>
+      @if(overlayContent == 'add'){
+        <h3>Tasks are better with a team!</h3>
+      }
+
+    </div>
+    <!-- TODO: hier Weiter overlay , add / edit designen und funktionen -->
+    <form class="overlay-form">
+
+      <input type="text">
+      <input type="text">
+      <input type="text">
+
+      <div class="buttons-wrapper">
+
+        @if(overlayContent == 'add'){
+
+        <app-button text="Cancel" size="small" design="secondary" icon="clear" (clicked)="toggleOverlay('')" />
+
+        <app-button text="Create contact" size="small" design="primary" icon="check" />
+
+        } @else if (overlayContent == 'edit') {
+
+        <app-button text="Cancel" size="small" design="secondary" icon="clear" (clicked)="toggleOverlay('')" />
+
+        <app-button text="Save" size="small" design="primary" icon="check" />
+        }
+
+      </div>
+
+    </form>
+
+  </div>
+
 </section>
