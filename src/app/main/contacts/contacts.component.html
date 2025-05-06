@@ -1,14 +1,13 @@
 <section>
 
-
   <div class="contactList-wrapper">
 
-    <app-button />
+    <app-button text="Add new contact" size="large" design="fullsize" icon="addcontact" style="width: 100%;"/>
 
     @for( contact of contacts() ; track contact; let index = $index){
 
     @if(isNewGroup(index)){
-    <div class="register-letter bold-text center">{{ getInitial(contacts()[index]) }}</div>
+    <div class="register-letter">{{ getInitial(contacts()[index]) }}</div>
     }
 
     <div class="contact" [ngClass]="{ 'activeContact':activeContact == contact.id }"
@@ -22,13 +21,11 @@
           <a type="e-mail" href="mailto:${contact.mail}">{{contact.email}}</a>
       </div>
     </div>
-
     }
 
   </div>
 
   <div class="bigContactInfo">
-
 
     <img class="back-arrow d-none" alt="backbutton" src="/assets/img/arrow.svg">
 
@@ -57,10 +54,9 @@
       <p>Phone</p>
       <a href="tel:+49{{selectedContact.phone}}" style="color: black;">+49 {{selectedContact.phone}}</a>
     </div>
-
     }
 
   </div>
 
-
+  <div class="overlay"></div>
 </section>

@@ -9,7 +9,8 @@ button {
   @include mix.center($x: 5px);
 
   &.primary,
-  &.submit {
+  &.submit,
+  &.fullsize {
     background-color: mix.$main-color;
     color: mix.$secondary-color;
 
@@ -58,11 +59,12 @@ button {
 
   .clear,
   .check,
-  .add {
+  .add,
+  .addcontact {
     background-position: center;
     background-size: contain;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
   }
 
   .clear {
@@ -77,7 +79,16 @@ button {
     background-image: url(/assets/img/checktask.svg);
   }
 
-  .add{
+  .add {
     background-image: url(/assets/img/addtask.svg);
   }
+
+  .addcontact {
+    background-image: url(/assets/img/person_add.svg);
+  }
+}
+
+.fullsize {
+  gap: 15px;
+  width: 100%;
 }
