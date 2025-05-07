@@ -42,7 +42,7 @@
         <p> {{selectedContact.name}} </p>
         <div class="icons">
           <a class="edit" (click)="toggleOverlay('edit')">Edit</a>
-          <a class="delete">Delete</a>
+          <a class="delete" (click)="deleteContact(selectedContact.id!)">Delete</a>
         </div>
       </div>
     </div>

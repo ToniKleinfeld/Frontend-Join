@@ -142,7 +142,7 @@ export class ContactsComponent implements OnDestroy {
   deleteContact(id: string) {
     this.backendService.deleteRequest(`contacts/${id}`).subscribe({
       next: (resonse) => {
-        console.log(resonse);
+        //TODO: siehe createContact , aber ohne nachricht
       },
     });
   }
