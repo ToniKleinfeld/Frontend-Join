@@ -61,25 +61,44 @@
 
   <div class="overlay" [ngClass]="{'d-none': !overlayActive}">
     <div class="overlay-header">
-      <img src="assets/img/logobgblue.svg" alt="">
-      <h2>
-        @if(overlayContent == 'add'){
+      <img class="close" src="/assets/img/whitecloseicon.svg" alt="" (click)="toggleOverlay('')">
+      <div class="overlay-rubric">
+        <img src="assets/img/logobgblue.svg">
+        <h2>
+          @if(overlayContent == 'add'){
           Add contact
-        } @else if (overlayContent == 'edit') {
+          } @else if (overlayContent == 'edit') {
           Edit contact
-        }
-      </h2>
-      @if(overlayContent == 'add'){
+          }
+        </h2>
+        @if(overlayContent == 'add'){
         <h3>Tasks are better with a team!</h3>
-      }
+        }
+      </div>
 
     </div>
     <!-- TODO: hier Weiter overlay , add / edit designen und funktionen -->
     <form class="overlay-form">
 
-      <input type="text">
-      <input type="text">
-      <input type="text">
+      <div class="contact-fields">
+
+        @if(selectedContact && overlayContent == 'edit'){
+        <div class="initials initials--open-contact" style="background-color:lightblue;">
+          {{selectedContact.name| initials}}
+        </div>
+        } @else if (overlayContent == 'add') {
+          <div class="initials initials--open-contact" style="background-color:lightgrey;">
+            <img src="/assets/img/person.svg"  class="smallimg" >
+          </div>
+
+        }
+
+        <input type="text" class="input-name" placeholder="Name" required minlength="3" pattern="^[a-zA-Z0-9 ]+$">
+        <input type="email" class="input-mail" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" required placeholder="E-mail">
+        <input type="tel" pattern="[0-9]+" required placeholder="Phone" class="input-phone">
+        <!-- placeholder]="(!signup_mail.valid && signup_mail.touched && signup_name.valid) ? 'Example@gmail.com'  : 'Email'" -->
+
+      </div>
 
       <div class="buttons-wrapper">
 

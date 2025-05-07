@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-contacts',
   imports: [ButtonComponent, InitialsPipe, FormatUserNamePipe, CommonModule],
   templateUrl: './contacts.component.html',
-  styleUrl: './contacts.component.scss',
+  styleUrls: ['./contacts.component.scss','./contacts.form.component.scss']
 })
 export class ContactsComponent implements OnDestroy {
   private _contacts = signal<Contact[]>([]);
