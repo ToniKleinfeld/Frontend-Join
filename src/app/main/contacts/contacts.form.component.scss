@@ -3,7 +3,7 @@
 .overlay {
   @include mix.center($jc: flex-start, $ai: start);
   flex-direction: column;
-  height: 80%;
+  height: 90%;
   width: 584px;
   max-width: 584px;
   max-height: 1024px;
@@ -97,3 +97,5 @@
   height: 64px;
   height: 64px;
 }
+
+// TODO: Repomsive , animation , overlay massage create Contact

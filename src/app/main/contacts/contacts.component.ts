@@ -6,11 +6,18 @@ import { ButtonComponent } from '../../shared/components/button/button.component
 import { InitialsPipe } from '../../shared/pipes/initials.pipe';
 import { FormatUserNamePipe } from '../../shared/pipes/format-user-name.pipe';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-contacts',
-  imports: [ButtonComponent, InitialsPipe, FormatUserNamePipe, CommonModule],
+  imports: [
+    ButtonComponent,
+    InitialsPipe,
+    FormatUserNamePipe,
+    CommonModule,
+    FormsModule,
+  ],
   templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.scss','./contacts.form.component.scss']
+  styleUrls: ['./contacts.component.scss', './contacts.form.component.scss'],
 })
 export class ContactsComponent implements OnDestroy {
   private _contacts = signal<Contact[]>([]);
@@ -19,10 +26,19 @@ export class ContactsComponent implements OnDestroy {
       a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
     );
   });
+
   private subContact = new Subscription();
   activeContact: string = '-1';
   overlayActive: boolean = false;
   overlayContent: string = '';
+
+  defaultContact: Contact = {
+    name: '',
+    email: '',
+    phone: '',
+  };
+
+  addContact: Contact = JSON.parse(JSON.stringify(this.defaultContact));
 
   constructor(private backendService: BackendService) {
     this.subContact.add(
@@ -55,16 +71,18 @@ export class ContactsComponent implements OnDestroy {
    */
   toggleOverlay(state: string): void {
     this.overlayActive = !this.overlayActive;
+    this.addContact = JSON.parse(JSON.stringify(this.defaultContact));
 
     switch (state) {
       case 'add':
-        this.overlayContent = 'add'
+        this.overlayContent = 'add';
         break;
       case 'edit':
-        this.overlayContent = 'edit'
+        this.overlayContent = 'edit';
+        this.addContact = JSON.parse(JSON.stringify(this.selectedContact));
         break;
       default:
-        this.overlayContent = ''
+        this.overlayContent = '';
         break;
     }
   }
@@ -95,18 +113,30 @@ export class ContactsComponent implements OnDestroy {
   //TODO; später mir mehreren Testen !
 
   //TODO: Farbe für Contact im Frontend schon erstellen oder im backend?
-  createContact() {
-    let newContact: Contact = {
-      name: 'Antonio',
-      email: 'Test2@post.de',
-      phone: '0173534636',
-    };
 
-    this.backendService.postRequest('contacts', newContact).subscribe({
-      next: (resonse) => {
-        console.log(resonse);
-      },
-    });
+  createContact(formRef: any) {
+    if (formRef.valid) {
+      this.backendService.postRequest('contacts', this.addContact).subscribe({
+        next: (resonse) => {
+          // TODO: neuladen des get contacts auslösen , anzeige Create new !
+          this.toggleOverlay('');
+        },
+      });
+    }
+  }
+
+  patchContact(formRef: any) {
+    if (formRef.valid) {
+      this.backendService
+        .patchRequest(`contacts/${this.addContact.id}`, this.addContact)
+        .subscribe({
+          next: (resonse) => {
+            console.log(resonse);
+            this.toggleOverlay('');
+            //TODO: siehe createContact , aber ohne nachricht
+          },
+        });
+    }
   }
 
   deleteContact(id: string) {

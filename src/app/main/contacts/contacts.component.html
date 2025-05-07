@@ -29,6 +29,7 @@
   <div class="bigContactInfo">
 
     <img class="back-arrow d-none" alt="backbutton" src="/assets/img/arrow.svg">
+    <!-- TODO: Close img anzeigen , wenn im mbile bereich umd "große Karte auszublenden" -->
 
     @if(selectedContact){
 
@@ -78,7 +79,7 @@
 
     </div>
     <!-- TODO: hier Weiter overlay , add / edit designen und funktionen -->
-    <form class="overlay-form">
+    <form class="overlay-form" #formRef="ngForm">
 
       <div class="contact-fields">
 
@@ -87,32 +88,43 @@
           {{selectedContact.name| initials}}
         </div>
         } @else if (overlayContent == 'add') {
-          <div class="initials initials--open-contact" style="background-color:lightgrey;">
-            <img src="/assets/img/person.svg"  class="smallimg" >
-          </div>
-
+        <div class="initials initials--open-contact" style="background-color:lightgrey;">
+          <img src="/assets/img/person.svg" class="smallimg">
+        </div>
         }
 
-        <input type="text" class="input-name" placeholder="Name" required minlength="3" pattern="^[a-zA-Z0-9 ]+$">
-        <input type="email" class="input-mail" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" required placeholder="E-mail">
-        <input type="tel" pattern="[0-9]+" required placeholder="Phone" class="input-phone">
-        <!-- placeholder]="(!signup_mail.valid && signup_mail.touched && signup_name.valid) ? 'Example@gmail.com'  : 'Email'" -->
+        <input type="text" class="input-name" placeholder="Name" required minlength="3" pattern="^[a-zA-Z0-9 ]+$"
+          [(ngModel)]="addContact.name" name="contact_name" #name="ngModel">
+        <input type="email" class="input-mail" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" required
+          [placeholder]="(!email.valid && email.touched && name.valid) ? 'Example@gmail.com'  : 'Email'"
+          [(ngModel)]="addContact.email" name="contact_email" #email="ngModel">
+        <input type="tel" pattern="[0-9]+" required placeholder="Phone" class="input-phone"
+          [(ngModel)]="addContact.phone" name="contact_phone" #phone="ngModel">
 
       </div>
 
       <div class="buttons-wrapper">
 
         @if(overlayContent == 'add'){
-
         <app-button text="Cancel" size="small" design="secondary" icon="clear" (clicked)="toggleOverlay('')" />
 
-        <app-button text="Create contact" size="small" design="primary" icon="check" />
+        @if(formRef.valid){
+        <app-button text="Create contact" size="small" design="primary" for="formRef" icon="check"
+          (clicked)="createContact(formRef)" />
+        } @else {
+        <app-button text="Create contact" size="small" design="deactive" icon="check" />
+        }
 
         } @else if (overlayContent == 'edit') {
 
         <app-button text="Cancel" size="small" design="secondary" icon="clear" (clicked)="toggleOverlay('')" />
 
-        <app-button text="Save" size="small" design="primary" icon="check" />
+        @if(formRef.valid){
+        <app-button text="Save" size="small" design="primary" icon="check" (clicked)="patchContact(formRef)"
+          for="formRef" />
+        } @else {
+        <app-button text="Save" size="small" design="deactive" icon="check" />
+        }
         }
 
       </div>
