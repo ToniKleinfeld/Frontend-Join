@@ -1,4 +1,4 @@
-import { Component, OnDestroy, signal, computed } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { BackendService } from '../../shared/service/backend.service';
 import { Contact } from '../../shared/interfaces/interfaces.model';
 import { Subscription } from 'rxjs';
@@ -19,7 +19,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss', './contacts.form.component.scss'],
 })
-export class ContactsComponent implements OnDestroy {
+export class ContactsComponent {
   private _contacts = signal<Contact[]>([]);
   readonly contacts = computed(() => {
     return [...this._contacts()].sort((a, b) =>
@@ -27,7 +27,6 @@ export class ContactsComponent implements OnDestroy {
     );
   });
 
-  private subContact = new Subscription();
   activeContact: string = '-1';
   overlayActive: boolean = false;
   overlayContent: string = '';
@@ -41,16 +40,17 @@ export class ContactsComponent implements OnDestroy {
   addContact: Contact = JSON.parse(JSON.stringify(this.defaultContact));
 
   constructor(private backendService: BackendService) {
-    this.subContact.add(
-      this.backendService.getRequest<Contact[]>('contacts').subscribe({
-        next: (contacts) => this._contacts.set(contacts),
-        error: (err) => console.error('Fehler beim Laden der Nutzer:', err),
-      })
-    );
+    this.loadContacts();
   }
 
-  ngOnDestroy(): void {
-    this.subContact.unsubscribe();
+  /**
+   * Load contact list , add to signal
+   */
+  loadContacts() {
+    this.backendService.getRequest<Contact[]>('contacts').subscribe({
+      next: (contacts) => this._contacts.set(contacts),
+      error: (err) => console.error('Fehler beim Laden der Nutzer:', err),
+    });
   }
 
   /**
@@ -114,35 +114,48 @@ export class ContactsComponent implements OnDestroy {
 
   //TODO: Farbe für Contact im Frontend schon erstellen oder im backend?
 
+  /**
+   *  Create a new Contact
+   * @param formRef
+   */
   createContact(formRef: any) {
     if (formRef.valid) {
       this.backendService.postRequest('contacts', this.addContact).subscribe({
-        next: (resonse) => {
-          // TODO: neuladen des get contacts auslösen , anzeige Create new !
+        next: (response) => {
+          this.loadContacts();
           this.toggleOverlay('');
         },
+        error: (err) =>
+          console.error('Fehler beim Erstellen des Kontakts:', err),
       });
     }
   }
 
+  /**
+   * Update Contact
+   * @param formRef
+   */
   patchContact(formRef: any) {
     if (formRef.valid) {
       this.backendService
         .patchRequest(`contacts/${this.addContact.id}`, this.addContact)
         .subscribe({
-          next: (resonse) => {
-            console.log(resonse);
+          next: () => {
+            this.loadContacts();
             this.toggleOverlay('');
-            //TODO: siehe createContact , aber ohne nachricht
           },
         });
     }
   }
 
+  /**
+   * Delte Contact
+   * @param id contact ID
+   */
   deleteContact(id: string) {
     this.backendService.deleteRequest(`contacts/${id}`).subscribe({
-      next: (resonse) => {
-        //TODO: siehe createContact , aber ohne nachricht
+      next: () => {
+        this.loadContacts();
       },
     });
   }
