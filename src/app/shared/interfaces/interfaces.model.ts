@@ -27,6 +27,7 @@ export interface Contact {
   name: string;
   email: string;
   phone: string;
+  bgcolor: string;
 }
 
 export interface SummaryItem {

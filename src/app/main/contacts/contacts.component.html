@@ -13,7 +13,7 @@
 
     <div class="contact" [ngClass]="{ 'activeContact':activeContact == contact.id }"
       (click)="setActiveContact(contact)">
-      <div class="initials " style="background-color:lightblue">
+      <div class="initials " [style.background-color]="contact.bgcolor">
         {{ contact.name| initials }}
       </div>
       <div class="contactfields">
@@ -34,7 +34,7 @@
     @if(selectedContact){
 
     <div class="open-contact-headline">
-      <div class="initials initials--open-contact" style="background-color:lightblue;">
+      <div class="initials initials--open-contact" [style.background-color]="selectedContact.bgcolor">
         {{selectedContact.name| initials}}
       </div>
 
@@ -90,9 +90,9 @@
         } @else if (overlayContent == 'add') {
         <div class="initials initials--open-contact" style="background-color:lightgrey;">
           @if(addContact.name == ''){
-            <img src="/assets/img/person.svg" class="smallimg">
+          <img src="/assets/img/person.svg" class="smallimg">
           } @else {
-            {{addContact.name| initials}}
+          {{addContact.name| initials}}
           }
         </div>
         }
@@ -113,7 +113,7 @@
 
         @if(overlayContent === 'add' || overlayContent === 'edit'){
         <app-button [text]="overlayContent === 'add' ? 'Create contact' : 'Save'" size="small"
-          [design]="formRef.valid ? 'primary' : 'deactive'" for="formRef" icon="check" (clicked)="  formRef.valid
+          [design]="formRef.valid ? 'primary' : 'deactive'" for="formRef" icon="check" (clicked)="formRef.valid
         ? (overlayContent === 'add' ? createContact(formRef) : patchContact(formRef))
         : null" />
         }

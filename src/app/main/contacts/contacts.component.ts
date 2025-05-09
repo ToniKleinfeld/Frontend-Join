@@ -15,7 +15,7 @@ import { PhoneformatPipe } from '../../shared/pipes/phoneformat.pipe';
     FormatUserNamePipe,
     CommonModule,
     FormsModule,
-    PhoneformatPipe
+    PhoneformatPipe,
   ],
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss', './contacts.form.component.scss'],
@@ -36,6 +36,7 @@ export class ContactsComponent {
     name: '',
     email: '',
     phone: '',
+    bgcolor: '',
   };
 
   addContact: Contact = JSON.parse(JSON.stringify(this.defaultContact));
@@ -88,6 +89,13 @@ export class ContactsComponent {
     }
   }
 
+  getRandomHexColor(): string {
+    const hex = Math.floor(Math.random() * 0xffffff)
+      .toString(16)
+      .padStart(6, '0');
+    return `#${hex}`;
+  }
+
   /**
    * filter for current Contact index
    * @param contact Contact list
@@ -113,16 +121,15 @@ export class ContactsComponent {
   }
   //TODO; später mir mehreren Testen !
 
-  //TODO: Farbe für Contact im Frontend schon erstellen oder im backend?
-
   /**
    *  Create a new Contact
    * @param formRef
    */
   createContact(formRef: any) {
     if (formRef.valid) {
+      this.addContact.bgcolor = this.getRandomHexColor();
       this.backendService.postRequest('contacts', this.addContact).subscribe({
-        next: (response) => {
+        next: () => {
           this.loadContacts();
           this.toggleOverlay('');
         },
@@ -145,6 +152,8 @@ export class ContactsComponent {
             this.loadContacts();
             this.toggleOverlay('');
           },
+          error: (err) =>
+            console.error('Fehler beim abändern des Kontakts:', err),
         });
     }
   }
@@ -158,6 +167,7 @@ export class ContactsComponent {
       next: () => {
         this.loadContacts();
       },
+      error: (err) => console.error('Fehler beim löschen des Kontakts:', err),
     });
   }
 }
