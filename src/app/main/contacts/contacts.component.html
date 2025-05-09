@@ -89,7 +89,11 @@
         </div>
         } @else if (overlayContent == 'add') {
         <div class="initials initials--open-contact" style="background-color:lightgrey;">
-          <img src="/assets/img/person.svg" class="smallimg">
+          @if(addContact.name == ''){
+            <img src="/assets/img/person.svg" class="smallimg">
+          } @else {
+            {{addContact.name| initials}}
+          }
         </div>
         }
 
@@ -105,26 +109,13 @@
 
       <div class="buttons-wrapper">
 
-        @if(overlayContent == 'add'){
         <app-button text="Cancel" size="small" design="secondary" icon="clear" (clicked)="toggleOverlay('')" />
 
-        @if(formRef.valid){
-        <app-button text="Create contact" size="small" design="primary" for="formRef" icon="check"
-          (clicked)="createContact(formRef)" />
-        } @else {
-        <app-button text="Create contact" size="small" design="deactive" icon="check" />
-        }
-
-        } @else if (overlayContent == 'edit') {
-
-        <app-button text="Cancel" size="small" design="secondary" icon="clear" (clicked)="toggleOverlay('')" />
-
-        @if(formRef.valid){
-        <app-button text="Save" size="small" design="primary" icon="check" (clicked)="patchContact(formRef)"
-          for="formRef" />
-        } @else {
-        <app-button text="Save" size="small" design="deactive" icon="check" />
-        }
+        @if(overlayContent === 'add' || overlayContent === 'edit'){
+        <app-button [text]="overlayContent === 'add' ? 'Create contact' : 'Save'" size="small"
+          [design]="formRef.valid ? 'primary' : 'deactive'" for="formRef" icon="check" (clicked)="  formRef.valid
+        ? (overlayContent === 'add' ? createContact(formRef) : patchContact(formRef))
+        : null" />
         }
 
       </div>
