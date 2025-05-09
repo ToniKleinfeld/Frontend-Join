@@ -40,12 +40,14 @@ export class AuthService {
     signup_pw: string;
     signup_pw_confirm: string;
     terms: boolean;
+    color: string;
   }): Observable<any> {
     const formattedData = {
       username: signupData.signup_name.toLowerCase().replaceAll(' ', '-'),
       email: signupData.signup_mail.toLowerCase(),
       password: signupData.signup_pw,
       repeated_password: signupData.signup_pw_confirm,
+      color: signupData.color,
     };
     return this.http.post(`${this.baseUrl}registration/`, formattedData, {
       withCredentials: true,

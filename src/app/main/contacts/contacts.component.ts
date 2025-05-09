@@ -89,6 +89,10 @@ export class ContactsComponent {
     }
   }
 
+  /**
+   *
+   * @returns renadom hex color
+   */
   getRandomHexColor(): string {
     const hex = Math.floor(Math.random() * 0xffffff)
       .toString(16)

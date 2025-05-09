@@ -39,7 +39,7 @@
               [checked]="addTaskData.assigned_users.includes(user.id!)" (ngModelChange)="toggleAssignUser(user.id!, $event)"
               [ngModel]="addTaskData.assigned_users.includes(user.id!)">
             <span class="checkmark"></span>
-            <label for="{{user.id }}"><span class="contacticon" style="background-color: #6E52FF;">{{ user.username |
+            <label for="{{user.id }}"><span class="contacticon" [style.background-color]="user.color">{{ user.username |
                 initials }}</span>{{ user.username | formatUserName }}</label>
           </li>
           }
@@ -49,7 +49,7 @@
       <div class="showassignedcontacts">
         @for( user of users(); track user; let index = $index){
         @if( addTaskData.assigned_users.includes(user.id!)){
-        <div class="contacticon" style="background-color: #6E52FF;">{{user.username |
+        <div class="contacticon" [style.background-color]="user.color">{{user.username |
           initials}}</div>
         }
         }

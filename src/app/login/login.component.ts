@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
   ],
 })
 export class LoginComponent {
-  private guesttoken :string = '9b0b222592cec1c4553b9f9fec588a588350fcf8';
+  private guesttoken: string = '9b0b222592cec1c4553b9f9fec588a588350fcf8';
   signup: boolean = false;
   isMobile: boolean = window.innerWidth < 1024;
   feedback_Login_SingUp: string = '';
@@ -31,6 +31,7 @@ export class LoginComponent {
     signup_mail: '',
     signup_pw: '',
     signup_pw_confirm: '',
+    color: this.getRandomHexColor(),
     terms: false,
   };
 
@@ -53,6 +54,7 @@ export class LoginComponent {
       signup_mail: '',
       signup_pw: '',
       signup_pw_confirm: '',
+      color: this.getRandomHexColor(),
       terms: false,
     };
   }
@@ -88,7 +90,7 @@ export class LoginComponent {
       this.authService.login(this.loginData).subscribe({
         next: (response) => {
           let user = response.username.replaceAll('-', ' ');
-          let username = user.charAt(0).toUpperCase() + user.slice(1)
+          let username = user.charAt(0).toUpperCase() + user.slice(1);
           let logedIn = `Login successfully ${username}`;
           this.showFeedbackMsg(logedIn);
           this.routeToSummary();
@@ -111,6 +113,8 @@ export class LoginComponent {
    * @param ngForm
    */
   onSubmitSignUp(ngForm: NgForm) {
+    console.log(this.signupData);
+
     if (ngForm.submitted && ngForm.form.valid) {
       this.authService.register(this.signupData).subscribe({
         next: () => {
@@ -157,10 +161,21 @@ export class LoginComponent {
   /**
    * Guest login , with createt user in Backend "guest" , per token
    */
-  guestLogIn(){
+  guestLogIn() {
     this.showFeedbackMsg('Login successfully.');
     this.routeToSummary();
   }
 
-    // TODO: Gäste login überarbeiten! da jetzt HTTP only Cookie , evtl im backend was machbar?
+  /**
+   *
+   * @returns renadom hex color
+   */
+  getRandomHexColor(): string {
+    const hex = Math.floor(Math.random() * 0xffffff)
+      .toString(16)
+      .padStart(6, '0');
+    return `#${hex}`;
+  }
+
+  // TODO: Gäste login überarbeiten! da jetzt HTTP only Cookie , evtl im backend was machbar?
 }

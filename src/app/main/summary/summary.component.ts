@@ -98,16 +98,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
    */
   private getCountsByRubric(): Record<string, number> {
     const all = this._tasks();
-    console.log({
-      all: all.length,
-      urgentFuture: all.filter(
-        (t) => t.prio === 'urgent' && new Date(t.due_date) >= new Date()
-      ).length,
-      todo: all.filter((t) => t.rubric === 'To do').length,
-      inProgress: all.filter((t) => t.rubric === 'In progress').length,
-      awaitFeedback: all.filter((t) => t.rubric === 'Await feedback').length,
-      done: all.filter((t) => t.rubric === 'Done').length,
-    });
+
     return {
       all: all.length,
       urgentFuture: all.filter(
