@@ -1,12 +1,12 @@
 import { Component, signal, computed } from '@angular/core';
 import { BackendService } from '../../shared/service/backend.service';
 import { Contact } from '../../shared/interfaces/interfaces.model';
-import { Subscription } from 'rxjs';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { InitialsPipe } from '../../shared/pipes/initials.pipe';
 import { FormatUserNamePipe } from '../../shared/pipes/format-user-name.pipe';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PhoneformatPipe } from '../../shared/pipes/phoneformat.pipe';
 @Component({
   selector: 'app-contacts',
   imports: [
@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
     FormatUserNamePipe,
     CommonModule,
     FormsModule,
+    PhoneformatPipe
   ],
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss', './contacts.form.component.scss'],
