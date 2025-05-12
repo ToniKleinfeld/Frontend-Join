@@ -26,9 +26,12 @@
 
   </div>
 
-  <div class="bigContactInfo">
+  <div class="bigContactInfo" [ngClass]="{'d-none': activeContact == '-1'}">
+    <div class="contactHeadWrapper">
+      <p class="contactcardinfo">Contact Information</p>
+          <img class="back-arrow" alt="backbutton" src="/assets/img/arrow.svg" (click)="activeContact = '-1'">
+    </div>
 
-    <img class="back-arrow d-none" alt="backbutton" src="/assets/img/arrow.svg">
     <!-- TODO: Close img anzeigen , wenn im mbile bereich umd "große Karte auszublenden" -->
 
     @if(selectedContact){
@@ -47,7 +50,6 @@
       </div>
     </div>
 
-    <p class="contactcardinfo">Contact Information</p>
     <div class="phone-and-e-mail-container">
       <p>Email</p>
       <a href="mailto:{{selectedContact.email}}" class="e-mail-card">{{selectedContact.email}}</a>
@@ -72,9 +74,7 @@
           Edit contact
           }
         </h2>
-        @if(overlayContent == 'add'){
         <h3>Tasks are better with a team!</h3>
-        }
       </div>
 
     </div>

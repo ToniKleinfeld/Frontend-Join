@@ -18,7 +18,7 @@ import { PhoneformatPipe } from '../../shared/pipes/phoneformat.pipe';
     PhoneformatPipe,
   ],
   templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.scss', './contacts.form.component.scss'],
+  styleUrls: ['./contacts.component.scss', './contacts.form.component.scss','./contacts.mobile.component.scss'],
 })
 export class ContactsComponent {
   private _contacts = signal<Contact[]>([]);

@@ -1,0 +1,111 @@
+@use "../../shared/mixin" as mix;
+
+
+
+@media (max-width: 1025px) {
+  @media (max-height: 601px) {
+    .overlay {
+      height: 120%;
+    }
+
+    .close {
+      margin: 15px 25px 10px 0;
+    }
+
+    .overlay-header {
+      height: 40%;
+    }
+
+    .overlay-form {
+      height: 60%;
+    }
+
+    .contact-fields {
+      padding-top: 20px;
+      .initials {
+        position: absolute;
+        top: calc(40% - 60px);
+        border: 3px solid white;
+      }
+    }
+
+    .overlay-rubric {
+      img {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 680px) {
+  .close {
+    margin: 15px 25px 10px 0;
+  }
+
+  .overlay-header {
+    height: 40%;
+  }
+
+  .overlay-form {
+    height: 60%;
+  }
+
+  .contact-fields {
+    padding-top: 20px;
+    .initials {
+      position: absolute;
+      top: calc(40% - 60px);
+      border: 3px solid white;
+    }
+  }
+
+  .overlay-rubric {
+    img {
+      display: none;
+    }
+  }
+
+  .contactList-wrapper{
+    max-width: unset;
+    width: 100%;
+  }
+
+  .bigContactInfo{
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    height: 100%;
+    z-index: 6;
+  }
+
+  .contactHeadWrapper{
+    @include mix.center($jc:space-between);
+    width: 100%;
+  }
+
+  .back-arrow{
+    display: unset;
+    cursor: pointer;
+  }
+
+  .open-contact-name-and-icons{
+    p{
+      font-size: 33px;
+      font-weight: 400;
+    }
+  }
+
+  .open-contact-headline{
+    .initials{
+      width: 80px;
+      height: 80px;
+      font-size: 27px;
+    }
+  }
+
+  .icons{
+    display: none;
+  }
+}
+
+
