@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, HostListener } from '@angular/core';
 import { BackendService } from '../../shared/service/backend.service';
 import { Contact } from '../../shared/interfaces/interfaces.model';
 import { ButtonComponent } from '../../shared/components/button/button.component';
@@ -18,7 +18,11 @@ import { PhoneformatPipe } from '../../shared/pipes/phoneformat.pipe';
     PhoneformatPipe,
   ],
   templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.scss', './contacts.form.component.scss','./contacts.mobile.component.scss'],
+  styleUrls: [
+    './contacts.component.scss',
+    './contacts.form.component.scss',
+    './contacts.mobile.component.scss',
+  ],
 })
 export class ContactsComponent {
   private _contacts = signal<Contact[]>([]);
@@ -32,6 +36,8 @@ export class ContactsComponent {
   overlayActive: boolean = false;
   overlayContent: string = '';
   showSuccessMsg: boolean = false;
+  isMobile: boolean = window.innerWidth < 681;
+  mobileMenu: boolean = false;
 
   defaultContact: Contact = {
     name: '',
@@ -44,6 +50,11 @@ export class ContactsComponent {
 
   constructor(private backendService: BackendService) {
     this.loadContacts();
+  }
+
+  @HostListener('window:resize', [])
+  onResize() {
+    this.isMobile = window.innerWidth < 681;
   }
 
   /**
@@ -66,6 +77,17 @@ export class ContactsComponent {
 
   get selectedContact(): Contact | null {
     return this.contacts().find((c) => c.id === this.activeContact) ?? null;
+  }
+
+  /**
+   * toogle the mobile edit menu
+   */
+  toggleMobileMenu() {
+    if (this.isMobile && this.activeContact !== '-1') {
+      this.mobileMenu = this.mobileMenu ? false : true;
+    } else {
+      this.mobileMenu = false;
+    }
   }
 
   /**
@@ -159,6 +181,7 @@ export class ContactsComponent {
           next: () => {
             this.loadContacts();
             this.toggleOverlay('');
+            this.toggleMobileMenu();
           },
           error: (err) =>
             console.error('Fehler beim abändern des Kontakts:', err),
@@ -174,6 +197,7 @@ export class ContactsComponent {
     this.backendService.deleteRequest(`contacts/${id}`).subscribe({
       next: () => {
         this.loadContacts();
+        this.toggleMobileMenu();
       },
       error: (err) => console.error('Fehler beim löschen des Kontakts:', err),
     });

@@ -10,13 +10,18 @@ button {
 
   &.primary,
   &.submit,
-  &.fullsize {
+  &.fullsize,
+  &.icon {
     background-color: mix.$main-color;
     color: mix.$secondary-color;
 
     &:hover {
       background-color: mix.$third-color;
     }
+  }
+
+  &.icon {
+    padding: 12px !important;
   }
 
   &.secondary {
@@ -60,7 +65,8 @@ button {
   .clear,
   .check,
   .add,
-  .addcontact {
+  .addcontact,
+  .dots {
     background-position: center;
     background-size: contain;
     width: 32px;
@@ -85,6 +91,10 @@ button {
 
   .addcontact {
     background-image: url(/assets/img/person_add.svg);
+  }
+
+  .dots {
+    background-image: url(/assets/img/dot_menu.svg);
   }
 }
 

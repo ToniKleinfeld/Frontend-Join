@@ -119,7 +119,7 @@ section {
   @include mix.center($x: 16px);
 
   & a {
-    font-size: value(--normal-letter-size);
+    font-size: var(--normal-letter-size);
     font-weight: 400;
   }
 }
@@ -139,11 +139,11 @@ section {
   mask-size: contain;
 }
 
-.icons .edit::before {
+.icons .edit::before, .mobileEditDelte .edit::before{
   mask: url("/assets/img/edit.svg") no-repeat center;
 }
 
-.icons .delete::before {
+.icons .delete::before, .mobileEditDelte .delete::before {
   mask: url("/assets/img/delete.svg") no-repeat center;
 }
 

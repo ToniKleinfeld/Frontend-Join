@@ -2,8 +2,23 @@
 
   <div class="contactList-wrapper">
 
+    @if(!isMobile){
     <app-button text="Add new contact" size="large" design="fullsize" icon="addcontact" style="width: 100%;"
       (clicked)="toggleOverlay('add')" />
+    } @else {
+    <div class="mobileButton">
+      <app-button text="" size="small" design="icon" [icon]="activeContact === '-1' ? 'addcontact' : 'dots'"
+        style="width: 100%;" (clicked)="activeContact === '-1' ? toggleOverlay('add') : toggleMobileMenu()" />
+
+
+      <div class="icons" [ngClass]="{'d-none': !mobileMenu}">
+        <a class="edit" (click)="toggleOverlay('edit')">Edit</a>
+        <a class="delete" (click)="deleteContact(selectedContact!.id!)">Delete</a>
+      </div>
+
+    </div>
+    }
+
 
     @for( contact of contacts() ; track contact.id ; let index = $index){
 
@@ -29,7 +44,8 @@
   <div class="bigContactInfo" [ngClass]="{'d-none': activeContact == '-1'}">
     <div class="contactHeadWrapper">
       <p class="contactcardinfo">Contact Information</p>
-          <img class="back-arrow" alt="backbutton" src="/assets/img/arrow.svg" (click)="activeContact = '-1'">
+      <img class="back-arrow" alt="backbutton" src="/assets/img/arrow.svg"
+        (click)="activeContact = '-1';toggleMobileMenu()">
     </div>
 
     <!-- TODO: Close img anzeigen , wenn im mbile bereich umd "große Karte auszublenden" -->
