@@ -36,7 +36,7 @@ section {
 }
 
 .contact {
-  @include mix.center($jc: flex-start,$x:5%);
+  @include mix.center($jc: flex-start, $x: 5%);
   height: auto;
   width: 100%;
   font-size: 20px;
@@ -83,39 +83,40 @@ section {
   }
 }
 
-.bigContactInfo{
-  @include mix.center($jc:flex-start,$ai:flex-start, $x:16px);
+.bigContactInfo {
+  @include mix.center($jc: flex-start, $ai: flex-start, $x: 16px);
   flex-direction: column;
   padding: 5vh 5vw;
   z-index: 9;
+  width: 60%;
 }
 
- .contactcardinfo {
-  font-size: var( --button-letter-size);
+.contactcardinfo {
+  font-size: var(--button-letter-size);
   font-weight: 700;
 }
 
 .open-contact-headline {
-  @include mix.center($jc:flex-start,$x:3vw);
+  @include mix.center($jc: flex-start, $x: 3vw);
 }
 
 .open-contact-name-and-icons {
-  @include mix.center($ai:start);
+  @include mix.center($ai: start);
   flex-direction: column;
 
   p {
-      font-size: 47px;
-      font-weight: 600;
-      letter-spacing: 0.15px;
+    font-size: 47px;
+    font-weight: 600;
+    letter-spacing: 0.15px;
   }
 }
 
 .icons {
-  @include mix.center($x:16px);
+  @include mix.center($x: 16px);
 
   & a {
-      font-size: value( --normal-letter-size);
-      font-weight: 400;
+    font-size: value(--normal-letter-size);
+    font-weight: 400;
   }
 }
 
@@ -130,16 +131,16 @@ section {
   width: 24px;
   height: 24px;
   margin-right: 7px;
-  background-color: mix.$main-color;;
+  background-color: mix.$main-color;
   mask-size: contain;
 }
 
 .icons .edit::before {
-  mask: url('/assets/img/edit.svg') no-repeat center;
+  mask: url("/assets/img/edit.svg") no-repeat center;
 }
 
 .icons .delete::before {
-  mask: url('/assets/img/delete.svg') no-repeat center;
+  mask: url("/assets/img/delete.svg") no-repeat center;
 }
 
 .icons a:hover {
@@ -149,8 +150,8 @@ section {
   cursor: pointer;
 }
 
-.phone-and-e-mail-container p{
-  font-weight:700 ;
+.phone-and-e-mail-container p {
+  font-weight: 700;
   padding: 10px 0 10px 0;
 }
 

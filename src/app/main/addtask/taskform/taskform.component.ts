@@ -180,16 +180,18 @@ export class TaskformComponent implements OnDestroy {
     this.addTaskData = JSON.parse(JSON.stringify(this.defaultAddTask));
     this.filterText.set('');
     form.resetForm();
-    console.log(this._users())
   }
 
+  /**
+   *  Send  addTaskData to backend , when form is valid
+   * @param form
+   */
   submitAddTask(form: NgForm) {
     if (form.valid) {
       this.backendService
         .postRequest<AddTaskData>('tasks', this.addTaskData)
         .subscribe({
           next: (resonse) => {
-            console.log(resonse);
             //TODO: Erfolgreich erstell Message (Container)
             this.clearAll(form);
           },

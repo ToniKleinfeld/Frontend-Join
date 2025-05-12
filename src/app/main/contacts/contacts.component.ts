@@ -31,6 +31,7 @@ export class ContactsComponent {
   activeContact: string = '-1';
   overlayActive: boolean = false;
   overlayContent: string = '';
+  showSuccessMsg: boolean = false;
 
   defaultContact: Contact = {
     name: '',
@@ -123,10 +124,9 @@ export class ContactsComponent {
     const currInitial = this.getInitial(contacts[index]);
     return prevInitial !== currInitial;
   }
-  //TODO; später mir mehreren Testen !
 
   /**
-   *  Create a new Contact
+   * Create a new Contact
    * @param formRef
    */
   createContact(formRef: any) {
@@ -136,6 +136,10 @@ export class ContactsComponent {
         next: () => {
           this.loadContacts();
           this.toggleOverlay('');
+          this.showSuccessMsg = true;
+          setTimeout(() => {
+            this.showSuccessMsg = false;
+          }, 2000);
         },
         error: (err) =>
           console.error('Fehler beim Erstellen des Kontakts:', err),

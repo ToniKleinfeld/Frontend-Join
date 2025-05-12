@@ -5,7 +5,7 @@
     <app-button text="Add new contact" size="large" design="fullsize" icon="addcontact" style="width: 100%;"
       (clicked)="toggleOverlay('add')" />
 
-    @for( contact of contacts() ; track contact; let index = $index){
+    @for( contact of contacts() ; track contact.id ; let index = $index){
 
     @if(isNewGroup(index)){
     <div class="register-letter">{{ getInitial(contacts()[index]) }}</div>
@@ -78,13 +78,13 @@
       </div>
 
     </div>
-    <!-- TODO: hier Weiter overlay , add / edit designen und funktionen -->
+
     <form class="overlay-form" #formRef="ngForm">
 
       <div class="contact-fields">
 
         @if(selectedContact && overlayContent == 'edit'){
-        <div class="initials initials--open-contact" style="background-color:lightblue;">
+        <div class="initials initials--open-contact" [style.background-color]="selectedContact.bgcolor">
           {{selectedContact.name| initials}}
         </div>
         } @else if (overlayContent == 'add') {
@@ -119,9 +119,11 @@
         }
 
       </div>
-
     </form>
+  </div>
 
+  <div class="message" [ngClass]="{'d-none': !showSuccessMsg}">
+    Contact succesfully created
   </div>
 
 </section>
