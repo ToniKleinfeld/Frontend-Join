@@ -124,8 +124,9 @@
       </div>
 
       <div class="buttons-wrapper">
-
-        <app-button text="Cancel" size="small" design="secondary" icon="clear" (clicked)="toggleOverlay('')" />
+        @if(isMobile && overlayContent == 'edit' || !isMobile){
+          <app-button text="Cancel" size="small" design="secondary" icon="clear" (clicked)="toggleOverlay('')" />
+        }
 
         @if(overlayContent === 'add' || overlayContent === 'edit'){
         <app-button [text]="overlayContent === 'add' ? 'Create contact' : 'Save'" size="small"
