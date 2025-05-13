@@ -99,12 +99,10 @@
   height: 64px;
 }
 
-// TODO: Repomsive , animation
-
-.message{
+.message {
   @include mix.center();
   position: absolute;
-  width: 320px;
+  width: 300px;
   height: 75px;
   background-color: mix.$main-color;
   top: 50%;

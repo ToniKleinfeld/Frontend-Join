@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, OnDestroy, signal, WritableSignal, computed  } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnDestroy,
+  signal,
+  WritableSignal,
+  computed,
+} from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AddTaskData } from '../../../shared/interfaces/interfaces.model';
@@ -12,7 +19,13 @@ import { FormatUserNamePipe } from '../../../shared/pipes/format-user-name.pipe'
 
 @Component({
   selector: 'app-taskform',
-  imports: [CommonModule, FormsModule, ButtonComponent, InitialsPipe, FormatUserNamePipe],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ButtonComponent,
+    InitialsPipe,
+    FormatUserNamePipe,
+  ],
   templateUrl: './taskform.component.html',
   styleUrls: [
     './taskform.component.scss',
@@ -39,6 +52,7 @@ export class TaskformComponent implements OnDestroy {
   showAssingedToList: boolean = false;
   editingIndex: number = -1;
   editingSubtaskValue: string = '';
+  showSuccessMsg: boolean = false;
   today: string = new Date().toISOString().split('T')[0];
 
   defaultAddTask: AddTaskData = {
@@ -69,9 +83,7 @@ export class TaskformComponent implements OnDestroy {
       return this.users();
     }
 
-    return this.users().filter(u =>
-      u.username.toLowerCase().includes(txt)
-    );
+    return this.users().filter((u) => u.username.toLowerCase().includes(txt));
   });
 
   /**
@@ -191,8 +203,11 @@ export class TaskformComponent implements OnDestroy {
       this.backendService
         .postRequest<AddTaskData>('tasks', this.addTaskData)
         .subscribe({
-          next: (resonse) => {
-            //TODO: Erfolgreich erstell Message (Container)
+          next: () => {
+            this.showSuccessMsg = true;
+            setTimeout(() => {
+              this.showSuccessMsg = false;
+            }, 2000);
             this.clearAll(form);
           },
         });

@@ -1,6 +1,5 @@
 @use "../../../shared/mixin" as mix;
 
-
 .check-button-container {
   @include mix.center($jc: space-between);
 }
@@ -89,4 +88,20 @@
 
 .required-info {
   font-size: var(--input-letter-size);
+}
+
+.message {
+  @include mix.center($x: 10px);
+  position: absolute;
+  width: 300px;
+  height: 75px;
+  background-color: mix.$main-color;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 25px;
+  box-shadow: 2px 0.1px 4px 0.1px rgba(0, 0, 0, 0.5);
+  color: white;
+  font-weight: 400;
+  font-size: var(--button-letter-size);
 }
