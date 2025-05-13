@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { AddTaskData } from '../../shared/interfaces/interfaces.model';
@@ -7,12 +7,18 @@ import { Observable, Subject, timer } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { BackendService } from '../../shared/service/backend.service';
 import { TaskformComponent } from '../addtask/taskform/taskform.component';
+import { SmallcardComponent } from './smallcard/smallcard.component';
 
 @Component({
   selector: 'app-board',
-  imports: [ButtonComponent, CommonModule, TaskformComponent],
+  imports: [
+    ButtonComponent,
+    CommonModule,
+    TaskformComponent,
+    SmallcardComponent,
+  ],
   templateUrl: './board.component.html',
-  styleUrl: './board.component.scss',
+  styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit, OnDestroy {
   tasks$!: Observable<AddTaskData[]>;
@@ -31,8 +37,14 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   overlay: boolean = false;
   overlayContent = '';
+  isMobile: boolean = window.innerWidth < 681;
 
   ngOnDestroy(): void {}
+
+  @HostListener('window:resize', [])
+  onResize() {
+    this.isMobile = window.innerWidth < 681;
+  }
 }
 
 // TODO: {

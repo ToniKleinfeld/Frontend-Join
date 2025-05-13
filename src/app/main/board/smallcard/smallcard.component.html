@@ -1,0 +1,56 @@
+<div class="card-container" draggable="true">
+
+  <div class="changeprogressmenü" [ngClass]="{'d-none': !isMobile}">
+
+    <img src="./assets/img/smallarrowicon.svg" alt="">
+    <div class="progressmenue d-none">
+      <h4>Change progress to:</h4>
+      <div>In progress</div>
+      <!-- TODO: hier alle möglichkeiten zum verschieben mit (click) -->
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="wrapper">
+      <div class="headline">
+        ['category']
+      </div>
+
+      <div class="title-description-container">
+        <h3>['title']</h3>
+        <div>['description']</div>
+      </div>
+
+      <div class="progress">
+        <div class="progressbar">
+          <div class="filler"></div>
+        </div>
+        <!-- TODO: filler with anpassen mit style -->
+        <div class="card-subtasks">
+          1/2 Subtask
+        </div>
+      </div>
+
+      <div class="circle-prio-container">
+
+        <div class="circle-container">
+          <div class="circle" style="background-color:lightblue">
+            AT
+          </div>
+        </div>
+
+        <div class="countassigneduseres">
+          5<img src="./assets/img/person.svg">
+          <!-- TODO: nur wenn mehr als 4 assigned -->
+        </div>
+
+        <div class="priority-symbols">
+          <img src="./assets/img/priolow.svg">
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

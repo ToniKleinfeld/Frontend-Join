@@ -19,11 +19,14 @@
           <i [ngClass]="{'addtaskicon': board != 'Done'}"></i>
         </div>
         <div class="taskwrapper">
-          <!-- hover effekt und drag an drop hier! -->
-          <div class="emptyboard">
+          <!-- TODO: hover effekt und drag an drop hier! -->
+          <!-- <div class="emptyboard">
             No tasks {{board}}
-          </div>
-          <!-- for schleife für einzele tasks hier -->
+          </div> -->
+
+          <app-smallcard/>
+
+
         </div>
       </div>
       }
@@ -35,6 +38,7 @@
   <div class="overlay" [ngClass]="{'d-none': !overlay}" (click)="overlay = false ; overlayContent = ''">
     <div class="overlay-content" [ngClass]="{'d-none':overlayContent == ''}" (click)="$event.stopPropagation()">
       @if(overlayContent == 'newtask'){
+      <img class="close" src="/assets/img/closeicon.svg" alt="" (click)="overlay = false ; overlayContent = ''">
       <app-taskform />
       }
     </div>
