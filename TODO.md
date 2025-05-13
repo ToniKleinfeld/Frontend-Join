@@ -56,17 +56,18 @@
 
 ## 📇 Contact-Bereich
 
-- [ ] ContactsComponent erstellen
-- [ ] Links: Liste aller Contacts alphabetisch
-- [ ] Rechts: Detailansicht des ausgewählten Contact
-- [ ] CRUD-Funktionen:
+- [x] ContactsComponent erstellen
+- [x] Links: Liste aller Contacts alphabetisch
+- [x] Rechts: Detailansicht des ausgewählten Contact
+- [x] CRUD-Funktionen:
   - Create Contact
   - Update Contact
   - Delete Contact
-- [ ] Contact-Felder:
+- [x] Contact-Felder:
   - `name: string`
   - `email: string`
   - `phone: string`
+  - `bgcolor: string`
 
 ## 🔗 Services & Endpunkte
 
@@ -87,7 +88,6 @@
 - [ ] `DELETE /api/tasks/:id` → Task löschen
 
 - [x] `GET /api/contacts` → Alle Contacts
-- [ ] `GET /api/contacts/:id` → Einzelner Contact
-- [ ] `POST /api/contacts` → Neuen Contact anlegen
-- [ ] `PUT /api/contacts/:id` → Contact bearbeiten
+- [x] `POST /api/contacts` → Neuen Contact anlegen
+- [x] `PUT /api/contacts/:id` → Contact bearbeiten
 - [x] `DELETE /api/contacts/:id` → Contact löschen
