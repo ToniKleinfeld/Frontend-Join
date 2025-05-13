@@ -16,7 +16,7 @@
       <div class="tablerow">
         <div class="tablehead">
           <h3>{{board}}</h3>
-          <i [ngClass]="{'addtaskicon': board != 'Done'}"></i>
+          <i [ngClass]="{'addtaskicon': board !== 'Done'}"></i>
         </div>
         <div class="taskwrapper">
           <!-- TODO: hover effekt und drag an drop hier! -->
@@ -24,7 +24,17 @@
             No tasks {{board}}
           </div> -->
 
-          <app-smallcard/>
+          @let filteredTasks = this.filterTasks(board);
+
+          @if (filteredTasks.length > 0) {
+          @for (task of filteredTasks; track task.id) {
+          <app-smallcard [data]="task"></app-smallcard>
+          }
+          } @else {
+          <div class="emptyboard">
+            No tasks {{ board }}
+          </div>
+          }
 
 
         </div>

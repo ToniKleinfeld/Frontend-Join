@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener, signal } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { AddTaskData } from '../../shared/interfaces/interfaces.model';
@@ -20,30 +20,38 @@ import { SmallcardComponent } from './smallcard/smallcard.component';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })
-export class BoardComponent implements OnInit, OnDestroy {
-  tasks$!: Observable<AddTaskData[]>;
-  private destroy$ = new Subject<void>();
+export class BoardComponent {
+  private _tasks = signal<AddTaskData[]>([]);
+  readonly tasks = this._tasks.asReadonly();
 
-  constructor(private backendService: BackendService) {}
+  constructor(private backendService: BackendService) {
+    this.loadTasks();
+  }
+
+  filterTasks(currentBoard: string) {
+    return this.tasks().filter((t) => t.rubric == currentBoard);
+  }
 
   taskboards: string[] = ['To do', 'In progress', 'Await feedback', 'Done'];
 
-  ngOnInit(): void {
-    this.tasks$ = timer(0, 30_000).pipe(
-      switchMap(() => this.backendService.getRequest<AddTaskData[]>('tasks')),
-      takeUntil(this.destroy$)
-    );
+  /**
+   * Load current User Tasks
+   */
+  loadTasks() {
+    this.backendService.getRequest<AddTaskData[]>('tasks').subscribe({
+      next: (tasks) => this._tasks.set(tasks),
+      error: (err) => console.error('Fehler beim Laden der Tasks:', err),
+    });
   }
 
   overlay: boolean = false;
   overlayContent = '';
   isMobile: boolean = window.innerWidth < 681;
 
-  ngOnDestroy(): void {}
-
   @HostListener('window:resize', [])
   onResize() {
     this.isMobile = window.innerWidth < 681;
+    console.log(this.tasks());
   }
 }
 

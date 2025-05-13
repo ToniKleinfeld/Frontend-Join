@@ -7,7 +7,8 @@ import {
   signal,
 } from '@angular/core';
 import { BackendService } from '../../shared/service/backend.service';
-import { Subscription } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
+import { startWith, switchMap } from 'rxjs/operators';
 import { AddTaskData } from '../../shared/interfaces/interfaces.model';
 import { SummaryItem } from '../../shared/interfaces/interfaces.model';
 import { DatePipe } from '@angular/common';
@@ -25,14 +26,21 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
   constructor(private backendService: BackendService) {
     this.subTasks.add(
-      this.backendService.getRequest<AddTaskData[]>('tasks').subscribe({
-        next: (tasks) => {
-          this._tasks.set(tasks);
-          this.updateSummary();
-          this.checkScreenSize();
-        },
-        error: (err) => console.error('Fehler beim Laden der Nutzer:', err),
-      })
+      interval(5000)
+        .pipe(
+          startWith(0),
+          switchMap(() =>
+            this.backendService.getRequest<AddTaskData[]>('tasks')
+          )
+        )
+        .subscribe({
+          next: (tasks) => {
+            this._tasks.set(tasks);
+            this.updateSummary();
+            this.checkScreenSize();
+          },
+          error: (err) => console.error('Fehler beim Laden der Tasks:', err),
+        })
     );
   }
 
@@ -212,7 +220,6 @@ export class SummaryComponent implements OnInit, OnDestroy {
    */
   swapTasks(index1: number, index2: number) {
     this._summaryTasks.update((current) => {
-
       const arr = [...current];
       if (
         index1 >= 0 &&

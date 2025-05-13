@@ -15,12 +15,12 @@
 
     <div class="wrapper">
       <div class="headline">
-        ['category']
+        {{ data?.category}}
       </div>
 
       <div class="title-description-container">
-        <h3>['title']</h3>
-        <div>['description']</div>
+        <h3>{{ data?.title}}</h3>
+        <div>{{ data?.description}}</div>
       </div>
 
       <div class="progress">
@@ -36,9 +36,10 @@
       <div class="circle-prio-container">
 
         <div class="circle-container">
+
           <div class="circle" style="background-color:lightblue">
-            AT
           </div>
+          <!-- user name abfrage? -->
         </div>
 
         <div class="countassigneduseres">
@@ -46,8 +47,9 @@
           <!-- TODO: nur wenn mehr als 4 assigned -->
         </div>
 
+
         <div class="priority-symbols">
-          <img src="./assets/img/priolow.svg">
+          <img src="./assets/img/prio{{ data?.prio}}.svg">
         </div>
 
       </div>
