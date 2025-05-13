@@ -1,26 +1,26 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ButtonComponent } from "../../shared/components/button/button.component";
+import { ButtonComponent } from '../../shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { AddTaskData } from '../../shared/interfaces/interfaces.model';
 import { Subtask } from '../../shared/interfaces/interfaces.model';
 import { Observable, Subject, timer } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { BackendService } from '../../shared/service/backend.service';
+import { TaskformComponent } from '../addtask/taskform/taskform.component';
 
 @Component({
   selector: 'app-board',
-  imports: [ButtonComponent,CommonModule],
+  imports: [ButtonComponent, CommonModule, TaskformComponent],
   templateUrl: './board.component.html',
-  styleUrl: './board.component.scss'
+  styleUrl: './board.component.scss',
 })
-export class BoardComponent implements OnInit, OnDestroy{
+export class BoardComponent implements OnInit, OnDestroy {
   tasks$!: Observable<AddTaskData[]>;
   private destroy$ = new Subject<void>();
 
   constructor(private backendService: BackendService) {}
 
-  taskboards:string[]= ['To do','In progress','Await feedback', 'Done']
-
+  taskboards: string[] = ['To do', 'In progress', 'Await feedback', 'Done'];
 
   ngOnInit(): void {
     this.tasks$ = timer(0, 30_000).pipe(
@@ -29,9 +29,10 @@ export class BoardComponent implements OnInit, OnDestroy{
     );
   }
 
-  ngOnDestroy(): void {
-    
-  }
+  overlay: boolean = false;
+  overlayContent = '';
+
+  ngOnDestroy(): void {}
 }
 
 // TODO: {

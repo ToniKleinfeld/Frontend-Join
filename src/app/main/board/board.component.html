@@ -6,28 +6,38 @@
         <input class="search" type="text">
       </div>
 
-      <app-button text="Add Task" size="small" design="primary" for="addtaskform" icon="add" />
+      <app-button text="Add Task" size="small" design="primary" for="addtaskform" icon="add"
+        (clicked)="overlay=!overlay;overlayContent = 'newtask'" />
     </div>
 
     <div class="board-wrapper">
 
       @for(board of taskboards; track board; let index = $index){
-        <div class="tablerow">
-          <div class="tablehead">
-            <h3>{{board}}</h3>
-            <i [ngClass]="{'addtaskicon': board != 'Done'}"></i>
-          </div>
-          <div class="taskwrapper">
-            <!-- hover effekt und drag an drop hier! -->
-            <div class="emptyboard">
-              No tasks {{board}}
-            </div>
-            <!-- for schleife für einzele tasks hier -->
-          </div>
+      <div class="tablerow">
+        <div class="tablehead">
+          <h3>{{board}}</h3>
+          <i [ngClass]="{'addtaskicon': board != 'Done'}"></i>
         </div>
+        <div class="taskwrapper">
+          <!-- hover effekt und drag an drop hier! -->
+          <div class="emptyboard">
+            No tasks {{board}}
+          </div>
+          <!-- for schleife für einzele tasks hier -->
+        </div>
+      </div>
       }
 
     </div>
 
   </div>
+
+  <div class="overlay" [ngClass]="{'d-none': !overlay}" (click)="overlay = false ; overlayContent = ''">
+    <div class="overlay-content" [ngClass]="{'d-none':overlayContent == ''}" (click)="$event.stopPropagation()">
+      @if(overlayContent == 'newtask'){
+      <app-taskform />
+      }
+    </div>
+  </div>
+
 </section>

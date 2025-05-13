@@ -1,7 +1,7 @@
 @use "../../../shared/mixin" as mix;
 
 .wrapper {
-  height: calc(var(--main-content-height) - 20dvh);
+  // height: calc(var(--main-content-height) - 20dvh);
   border-radius: 20px;
   @include mix.center($jc: flex-start, $ai: flex-start);
   flex-direction: column;

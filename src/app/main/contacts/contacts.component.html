@@ -75,65 +75,67 @@
 
   </div>
 
-  <div class="overlay" [ngClass]="{'d-none': !overlayActive}">
-    <div class="overlay-header">
-      <img class="close" src="/assets/img/whitecloseicon.svg" alt="" (click)="toggleOverlay('')">
-      <div class="overlay-rubric">
-        <img src="assets/img/logobgblue.svg">
-        <h2>
-          @if(overlayContent == 'add'){
-          Add contact
-          } @else if (overlayContent == 'edit') {
-          Edit contact
-          }
-        </h2>
-        <h3>Tasks are better with a team!</h3>
-      </div>
-
-    </div>
-
-    <form class="overlay-form" #formRef="ngForm">
-
-      <div class="contact-fields">
-
-        @if(selectedContact && overlayContent == 'edit'){
-        <div class="initials initials--open-contact" [style.background-color]="selectedContact.bgcolor">
-          {{selectedContact.name| initials}}
+  <div class="overlay-wrapper" [ngClass]="{'d-none': !overlayActive}" (click)="toggleOverlay('')">
+    <div class="overlay" [ngClass]="{'d-none': !overlayActive}" (click)="$event.stopPropagation()">
+      <div class="overlay-header">
+        <img class="close" src="/assets/img/whitecloseicon.svg" alt="" (click)="toggleOverlay('')">
+        <div class="overlay-rubric">
+          <img src="assets/img/logobgblue.svg">
+          <h2>
+            @if(overlayContent == 'add'){
+            Add contact
+            } @else if (overlayContent == 'edit') {
+            Edit contact
+            }
+          </h2>
+          <h3>Tasks are better with a team!</h3>
         </div>
-        } @else if (overlayContent == 'add') {
-        <div class="initials initials--open-contact" style="background-color:lightgrey;">
-          @if(addContact.name == ''){
-          <img src="/assets/img/person.svg" class="smallimg">
-          } @else {
-          {{addContact.name| initials}}
-          }
-        </div>
-        }
-
-        <input type="text" class="input-name" placeholder="Name" required minlength="3" pattern="^[a-zA-Z0-9 ]+$"
-          [(ngModel)]="addContact.name" name="contact_name" #name="ngModel">
-        <input type="email" class="input-mail" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" required
-          [placeholder]="(!email.valid && email.touched && name.valid) ? 'Example@gmail.com'  : 'Email'"
-          [(ngModel)]="addContact.email" name="contact_email" #email="ngModel">
-        <input type="tel" pattern="[0-9]+" required placeholder="Phone" class="input-phone"
-          [(ngModel)]="addContact.phone" name="contact_phone" #phone="ngModel">
 
       </div>
 
-      <div class="buttons-wrapper">
-        @if(isMobile && overlayContent == 'edit' || !isMobile){
-        <app-button text="Cancel" size="small" design="secondary" icon="clear" (clicked)="toggleOverlay('')" />
-        }
+      <form class="overlay-form" #formRef="ngForm">
 
-        @if(overlayContent === 'add' || overlayContent === 'edit'){
-        <app-button [text]="overlayContent === 'add' ? 'Create contact' : 'Save'" size="small"
-          [design]="formRef.valid ? 'primary' : 'deactive'" for="formRef" icon="check" (clicked)="formRef.valid
+        <div class="contact-fields">
+
+          @if(selectedContact && overlayContent == 'edit'){
+          <div class="initials initials--open-contact" [style.background-color]="selectedContact.bgcolor">
+            {{selectedContact.name| initials}}
+          </div>
+          } @else if (overlayContent == 'add') {
+          <div class="initials initials--open-contact" style="background-color:lightgrey;">
+            @if(addContact.name == ''){
+            <img src="/assets/img/person.svg" class="smallimg">
+            } @else {
+            {{addContact.name| initials}}
+            }
+          </div>
+          }
+
+          <input type="text" class="input-name" placeholder="Name" required minlength="3" pattern="^[a-zA-Z0-9 ]+$"
+            [(ngModel)]="addContact.name" name="contact_name" #name="ngModel">
+          <input type="email" class="input-mail" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" required
+            [placeholder]="(!email.valid && email.touched && name.valid) ? 'Example@gmail.com'  : 'Email'"
+            [(ngModel)]="addContact.email" name="contact_email" #email="ngModel">
+          <input type="tel" pattern="[0-9]+" required placeholder="Phone" class="input-phone"
+            [(ngModel)]="addContact.phone" name="contact_phone" #phone="ngModel">
+
+        </div>
+
+        <div class="buttons-wrapper">
+          @if(isMobile && overlayContent == 'edit' || !isMobile){
+          <app-button text="Cancel" size="small" design="secondary" icon="clear" (clicked)="toggleOverlay('')" />
+          }
+
+          @if(overlayContent === 'add' || overlayContent === 'edit'){
+          <app-button [text]="overlayContent === 'add' ? 'Create contact' : 'Save'" size="small"
+            [design]="formRef.valid ? 'primary' : 'deactive'" for="formRef" icon="check" (clicked)="formRef.valid
         ? (overlayContent === 'add' ? createContact(formRef) : patchContact(formRef))
         : null" />
-        }
+          }
 
-      </div>
-    </form>
+        </div>
+      </form>
+    </div>
   </div>
 
   <div class="message" [ngClass]="{'d-none': !showSuccessMsg}">
