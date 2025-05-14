@@ -14,7 +14,8 @@
   <div class="card">
 
     <div class="wrapper">
-      <div class="headline">
+      <div class="headline"
+        [ngClass]="{'story': data.category === 'User Story', 'technical': data.category === 'Technical Task'}">
         {{ data.category}}
       </div>
 
@@ -26,7 +27,7 @@
       <div class="progress">
         @if (data.subtasks.length > 0) {
         <div class="progressbar">
-          <div class="filler" [style.width]="'50%'"></div>
+          <div class="filler" [style.width]="calcCurrentSubFiller()+'%'"></div>
         </div>
 
         <div class="card-subtasks">

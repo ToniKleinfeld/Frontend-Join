@@ -25,13 +25,30 @@ export class SmallcardComponent {
     this.clicked.emit();
   }
 
+  /**
+   *
+   * @returns Count of subtasks with state done
+   */
   countDoneSubtasks() {
     let countDoneSubs = this.data.subtasks.filter((sub) => sub.done == true);
+    console.log(this.data)
     return countDoneSubs.length;
   }
 
-  calcCurrentSubFiller(){
-    
+  /**
+   *
+   * @returns return % for Subtasks filler state
+   */
+  calcCurrentSubFiller() {
+    const doneCount = this.countDoneSubtasks();
+    const totalCount = this.data.assigned_users.length;
+
+    if (totalCount === 0) {
+      return 0;
+    }
+
+    const percentage = (doneCount / totalCount) * 100;
+    return Math.round(percentage);
   }
 
   @HostListener('window:resize', [])

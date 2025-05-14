@@ -16,6 +16,7 @@
   --sidemenu-height: calc(100dvh - var(--header-height));
   --main-content-height: calc(100dvh - var(--header-height));
   --main-content-width: calc(100dvw - var(--sidemenu-width));
+  --small-board-card-width: calc((var(--main-content-width) - 180px) / 4 );
 }
 
 @media (max-width: 1200px) {

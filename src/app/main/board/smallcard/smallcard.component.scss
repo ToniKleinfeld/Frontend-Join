@@ -3,6 +3,8 @@
 .card-container {
   @include mix.center($ai: flex-end);
   flex-direction: column;
+  width: var(--small-board-card-width);
+  min-width: 240px;
 }
 
 .card {
@@ -27,9 +29,17 @@
   @include mix.center();
   padding: 4px 16px;
   height: 27px;
-  background: #0038ff;
+  white-space: nowrap;
   border-radius: 16px;
   color: #ffffff;
+}
+
+.technical {
+  background-color: #0038ff;
+}
+
+.story {
+  background-color: #ff7a00;
 }
 
 .title-description-container {
@@ -38,12 +48,21 @@
   width: 95%;
 
   h3 {
+    width: inherit;
     font-weight: 700;
     color: mix.$main-color;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   div {
     color: #a8a8a8;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 }
 
