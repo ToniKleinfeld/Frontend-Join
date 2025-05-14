@@ -7,7 +7,7 @@
       </div>
 
       <app-button text="Add Task" size="small" design="primary" for="addtaskform" icon="add"
-        (clicked)="overlay=!overlay;overlayContent = 'newtask'" />
+        (clicked)="overlay=true;overlayContent = 'newtask'" />
     </div>
 
     <div class="board-wrapper">
@@ -16,13 +16,9 @@
       <div class="tablerow">
         <div class="tablehead">
           <h3>{{board}}</h3>
-          <i [ngClass]="{'addtaskicon': board !== 'Done'}"></i>
+          <i [ngClass]="{'addtaskicon': board !== 'Done'}" (click)="createTasksRubric = board;overlay=true;overlayContent = 'newtask';" ></i>
         </div>
         <div class="taskwrapper">
-          <!-- TODO: hover effekt und drag an drop hier! -->
-          <!-- <div class="emptyboard">
-            No tasks {{board}}
-          </div> -->
 
           @let filteredTasks = this.filterTasks(board);
 
@@ -35,21 +31,17 @@
             No tasks {{ board }}
           </div>
           }
-
-
         </div>
       </div>
       }
-
     </div>
-
   </div>
 
-  <div class="overlay" [ngClass]="{'d-none': !overlay}" (click)="overlay = false ; overlayContent = ''">
+  <div class="overlay" [ngClass]="{'d-none': !overlay}" (click)="closeOverlay()">
     <div class="overlay-content" [ngClass]="{'d-none':overlayContent == ''}" (click)="$event.stopPropagation()">
       @if(overlayContent == 'newtask'){
-      <img class="close" src="/assets/img/closeicon.svg" alt="" (click)="overlay = false ; overlayContent = ''">
-      <app-taskform />
+      <img class="close" src="/assets/img/closeicon.svg" alt="" (click)="closeOverlay()">
+      <app-taskform [rubric]="createTasksRubric" (closeOverlay)="closeOverlay()" />
       }
     </div>
   </div>

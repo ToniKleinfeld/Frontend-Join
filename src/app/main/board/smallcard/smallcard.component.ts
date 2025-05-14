@@ -31,7 +31,6 @@ export class SmallcardComponent {
    */
   countDoneSubtasks() {
     let countDoneSubs = this.data.subtasks.filter((sub) => sub.done == true);
-    console.log(this.data)
     return countDoneSubs.length;
   }
 

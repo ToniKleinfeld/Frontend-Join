@@ -31,6 +31,7 @@ export class BoardComponent {
   }
 
   taskboards: string[] = ['To do', 'In progress', 'Await feedback', 'Done'];
+  createTasksRubric: string = 'To do';
 
   /**
    * Load current User Tasks
@@ -42,6 +43,15 @@ export class BoardComponent {
     });
   }
 
+  /**
+   * close overlay and load tasks for refresh
+   */
+  closeOverlay() {
+    this.overlay = false;
+    this.overlayContent = '';
+    this.loadTasks();
+  }
+
   overlay: boolean = false;
   overlayContent = '';
   isMobile: boolean = window.innerWidth < 681;
@@ -49,7 +59,6 @@ export class BoardComponent {
   @HostListener('window:resize', [])
   onResize() {
     this.isMobile = window.innerWidth < 681;
-    console.log(this.tasks());
   }
 }
 

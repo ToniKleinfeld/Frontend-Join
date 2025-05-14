@@ -6,6 +6,9 @@ import {
   signal,
   WritableSignal,
   computed,
+  Input,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
@@ -16,6 +19,7 @@ import { BackendService } from '../../../shared/service/backend.service';
 import { User } from '../../../shared/interfaces/interfaces.model';
 import { InitialsPipe } from '../../../shared/pipes/initials.pipe';
 import { FormatUserNamePipe } from '../../../shared/pipes/format-user-name.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-taskform',
@@ -39,7 +43,7 @@ export class TaskformComponent implements OnDestroy {
   readonly users = this._users.asReadonly();
   private subUser = new Subscription();
 
-  constructor(private backendService: BackendService) {
+  constructor(private backendService: BackendService, private router: Router) {
     this.subUser.add(
       this.backendService.getRequest<User[]>('users').subscribe({
         next: (users) => this._users.set(users),
@@ -47,6 +51,9 @@ export class TaskformComponent implements OnDestroy {
       })
     );
   }
+
+  @Input() rubric: string = 'To do';
+  @Output() closeOverlay = new EventEmitter<void>();
 
   isMobile: boolean = window.innerWidth < 1200;
   showAssingedToList: boolean = false;
@@ -56,7 +63,7 @@ export class TaskformComponent implements OnDestroy {
   today: string = new Date().toISOString().split('T')[0];
 
   defaultAddTask: AddTaskData = {
-    rubric: 'To do',
+    rubric: this.rubric,
     title: '',
     description: '',
     assigned_users: [],
@@ -200,13 +207,17 @@ export class TaskformComponent implements OnDestroy {
    */
   submitAddTask(form: NgForm) {
     if (form.valid) {
+      this.addTaskData.rubric = this.rubric;
       this.backendService
         .postRequest<AddTaskData>('tasks', this.addTaskData)
         .subscribe({
           next: () => {
             this.showSuccessMsg = true;
+            console.log(this.addTaskData, this.rubric);
             setTimeout(() => {
               this.showSuccessMsg = false;
+              this.router.navigate(['/board']);
+              this.closeOverlay.emit();
             }, 2000);
             this.clearAll(form);
           },
