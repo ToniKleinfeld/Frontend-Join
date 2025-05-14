@@ -71,7 +71,7 @@ export class BoardComponent {
    * @param board wich collum is the task from
    * @param task
    */
-  onDragStart(event: DragEvent, board: string, task: GetTaskData): void {
+  onDragStart( board: string, task: GetTaskData): void {
     if (task.id) {
       this.draggedCardIndex = task.id;
       this.draggedFromColumnIndex = board;

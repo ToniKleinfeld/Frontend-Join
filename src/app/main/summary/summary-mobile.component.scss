@@ -1,5 +1,20 @@
 @use "../../shared/mixin" as mix;
 
+.welcome-wrapper {
+  width: 100%;
+  @include mix.center();
+  padding-bottom: 50px;
+  h1 {
+    font-size: 48px;
+    font-weight: 700;
+    span {
+      font-size: 60px;
+      font-weight: 700;
+      color: mix.$main-color;
+    }
+  }
+}
+
 @media (max-width: 920px) {
   .wrapper {
     height: 632px;
@@ -54,8 +69,8 @@
     }
   }
 
-  .welcome-wrapper{
-    h1{
+  .welcome-wrapper {
+    h1 {
       text-align: center;
     }
   }

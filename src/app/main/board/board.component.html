@@ -25,7 +25,7 @@
 
           @if (filteredTasks.length > 0) {
           @for (task of filteredTasks; track task.id ; let taskID = $index ) {
-          <app-smallcard [data]="task" draggable="true" (dragstart)="onDragStart($event, board, task)" [ngClass]="{'dragCard': draggedCardIndex === task.id}" (dragend)="onDragEnd($event)"></app-smallcard>
+          <app-smallcard [data]="task" draggable="true" (dragstart)="onDragStart(board, task)" [ngClass]="{'dragCard': draggedCardIndex === task.id}" (dragend)="onDragEnd($event)"></app-smallcard>
           }
           } @else {
           <div class="emptyboard">

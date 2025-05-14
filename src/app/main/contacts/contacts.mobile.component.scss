@@ -139,4 +139,25 @@
   }
 }
 
+.icons a:hover {
+  color: mix.$main-color;
+  font-weight: 400;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.phone-and-e-mail-container p {
+  font-weight: 700;
+  padding: 10px 0 10px 0;
+}
+
+.register-letter {
+  width: 95%;
+  padding: 0 0 10px 15px;
+  border-bottom: 1px solid #d1cdcd;
+  margin: 15px 0;
+  font-size: 18px;
+  font-weight: 400;
+}
+
 //TODO: Bei release noch einige animationen einbauen -> big card , message

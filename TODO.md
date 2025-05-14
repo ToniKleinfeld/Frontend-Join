@@ -46,13 +46,13 @@
   - In Progress
   - Await Feedback
   - Done
-- [ ] Tasks als kleine Karten rendern
-- [ ] Drag and Drop kleine Karten
+- [x] Tasks als kleine Karten rendern
+- [x] Drag and Drop kleine Karten
 - [ ] Klick auf Karte:
   - Overlay/Modal öffnen mit Task-Details
   - Bearbeiten (PUT)
   - Löschen (DELETE)
-- [ ] Overlay mit Add - Task zum task erstellen , mit verschiedenen Categorien
+- [x] Overlay mit Add - Task zum task erstellen , mit verschiedenen Categorien
 
 ## 📇 Contact-Bereich
 
@@ -84,7 +84,7 @@
 - [x] `GET /api/tasks` → Alle Tasks inkl. Subtasks
 - [ ] `GET /api/tasks/:id` → Einzelne Task
 - [x] `POST /api/tasks` → Neue Task anlegen
-- [ ] `PUT /api/tasks/:id` → Task bearbeiten
+- [x] `PUT /api/tasks/:id` → Task bearbeiten
 - [ ] `DELETE /api/tasks/:id` → Task löschen
 
 - [x] `GET /api/contacts` → Alle Contacts

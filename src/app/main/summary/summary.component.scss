@@ -9,21 +9,6 @@ section {
   position: relative;
 }
 
-.welcome-wrapper {
-  width: 100%;
-  @include mix.center();
-  padding-bottom: 50px;
-  h1 {
-    font-size: 48px;
-    font-weight: 700;
-    span{
-      font-size: 60px;
-      font-weight: 700;
-      color: mix.$main-color;
-    }
-  }
-}
-
 .wrapper {
   padding: 10px 20px;
   width: 912px;

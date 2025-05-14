@@ -13,7 +13,7 @@ import { InitialsPipe } from '../../../shared/pipes/initials.pipe';
   selector: 'app-smallcard',
   imports: [CommonModule, InitialsPipe],
   templateUrl: './smallcard.component.html',
-  styleUrl: './smallcard.component.scss',
+  styleUrls: ['./smallcard.component.scss','./smallcard.mobile.component.scss']
 })
 export class SmallcardComponent {
   isMobile: boolean = window.innerWidth < 681;

@@ -1,0 +1,43 @@
+@use "../../../shared/mixin" as mix;
+
+.changeprogressmenü {
+  display: none;
+  position: relative;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.progressmenue {
+  position: absolute;
+  top: 37px;
+  right: 18px;
+  z-index: 16;
+  width: 150px;
+  height: 150px;
+  background-color: white;
+  border: solid #2a3647 3px;
+  border-radius: 15px;
+  padding: 5px;
+  cursor: auto;
+
+  & h4 {
+    margin: 0 0 10px 0;
+  }
+
+  & div {
+    cursor: pointer;
+    padding: 3px;
+    font-size: 14px;
+    font-weight: 400;
+    border: solid 1px #2a3647;
+    border-radius: 15px;
+    margin-bottom: 3px;
+    display: flex;
+    justify-content: center;
+  }
+
+  & div:hover {
+    background-color: #374961;
+    color: #cdcdcd;
+  }
+}
