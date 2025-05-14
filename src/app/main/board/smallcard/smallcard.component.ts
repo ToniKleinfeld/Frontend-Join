@@ -6,7 +6,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddTaskData } from '../../../shared/interfaces/interfaces.model';
+import { GetTaskData } from '../../../shared/interfaces/interfaces.model';
 import { InitialsPipe } from '../../../shared/pipes/initials.pipe';
 
 @Component({
@@ -18,11 +18,20 @@ import { InitialsPipe } from '../../../shared/pipes/initials.pipe';
 export class SmallcardComponent {
   isMobile: boolean = window.innerWidth < 681;
 
-  @Input() data?: AddTaskData;
+  @Input() data!: GetTaskData;
   @Output() clicked = new EventEmitter<void>();
 
   onClick() {
     this.clicked.emit();
+  }
+
+  countDoneSubtasks() {
+    let countDoneSubs = this.data.subtasks.filter((sub) => sub.done == true);
+    return countDoneSubs.length;
+  }
+
+  calcCurrentSubFiller(){
+    
   }
 
   @HostListener('window:resize', [])

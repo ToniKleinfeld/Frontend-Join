@@ -1,14 +1,12 @@
 import { Component, HostListener, signal } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
-import { AddTaskData } from '../../shared/interfaces/interfaces.model';
 import { Subtask } from '../../shared/interfaces/interfaces.model';
-import { Observable, Subject, timer } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
 import { BackendService } from '../../shared/service/backend.service';
 import { TaskformComponent } from '../addtask/taskform/taskform.component';
 import { SmallcardComponent } from './smallcard/smallcard.component';
-
+import { User } from '../../shared/interfaces/interfaces.model';
+import { GetTaskData } from '../../shared/interfaces/interfaces.model';
 @Component({
   selector: 'app-board',
   imports: [
@@ -21,7 +19,7 @@ import { SmallcardComponent } from './smallcard/smallcard.component';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent {
-  private _tasks = signal<AddTaskData[]>([]);
+  private _tasks = signal<GetTaskData[]>([]);
   readonly tasks = this._tasks.asReadonly();
 
   constructor(private backendService: BackendService) {
@@ -38,7 +36,7 @@ export class BoardComponent {
    * Load current User Tasks
    */
   loadTasks() {
-    this.backendService.getRequest<AddTaskData[]>('tasks').subscribe({
+    this.backendService.getRequest<GetTaskData[]>('tasks').subscribe({
       next: (tasks) => this._tasks.set(tasks),
       error: (err) => console.error('Fehler beim Laden der Tasks:', err),
     });

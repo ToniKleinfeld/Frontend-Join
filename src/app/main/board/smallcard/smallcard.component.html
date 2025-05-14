@@ -15,41 +15,47 @@
 
     <div class="wrapper">
       <div class="headline">
-        {{ data?.category}}
+        {{ data.category}}
       </div>
 
       <div class="title-description-container">
-        <h3>{{ data?.title}}</h3>
-        <div>{{ data?.description}}</div>
+        <h3>{{ data.title}}</h3>
+        <div>{{ data.description}}</div>
       </div>
 
       <div class="progress">
+        @if (data.subtasks.length > 0) {
         <div class="progressbar">
-          <div class="filler"></div>
+          <div class="filler" [style.width]="'50%'"></div>
         </div>
-        <!-- TODO: filler with anpassen mit style -->
+
         <div class="card-subtasks">
-          1/2 Subtask
+          {{ countDoneSubtasks() }}/{{data.subtasks.length }} Subtask
         </div>
+        }
       </div>
 
       <div class="circle-prio-container">
 
         <div class="circle-container">
-
-          <div class="circle" style="background-color:lightblue">
+          @if(data.assigned_users.length! > 0){
+          @for (user of data.assigned_users; track $index) {
+          <div class="circle" [style.background-color]="user.color">
+            {{ user.username | initials}}
           </div>
-          <!-- user name abfrage? -->
+          }
+          }
         </div>
 
         <div class="countassigneduseres">
-          5<img src="./assets/img/person.svg">
-          <!-- TODO: nur wenn mehr als 4 assigned -->
+          @if(data.assigned_users.length! > 4){
+          {{data.assigned_users.length}}<img src="./assets/img/person.svg">
+          }
         </div>
 
 
         <div class="priority-symbols">
-          <img src="./assets/img/prio{{ data?.prio}}.svg">
+          <img src="./assets/img/prio{{ data.prio}}.svg">
         </div>
 
       </div>
