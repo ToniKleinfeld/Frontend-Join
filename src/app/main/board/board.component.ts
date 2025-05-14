@@ -60,6 +60,78 @@ export class BoardComponent {
   onResize() {
     this.isMobile = window.innerWidth < 681;
   }
+
+  draggedCardIndex: string = '-1';
+  draggedFromColumnIndex: string = '-1';
+  draggedover: string = '-1';
+
+  /**
+   *
+   * @param event Dragstart
+   * @param board wich collum is the task from
+   * @param task
+   */
+  onDragStart(event: DragEvent, board: string, task: GetTaskData): void {
+    if (task.id) {
+      this.draggedCardIndex = task.id;
+      this.draggedFromColumnIndex = board;
+    }
+  }
+
+  /**
+   * save the variables of wich board the card come from and the tasks id
+   *
+   * @param event DragEvent
+   * @param board wich collum is hoverd
+   */
+  onDragOver(event: DragEvent, board: string): void {
+    this.draggedover = board;
+    event.preventDefault();
+  }
+
+  /**
+   * update rubric in backend
+   *
+   * @param event drop event
+   * @param board wich colum dropped
+   * @returns nothing when dropped same collum
+   */
+  onDrop(event: DragEvent, board: string): void {
+    event.preventDefault();
+    if (
+      this.draggedCardIndex === '-1' ||
+      this.draggedFromColumnIndex === '-1' ||
+      board === this.draggedFromColumnIndex
+    ) {
+      return;
+    }
+    let newRubric = { rubric: board };
+    this.patchTask(this.draggedCardIndex, newRubric);
+  }
+
+  /**
+   * reset the drag info to '-1'
+   */
+  onDragEnd(event: DragEvent): void {
+    this.draggedCardIndex = '-1';
+    this.draggedFromColumnIndex = '-1';
+    this.draggedover = '-1';
+  }
+
+  /**
+   * Patch wanded data
+   *
+   * @param id tasks ID
+   * @param data data want send to backend
+   */
+  patchTask(id: string, data: object) {
+    this.backendService.patchRequest(`tasks/${id}`, data).subscribe({
+      next: () => {
+        this.loadTasks();
+      },
+      error: (err) => console.error('Fehler beim abändern des Tasks:', err),
+    });
+  }
 }
 
 // TODO: {
