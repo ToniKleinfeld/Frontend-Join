@@ -4,14 +4,18 @@
     'welcomeanimation': (isMobile || isLandscape) && showAnimation,
     'd-none': (isMobile || isLandscape)  && !showAnimation
   }">
-    <h1>Good Morning</h1>
+    <h1 *ngIf="user$ | async as user;">Good Morning
+      @if(user.username !== 'guest'){
+      ,<span>{{user.username | formatUserName }}</span>
+      }
+    </h1>
   </div>
 
   <div class="wrapper">
     @for(taskcount of summaryTasks(); track taskcount.task){
 
     @if(taskcount.class == "largeBox"){
-    <div class="{{taskcount.class}}">
+    <div class="{{taskcount.class}}" (click)="routeToBoard()">
       <div class="largeBox-wrapper">
         <div class="icon-wrapper">
           <div class="img {{taskcount.imgpath}}"></div>
@@ -25,7 +29,7 @@
       </div>
     </div>
     } @else {
-    <div class="{{taskcount.class}}">
+    <div class="{{taskcount.class}}" (click)="routeToBoard()">
       <div class="icon-wrapper">
         <div class="img {{taskcount.imgpath}}"></div>
         {{taskcount.count}}

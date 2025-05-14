@@ -12,10 +12,14 @@ import { startWith, switchMap } from 'rxjs/operators';
 import { AddTaskData } from '../../shared/interfaces/interfaces.model';
 import { SummaryItem } from '../../shared/interfaces/interfaces.model';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { User } from '../../shared/interfaces/interfaces.model';
+import { FormatUserNamePipe } from '../../shared/pipes/format-user-name.pipe';
 
 @Component({
   selector: 'app-summary',
-  imports: [CommonModule, DatePipe],
+  imports: [CommonModule, DatePipe, FormatUserNamePipe],
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss', './summary-mobile.component.scss'],
 })
@@ -24,7 +28,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
   readonly tasks = this._tasks.asReadonly();
   private subTasks = new Subscription();
 
-  constructor(private backendService: BackendService) {
+  constructor(private backendService: BackendService,private router: Router) {
     this.subTasks.add(
       interval(5000)
         .pipe(
@@ -54,10 +58,12 @@ export class SummaryComponent implements OnInit, OnDestroy {
   showAnimation = false;
   isMobile: boolean = window.innerWidth < 920;
   isLandscape: boolean = window.innerHeight < 601;
+  user$!: Observable<User>;
 
   ngOnInit() {
     this.checkScreenSize();
     this.checkWelcomeAnimation();
+    this.user$ = this.backendService.getRequest<User>('users/me');
   }
 
   private summaryTemplate: SummaryItem[] = [
@@ -231,5 +237,9 @@ export class SummaryComponent implements OnInit, OnDestroy {
       }
       return arr;
     });
+  }
+
+  routeToBoard(){
+    this.router.navigate(['/board']);
   }
 }

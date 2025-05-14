@@ -63,7 +63,7 @@ export class TaskformComponent implements OnDestroy {
   today: string = new Date().toISOString().split('T')[0];
 
   defaultAddTask: AddTaskData = {
-    rubric: this.rubric,
+    rubric: 'To do',
     title: '',
     description: '',
     assigned_users: [],

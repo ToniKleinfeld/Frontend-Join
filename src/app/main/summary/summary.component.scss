@@ -14,8 +14,13 @@ section {
   @include mix.center();
   padding-bottom: 50px;
   h1 {
-    font-size: 64px;
+    font-size: 48px;
     font-weight: 700;
+    span{
+      font-size: 60px;
+      font-weight: 700;
+      color: mix.$main-color;
+    }
   }
 }
 
