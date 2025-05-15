@@ -40,7 +40,7 @@ export class SmallcardComponent {
    */
   calcCurrentSubFiller() {
     const doneCount = this.countDoneSubtasks();
-    const totalCount = this.data.assigned_users.length;
+    const totalCount = this.data.subtasks.length;
 
     if (totalCount === 0) {
       return 0;

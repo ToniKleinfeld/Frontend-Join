@@ -28,7 +28,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
   readonly tasks = this._tasks.asReadonly();
   private subTasks = new Subscription();
 
-  constructor(private backendService: BackendService,private router: Router) {
+  constructor(private backendService: BackendService, private router: Router) {
     this.subTasks.add(
       interval(5000)
         .pipe(
@@ -239,7 +239,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
     });
   }
 
-  routeToBoard(){
+  routeToBoard() {
     this.router.navigate(['/board']);
   }
 }
