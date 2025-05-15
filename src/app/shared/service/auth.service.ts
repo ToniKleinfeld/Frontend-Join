@@ -99,4 +99,12 @@ export class AuthService {
       { withCredentials: true }
     );
   }
+
+  guestLogin() {
+    return this.http.post(
+      `${this.baseUrl}create-guest/`,
+      {},
+      { withCredentials: true }
+    );
+  }
 }

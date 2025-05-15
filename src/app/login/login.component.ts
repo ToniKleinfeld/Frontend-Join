@@ -16,7 +16,6 @@ import { Router } from '@angular/router';
   ],
 })
 export class LoginComponent {
-  private guesttoken: string = '9b0b222592cec1c4553b9f9fec588a588350fcf8';
   signup: boolean = false;
   isMobile: boolean = window.innerWidth < 1024;
   feedback_Login_SingUp: string = '';
@@ -162,8 +161,19 @@ export class LoginComponent {
    * Guest login , with createt user in Backend "guest" , per token
    */
   guestLogIn() {
-    this.showFeedbackMsg('Login successfully.');
-    this.routeToSummary();
+    this.authService.guestLogin().subscribe({
+      next: () => {
+        this.showFeedbackMsg('Login successfully.');
+        this.routeToSummary();
+      },
+      error: (error) => {
+        if (error.error.email) {
+          this.showFeedbackMsg(error.error.email[0]);
+        } else {
+          console.error(`${error}`, error);
+        }
+      },
+    });
   }
 
   /**
