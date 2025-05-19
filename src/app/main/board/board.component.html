@@ -48,7 +48,7 @@
       <img class="close" src="/assets/img/closeicon.svg" alt="" (click)="closeOverlay()">
       <app-taskform [rubric]="createTasksRubric" (closeOverlay)="closeOverlay()" />
       } @else if (overlayContent == 'cardinfo') {
-      <app-fullcard [task]="openedTask[0]" (closeOverlay)="closeOverlay()" />
+      <app-fullcard [task]="openedTask" (loadTasks)="loadTasks()" (closeOverlay)="closeOverlay()" />
       }
     </div>
   </div>

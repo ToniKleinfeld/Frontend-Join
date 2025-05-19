@@ -1,4 +1,4 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener, signal, computed } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { Subtask } from '../../shared/interfaces/interfaces.model';
@@ -31,7 +31,14 @@ export class BoardComponent {
 
   overlay: boolean = false;
   overlayContent: string = '';
-  openedTask: GetTaskData[] = [];
+  selectedTaskId = signal<string | null>(null);
+  openedTask = computed(() => {
+    const id = this.selectedTaskId();
+    return id
+      ? this._tasks().find(t => t.id === id) ?? null
+      : null;
+  });
+
   isMobile: boolean = window.innerWidth < 1200;
 
   filterTasks(currentBoard: string) {
@@ -156,10 +163,9 @@ export class BoardComponent {
    * @param id
    */
   openTask(id: string) {
+    this.selectedTaskId.set(id);
     this.overlayContent = 'cardinfo';
-    this.openedTask = this.filterTasksId(id);
     this.overlay = true;
-    console.log(this.openedTask[0]);
   }
 
   filterTasksId(id: string) {
