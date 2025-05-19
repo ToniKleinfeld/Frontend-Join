@@ -5,9 +5,11 @@
       <div class="search-box">
         <input class="search" type="text">
       </div>
-
+      @if(!isMobile){
       <app-button text="Add Task" size="small" design="primary" for="addtaskform" icon="add"
-        (clicked)="overlay=true;overlayContent = 'newtask'" />
+        (clicked)="openCreateNewTask('')" />
+      }
+
     </div>
 
     <div class="board-wrapper">
@@ -16,16 +18,18 @@
       <div class="tablerow">
         <div class="tablehead">
           <h3>{{board}}</h3>
-          <i [ngClass]="{'addtaskicon': board !== 'Done'}"
-            (click)="createTasksRubric = board;overlay=true;overlayContent = 'newtask';"></i>
+          <i [ngClass]="{'addtaskicon': board !== 'Done'}" (click)="openCreateNewTask(board)"></i>
         </div>
-        <div class="taskwrapper" (dragover)="onDragOver($event,board)" (drop)="onDrop($event, board)" [ngClass]="{'dotDrag': board === draggedover }">
+        <div class="taskwrapper" (dragover)="onDragOver($event,board)" (drop)="onDrop($event, board)"
+          [ngClass]="{'dotDrag': board === draggedover }">
 
           @let filteredTasks = this.filterTasks(board);
 
           @if (filteredTasks.length > 0) {
           @for (task of filteredTasks; track task.id ; let taskID = $index ) {
-          <app-smallcard [data]="task" draggable="true" (dragstart)="onDragStart(board, task)" [ngClass]="{'dragCard': draggedCardIndex === task.id}" (dragend)="onDragEnd($event)"></app-smallcard>
+          <app-smallcard [data]="task" draggable="true" (dragstart)="onDragStart(board, task)"
+            [ngClass]="{'dragCard': draggedCardIndex === task.id}" (dragend)="onDragEnd($event)"
+            (click)="openTask(task.id!)" />
           }
           } @else {
           <div class="emptyboard">
@@ -43,6 +47,8 @@
       @if(overlayContent == 'newtask'){
       <img class="close" src="/assets/img/closeicon.svg" alt="" (click)="closeOverlay()">
       <app-taskform [rubric]="createTasksRubric" (closeOverlay)="closeOverlay()" />
+      } @else if (overlayContent == 'cardinfo') {
+      <app-fullcard [task]="openedTask[0]" (closeOverlay)="closeOverlay()" />
       }
     </div>
   </div>

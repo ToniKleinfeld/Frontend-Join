@@ -1,0 +1,52 @@
+@if(!editMode){
+<div class="task-overlay-container">
+
+  <div class="user-story-close-container">
+    <div id="labelOverlay${indexOfTask}" class="user-story-overlay" [ngClass]="{'story': task.category === 'User Story', 'technical': task.category === 'Technical Task'}"> {{task.category}}</div>
+    <img onclick="closeTaskOverlay()" src="./assets/icons/close.svg" alt="">
+  </div>
+
+  <h1>{{task.title}}</h1>
+  <p class="content-overlay"> {{task.description}} </p>
+
+  <div class="date-overlay">
+    <span>Due date:</span>
+    <span>{{task.due_date}} </span>
+  </div>
+
+  <div class="priority-overlay">
+    <span>Priority:</span>
+    <div>
+      <span> {{task.prio}} </span>
+      <img src="./assets/img/prio{{ task.prio}}.svg" alt="">
+    </div>
+  </div>
+
+  <div class="assigned-grid-overlay">
+    <div>Assigned To:</div>
+    <div class="assignedcontactslistboardbigcard">
+      @if(task.assigned_users.length! > 0){
+      @for (user of task.assigned_users; track $index) {
+      <div class="circle" [style.background-color]="user.color">
+        {{ user.username | initials}}
+      </div>
+      }
+      }
+    </div>
+  </div>
+
+  <div class="subtasks-grid-overlay" id="formSubtasks">
+    <div>Subtasks:</div>
+
+  </div>
+
+  <div class="delete-edit-container">
+    <div><img class="trash-delete" src="./assets/icons/trash-board.svg" alt="">
+      Delete</div>
+    <img class="line-vertical" src="./assets/icons/line-vertical.svg" alt="">
+    <div><img class="trash-delete" src="./assets/icons/edit.svg" alt="">
+      Edit</div>
+  </div>
+
+</div>
+}

@@ -1,0 +1,21 @@
+@use "../../../shared/mixin" as mix;
+
+.technical {
+  background-color: #0038ff;
+}
+
+.story {
+  background-color: #ff7a00;
+}
+
+.circle {
+  @include mix.center();
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  margin-left: -10px;
+  border-radius: 50%;
+  font-size: 12px;
+  color: white;
+  border: 1px solid white;
+}

@@ -7,6 +7,8 @@ import { TaskformComponent } from '../addtask/taskform/taskform.component';
 import { SmallcardComponent } from './smallcard/smallcard.component';
 import { User } from '../../shared/interfaces/interfaces.model';
 import { GetTaskData } from '../../shared/interfaces/interfaces.model';
+import { FullcardComponent } from './fullcard/fullcard.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-board',
   imports: [
@@ -14,6 +16,7 @@ import { GetTaskData } from '../../shared/interfaces/interfaces.model';
     CommonModule,
     TaskformComponent,
     SmallcardComponent,
+    FullcardComponent,
   ],
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
@@ -22,9 +25,14 @@ export class BoardComponent {
   private _tasks = signal<GetTaskData[]>([]);
   readonly tasks = this._tasks.asReadonly();
 
-  constructor(private backendService: BackendService) {
+  constructor(private backendService: BackendService, private router: Router) {
     this.loadTasks();
   }
+
+  overlay: boolean = false;
+  overlayContent: string = '';
+  openedTask: GetTaskData[] = [];
+  isMobile: boolean = window.innerWidth < 1200;
 
   filterTasks(currentBoard: string) {
     return this.tasks().filter((t) => t.rubric == currentBoard);
@@ -52,13 +60,9 @@ export class BoardComponent {
     this.loadTasks();
   }
 
-  overlay: boolean = false;
-  overlayContent = '';
-  isMobile: boolean = window.innerWidth < 681;
-
   @HostListener('window:resize', [])
   onResize() {
-    this.isMobile = window.innerWidth < 681;
+    this.isMobile = window.innerWidth < 1200;
   }
 
   draggedCardIndex: string = '-1';
@@ -71,7 +75,7 @@ export class BoardComponent {
    * @param board wich collum is the task from
    * @param task
    */
-  onDragStart( board: string, task: GetTaskData): void {
+  onDragStart(board: string, task: GetTaskData): void {
     if (task.id) {
       this.draggedCardIndex = task.id;
       this.draggedFromColumnIndex = board;
@@ -131,6 +135,35 @@ export class BoardComponent {
       },
       error: (err) => console.error('Fehler beim abändern des Tasks:', err),
     });
+  }
+
+  /**
+   * Open add task overlay or route to addtasks when mobile
+   * @param board
+   */
+  openCreateNewTask(board: string | '') {
+    if (!this.isMobile) {
+      this.overlay = true;
+      this.overlayContent = 'newtask';
+      this.createTasksRubric = board || 'To do';
+    } else {
+      this.router.navigate(['/addtask']);
+    }
+  }
+
+  /**
+   *  Open Single task in overlay
+   * @param id
+   */
+  openTask(id: string) {
+    this.overlayContent = 'cardinfo';
+    this.openedTask = this.filterTasksId(id);
+    this.overlay = true;
+    console.log(this.openedTask[0]);
+  }
+
+  filterTasksId(id: string) {
+    return this.tasks().filter((t) => t.id == id);
   }
 }
 
