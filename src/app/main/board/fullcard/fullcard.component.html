@@ -2,49 +2,63 @@
 <div class="task-overlay-container">
 
   <div class="user-story-close-container">
-    <div id="labelOverlay${indexOfTask}" class="user-story-overlay" [ngClass]="{'story': task.category === 'User Story', 'technical': task.category === 'Technical Task'}"> {{task.category}}</div>
-    <img onclick="closeTaskOverlay()" src="./assets/icons/close.svg" alt="">
+    <div class="user-story-overlay"
+      [ngClass]="{'story': task.category === 'User Story', 'technical': task.category === 'Technical Task'}">
+      {{task.category}}</div>
+    <img (click)="onClick()" src="/assets/img/closeicon.svg" alt="">
   </div>
 
-  <h1>{{task.title}}</h1>
+  <h2>{{task.title}}</h2>
   <p class="content-overlay"> {{task.description}} </p>
 
   <div class="date-overlay">
-    <span>Due date:</span>
+    <h3>Due date:</h3>
     <span>{{task.due_date}} </span>
   </div>
 
   <div class="priority-overlay">
-    <span>Priority:</span>
+    <h3>Priority:</h3>
     <div>
       <span> {{task.prio}} </span>
       <img src="./assets/img/prio{{ task.prio}}.svg" alt="">
     </div>
   </div>
 
+  @if(task.assigned_users.length! > 0){
   <div class="assigned-grid-overlay">
-    <div>Assigned To:</div>
+    <h3>Assigned To:</h3>
     <div class="assignedcontactslistboardbigcard">
-      @if(task.assigned_users.length! > 0){
       @for (user of task.assigned_users; track $index) {
-      <div class="circle" [style.background-color]="user.color">
-        {{ user.username | initials}}
+      <div class="assigned-row-overlay">
+        <span class="circle" [style.background-color]="user.color">
+          {{ user.username | initials}}
+        </span>
+        <span> {{user.username | formatUserName }} </span>
       </div>
-      }
       }
     </div>
   </div>
-
-  <div class="subtasks-grid-overlay" id="formSubtasks">
-    <div>Subtasks:</div>
-
+  }
+  @if(task.subtasks.length! > 0){
+  <div class="subtasks-overlay">
+    <h3>Subtasks</h3>
+    <div class="subtask-wrapper">
+      @for (sub of task.subtasks; track $index) {
+      <div class="checkbox-title-container">
+        <input type="checkbox" [checked]="sub.done" id="{{sub.id}}" name="{{sub.id}}" />
+        <span class="checkmark"></span>
+        <label for="{{sub.id}}"> {{sub.title}}</label>
+      </div>
+      }
+    </div>
   </div>
+  }
 
   <div class="delete-edit-container">
-    <div><img class="trash-delete" src="./assets/icons/trash-board.svg" alt="">
+    <div><img class="trash-delete" src="/assets/img/delete.svg" alt="">
       Delete</div>
-    <img class="line-vertical" src="./assets/icons/line-vertical.svg" alt="">
-    <div><img class="trash-delete" src="./assets/icons/edit.svg" alt="">
+    <span></span>
+    <div><img class="trash-delete" src="./assets/img/edit.svg" alt="">
       Edit</div>
   </div>
 
