@@ -48,6 +48,13 @@ export class FullcardComponent {
     });
   }
 
+  /**
+   * patch subTask title and status done
+   *
+   * @param taskID
+   * @param sub
+   * @param check if true , only change done status , false for edit title
+   */
   patchSub(taskID: string, sub: Subtask, check: boolean) {
     let data: Subtask = {
       title: sub.title,
@@ -59,4 +66,5 @@ export class FullcardComponent {
     }
     this.patchTask(`${taskID}/subtasks/${sub.id}`, data);
   }
+  //TODO: edit title check => false  , delte task funktion
 }
