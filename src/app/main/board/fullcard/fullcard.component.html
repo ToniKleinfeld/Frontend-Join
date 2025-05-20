@@ -1,4 +1,3 @@
-
 @if(!editMode){
 <div class="task-overlay-container">
 
@@ -46,7 +45,8 @@
     <div class="subtask-wrapper">
       @for (sub of task()!.subtasks; track $index) {
       <div class="checkbox-title-container">
-        <input type="checkbox" (click)="patchSub(task()!.id!, sub , true )" [checked]="sub.done" id="{{sub.id}}" name="{{sub.id}}" />
+        <input type="checkbox" (click)="patchSub(task()!.id!, sub , true )" [checked]="sub.done" id="{{sub.id}}"
+          name="{{sub.id}}" />
         <span class="checkmark"></span>
         <label for="{{sub.id}}"> {{sub.title}}</label>
       </div>
@@ -56,7 +56,7 @@
   }
 
   <div class="delete-edit-container">
-    <div><img class="trash-delete" src="/assets/img/delete.svg" alt="">
+    <div (click)="delteTask(task()!.id!)"><img class="trash-delete" src="/assets/img/delete.svg" alt="">
       Delete</div>
     <span></span>
     <div><img class="trash-delete" src="./assets/img/edit.svg" alt="">

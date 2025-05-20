@@ -66,5 +66,19 @@ export class FullcardComponent {
     }
     this.patchTask(`${taskID}/subtasks/${sub.id}`, data);
   }
-  //TODO: edit title check => false  , delte task funktion
+
+  /**
+   * Delete currewnt Task
+   * @param id
+   */
+  delteTask(id: string) {
+    this.backendService.deleteRequest(`tasks/${id}`).subscribe({
+      next: () => {
+        this.closeOverlay.emit();
+        this.loadTasks.emit();
+      },
+      error: (err) => console.error('Fehler beim löschen des Kontakts:', err),
+    });
+  }
+  //TODO: edit title check => false
 }
