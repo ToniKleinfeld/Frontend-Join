@@ -59,7 +59,7 @@ export class FullcardComponent {
     let data: Subtask = {
       title: sub.title,
       done: sub.done,
-    };
+    }; 
 
     if (check) {
       data.done = !sub.done;
@@ -80,5 +80,6 @@ export class FullcardComponent {
       error: (err) => console.error('Fehler beim löschen des Kontakts:', err),
     });
   }
+
   //TODO: edit title check => false
 }

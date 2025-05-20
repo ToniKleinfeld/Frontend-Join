@@ -1,11 +1,9 @@
 import { Component, HostListener, signal, computed } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
-import { Subtask } from '../../shared/interfaces/interfaces.model';
 import { BackendService } from '../../shared/service/backend.service';
 import { TaskformComponent } from '../addtask/taskform/taskform.component';
 import { SmallcardComponent } from './smallcard/smallcard.component';
-import { User } from '../../shared/interfaces/interfaces.model';
 import { GetTaskData } from '../../shared/interfaces/interfaces.model';
 import { FullcardComponent } from './fullcard/fullcard.component';
 import { Router } from '@angular/router';
@@ -23,7 +21,20 @@ import { Router } from '@angular/router';
 })
 export class BoardComponent {
   private _tasks = signal<GetTaskData[]>([]);
-  readonly tasks = this._tasks.asReadonly();
+  readonly tasks = computed(() => {
+    const term = this.searchTerm().trim().toLowerCase();
+    const all = this._tasks();
+    if (!term) {
+      return all;
+    }
+    return all.filter(
+      (t) =>
+        t.title.toLowerCase().includes(term) ||
+        t.description.toLowerCase().includes(term)
+    );
+  });
+
+  searchTerm = signal<string>('');
 
   constructor(private backendService: BackendService, private router: Router) {
     this.loadTasks();
@@ -34,9 +45,7 @@ export class BoardComponent {
   selectedTaskId = signal<string | null>(null);
   openedTask = computed(() => {
     const id = this.selectedTaskId();
-    return id
-      ? this._tasks().find(t => t.id === id) ?? null
-      : null;
+    return id ? this._tasks().find((t) => t.id === id) ?? null : null;
   });
 
   isMobile: boolean = window.innerWidth < 1200;

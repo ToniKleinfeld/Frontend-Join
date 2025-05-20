@@ -3,7 +3,8 @@
 
     <div class="search-wrapper">
       <div class="search-box">
-        <input class="search" type="text">
+        <input class="search" type="text" [value]="searchTerm()" (input)="searchTerm.set($any($event.target).value)"
+          placeholder="Search for…">
       </div>
       @if(!isMobile){
       <app-button text="Add Task" size="small" design="primary" for="addtaskform" icon="add"
