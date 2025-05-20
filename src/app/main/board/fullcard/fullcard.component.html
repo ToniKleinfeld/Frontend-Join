@@ -1,5 +1,5 @@
-@if(!editMode){
 <div class="task-overlay-container">
+  @if(!editMode){
 
   <div class="user-story-close-container">
     <div class="user-story-overlay"
@@ -59,9 +59,17 @@
     <div (click)="delteTask(task()!.id!)"><img class="trash-delete" src="/assets/img/delete.svg" alt="">
       Delete</div>
     <span></span>
-    <div><img class="trash-delete" src="./assets/img/edit.svg" alt="">
+    <div (click)="changeToEdit()"><img class="trash-delete" src="./assets/img/edit.svg" alt="">
       Edit</div>
   </div>
 
+
+  } @else if (editMode) {
+  <div class="user-story-close-container">
+    <div class="user-story-overlay"></div>
+    <img (click)="onClick()" src="/assets/img/closeicon.svg" alt="">
+  </div>
+
+   <app-editform></app-editform>
+  }
 </div>
-}

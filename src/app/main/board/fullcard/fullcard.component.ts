@@ -12,10 +12,11 @@ import { CommonModule } from '@angular/common';
 import { FormatUserNamePipe } from '../../../shared/pipes/format-user-name.pipe';
 import { BackendService } from '../../../shared/service/backend.service';
 import { Subtask } from '../../../shared/interfaces/interfaces.model';
+import { EditformComponent } from '../editform/editform.component';
 
 @Component({
   selector: 'app-fullcard',
-  imports: [InitialsPipe, CommonModule, FormatUserNamePipe],
+  imports: [InitialsPipe, CommonModule, FormatUserNamePipe, EditformComponent],
   templateUrl: './fullcard.component.html',
   styleUrl: './fullcard.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -59,7 +60,7 @@ export class FullcardComponent {
     let data: Subtask = {
       title: sub.title,
       done: sub.done,
-    }; 
+    };
 
     if (check) {
       data.done = !sub.done;
@@ -81,5 +82,7 @@ export class FullcardComponent {
     });
   }
 
-  //TODO: edit title check => false
+  changeToEdit() {
+    this.editMode = true;
+  }
 }

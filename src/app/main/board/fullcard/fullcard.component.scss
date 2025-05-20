@@ -40,7 +40,7 @@
   }
 }
 
-h2 {
+.header {
   font-size: 61px;
   font-weight: 700;
   overflow: auto;
@@ -50,7 +50,7 @@ h2 {
   -webkit-box-orient: vertical;
 }
 
-h3{
+.sub-header {
   font-size: 21px;
   font-weight: 700;
   color: mix.$text-color-nav;
@@ -61,7 +61,6 @@ h3{
   gap: 10px;
   width: auto;
   height: 36px;
-  background: #0038ff;
   border-radius: 8px;
   font-weight: 400;
   font-size: 24px;
@@ -103,7 +102,7 @@ h3{
 }
 
 .assigned-row-overlay {
-  @include mix.center($jc:flex-start,$x:16px);
+  @include mix.center($jc: flex-start, $x: 16px);
   padding-left: 16px;
 }
 
