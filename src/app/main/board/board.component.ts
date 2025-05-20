@@ -21,6 +21,7 @@ import { Router } from '@angular/router';
 })
 export class BoardComponent {
   private _tasks = signal<GetTaskData[]>([]);
+
   readonly tasks = computed(() => {
     const term = this.searchTerm().trim().toLowerCase();
     const all = this._tasks();
@@ -35,6 +36,7 @@ export class BoardComponent {
   });
 
   searchTerm = signal<string>('');
+  
 
   constructor(private backendService: BackendService, private router: Router) {
     this.loadTasks();
