@@ -28,6 +28,10 @@
   height: auto;
   background: #ffffff;
   padding: 10px;
+
+  @media (max-height:600px) {
+    gap:10px
+  }
 }
 
 .user-story-close-container {
@@ -177,5 +181,17 @@
   div:hover {
     cursor: pointer;
     color: mix.$main-color;
+  }
+}
+
+app-editform{
+  width: 100%;
+}
+
+.colum{
+  flex-direction: column;
+
+  img{
+    align-self: flex-end;
   }
 }

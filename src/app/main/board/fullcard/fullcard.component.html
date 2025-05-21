@@ -63,13 +63,12 @@
       Edit</div>
   </div>
 
-
   } @else if (editMode) {
-  <div class="user-story-close-container">
-    <div class="user-story-overlay"></div>
+  <div class="user-story-close-container colum">
     <img (click)="onClick()" src="/assets/img/closeicon.svg" alt="">
+
+    <app-editform [data]="task()!"></app-editform>
   </div>
 
-   <app-editform></app-editform>
   }
 </div>

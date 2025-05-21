@@ -1,0 +1,26 @@
+@use "../../../shared/mixin" as mix;
+
+.edit-wrapper {
+  width: 100%;
+}
+
+input,textarea{
+  width: 100%;
+}
+
+.form-single-part{
+  overflow: auto;
+  height: calc(90dvh - 135px );
+}
+
+app-button{
+  background-color: white;
+}
+
+.button-container{
+ margin-top: 10px;
+}
+
+.dropdown-check-list-contacts ul.items{
+  max-width: 100%;
+}

@@ -36,7 +36,6 @@ export class BoardComponent {
   });
 
   searchTerm = signal<string>('');
-  
 
   constructor(private backendService: BackendService, private router: Router) {
     this.loadTasks();
