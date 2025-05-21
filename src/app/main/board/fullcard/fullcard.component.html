@@ -65,9 +65,9 @@
 
   } @else if (editMode) {
   <div class="user-story-close-container colum">
-    <img (click)="onClick()" src="/assets/img/closeicon.svg" alt="">
+    <img (click)="loadTask()" src="/assets/img/closeicon.svg" alt="">
 
-    <app-editform [data]="task()!"></app-editform>
+    <app-editform [data]="task()!" (loadTasks)="loadTask()"></app-editform>
   </div>
 
   }

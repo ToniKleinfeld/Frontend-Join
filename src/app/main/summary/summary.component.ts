@@ -142,7 +142,6 @@ export class SummaryComponent implements OnInit, OnDestroy {
       ? futureUrgents[0].toISOString().split('T')[0]
       : null;
   }
-  // TODO: Prüfen , wenn kein urgent datum vorliegt!
 
   private _summaryTasks = signal<SummaryItem[]>(this.summaryTemplate);
   readonly summaryTasks = this._summaryTasks.asReadonly();

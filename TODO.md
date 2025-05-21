@@ -48,9 +48,9 @@
   - Done
 - [x] Tasks als kleine Karten rendern
 - [x] Drag and Drop kleine Karten
-- [ ] Klick auf Karte:
+- [x] Klick auf Karte:
   - Overlay/Modal öffnen mit Task-Details
-  - Bearbeiten (PUT)
+  - [ ] Bearbeiten (PUT) <-- subtask fehlen noch
   - Löschen (DELETE)
 - [x] Overlay mit Add - Task zum task erstellen , mit verschiedenen Categorien
 
@@ -82,7 +82,6 @@
 - [x] `GET /api/users/me` → Welcher User ist eingelogt / bin ich?
 
 - [x] `GET /api/tasks` → Alle Tasks inkl. Subtasks
-- [ ] `GET /api/tasks/:id` → Einzelne Task
 - [x] `POST /api/tasks` → Neue Task anlegen
 - [x] `PUT /api/tasks/:id` → Task bearbeiten
 - [ ] `DELETE /api/tasks/:id` → Task löschen

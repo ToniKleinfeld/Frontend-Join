@@ -32,6 +32,11 @@ export class FullcardComponent {
     this.closeOverlay.emit();
   }
 
+  loadTask() {
+    this.loadTasks.emit();
+    this.editMode = false;
+  }
+
   constructor(private backendService: BackendService) {}
 
   /**

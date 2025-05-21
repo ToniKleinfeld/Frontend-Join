@@ -15,6 +15,7 @@ input,textarea{
 
 app-button{
   background-color: white;
+  @include mix.center($jc:flex-end);
 }
 
 .button-container{
