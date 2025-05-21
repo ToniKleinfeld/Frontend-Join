@@ -143,7 +143,7 @@
       }
 
       @if(formRef.valid){
-      <app-button design="submit" size="small" text="Create Task" icon="check" (clicked)="submitAddTask(formRef)" />
+      <app-button design="submit" size="small" text="Create Task" icon="check" (clicked)="submit(formRef)" />
       } @else {
       <app-button text="Create Task" size="small" design="deactive" for="addtaskform" icon="check" />
       }
