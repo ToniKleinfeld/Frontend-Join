@@ -56,45 +56,14 @@ export class EditformComponent extends BaseTaskFormComponent implements OnInit {
   }
 
   override submit(form: NgForm) {
-    let currentData = {
-      rubric: this.addTaskData.rubric,
-      title: this.addTaskData.title,
-      description: this.addTaskData.description,
-      assigned_users: this.addTaskData.assigned_users,
-      due_date: this.addTaskData.due_date,
-      category: this.addTaskData.category,
-      prio: this.addTaskData.prio,
-    };
-
-    console.log(this.addTaskData.subtasks)
-
     if (form.valid) {
       this.backendService
-        .patchRequest<AddTaskData>(`tasks/${this.data.id}`, currentData)
+        .patchRequest<AddTaskData>(`tasks/${this.data.id}`, this.addTaskData)
         .subscribe({
           next: (responde) => {
-            console.log(this.addTaskData, responde);
             this.loadTasks.emit();
           },
         });
     }
   }
-
-  // TODO: subtasks im backend oder frontend?
-
-  // TODO:
-  // Example Subtasks create :
-  // {
-  //   "title": "Test create subtask ",
-  // }
-  // http://127.0.0.1:8000/api/join/tasks/3/subtasks liste aller subtasks , hier von taks id 3
-  //
-  // Put / Patch :
-  // {
-  //   "title": "Test put subtask ",
-  //   "done": true
-  // }
-  // "done"= deflault -> false
-  // Delte (PUT UND PATCH)
-  // http://127.0.0.1:8000/api/join/tasks/3/subtasks/6/ singleview
 }

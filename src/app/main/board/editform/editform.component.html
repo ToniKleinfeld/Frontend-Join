@@ -39,16 +39,6 @@
       </div>
     </div>
 
-    <div class="input-container">
-      <h2 class="required input-title">Category</h2>
-      <select name="category" [(ngModel)]="addTaskData.category" #category="ngModel" required
-        [ngClass]="{ 'red-underline': !category.valid  && task_duedate.valid && task_duedate.touched && task_title.valid}">
-        <option value="" selected hidden disabled>Select task category</option>
-        <option value="Technical Task">Technical Task</option>
-        <option value="User Story">User Story</option>
-      </select>
-    </div>
-
     <div class="input-container dropdown-check-list-contacts" [ngClass]="{'visible' : showAssingedToList }">
       <h2 class="input-title">Assigned to</h2>
 

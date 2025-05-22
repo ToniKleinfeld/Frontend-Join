@@ -29,8 +29,8 @@
   background: #ffffff;
   padding: 10px;
 
-  @media (max-height:600px) {
-    gap:10px
+  @media (max-height: 600px) {
+    gap: 10px;
   }
 }
 
@@ -79,7 +79,6 @@
 .content-overlay {
   font-weight: 400;
   font-size: var(--input-letter-size);
-  text-align: center;
   overflow: auto;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -184,14 +183,26 @@
   }
 }
 
-app-editform{
+app-editform {
   width: 100%;
 }
 
-.colum{
+.colum {
   flex-direction: column;
 
-  img{
+  img {
     align-self: flex-end;
+  }
+}
+
+@media (max-width: 600px) {
+  .task-overlay-container {
+    width: 90dvw;
+    gap: 10px;
+    padding: 0;
+  }
+
+  .header{
+    font-size: 36px;
   }
 }
