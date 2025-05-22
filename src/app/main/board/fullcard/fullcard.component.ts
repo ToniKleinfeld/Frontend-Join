@@ -18,7 +18,7 @@ import { EditformComponent } from '../editform/editform.component';
   selector: 'app-fullcard',
   imports: [InitialsPipe, CommonModule, FormatUserNamePipe, EditformComponent],
   templateUrl: './fullcard.component.html',
-  styleUrl: './fullcard.component.scss',
+  styleUrls: ['./fullcard.component.scss','./fullcard.mobile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FullcardComponent {

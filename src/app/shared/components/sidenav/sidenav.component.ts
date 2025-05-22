@@ -9,10 +9,10 @@ import { RouterLink,RouterLinkActive } from '@angular/router';
 })
 export class SidenavComponent {
 
-  isMobile: boolean = window.innerWidth < 1200;
+  isMobile: boolean = window.innerWidth <= 1200;
 
   @HostListener('window:resize', [])
   onResize() {
-    this.isMobile = window.innerWidth < 1200;
+    this.isMobile = window.innerWidth <= 1200;
   }
 }

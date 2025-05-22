@@ -1,13 +1,5 @@
 @use "../../../shared/mixin" as mix;
 
-.technical {
-  background-color: #0038ff;
-}
-
-.story {
-  background-color: #ff7a00;
-}
-
 .circle {
   @include mix.center();
   width: 32px;
@@ -28,10 +20,6 @@
   height: auto;
   background: #ffffff;
   padding: 10px;
-
-  @media (max-height: 600px) {
-    gap: 10px;
-  }
 }
 
 .user-story-close-container {
@@ -192,17 +180,5 @@ app-editform {
 
   img {
     align-self: flex-end;
-  }
-}
-
-@media (max-width: 600px) {
-  .task-overlay-container {
-    width: 90dvw;
-    gap: 10px;
-    padding: 0;
-  }
-
-  .header{
-    font-size: 36px;
   }
 }

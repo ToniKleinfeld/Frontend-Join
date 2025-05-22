@@ -6,7 +6,7 @@ section {
   width: var(--main-content-width);
   position: relative;
   padding: 30px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .wrapper {
@@ -123,4 +123,52 @@ h3 {
 .close {
   margin-left: auto;
   cursor: pointer;
+}
+
+@media (max-width:1200px) {
+ .board-wrapper{
+  flex-direction: column;
+  flex-wrap: nowrap;
+ }
+
+ .tablerow{
+  width: 100%;
+  min-width: unset;
+  max-width: unset;
+ }
+
+ .taskwrapper{
+  flex-direction: unset;
+  min-height: unset;
+  width: 100%;
+  overflow: auto;
+ }
+
+ app-smallcard{
+  margin: 8px 3px;
+ }
+
+ .emptyboard{
+  max-width: 100%;
+ }
+}
+
+@media (max-width: 430px) {
+  section{
+    padding: 10px;
+  }
+
+  .search-wrapper{
+    padding: 0;
+    margin: auto;
+    width: 100%;
+  }
+
+  .search{
+    width: 100%;
+  }
+
+  .search-box{
+    width: 100%;
+  }
 }

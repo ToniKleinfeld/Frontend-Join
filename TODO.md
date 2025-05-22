@@ -3,8 +3,8 @@
 ## 📋 Allgemein
 
 - [x] Projektstruktur anlegen (Modules, Components, Services)
-- [ ] GitHub Issues für größere Tasks anlegen
 - [x] environment.ts / environment.prod.ts anlegen!
+- [ ] Datenschutzerklärung , Impressum , Help Bereich
 
 ## 🔐 Authentifizierung
 
@@ -50,7 +50,7 @@
 - [x] Drag and Drop kleine Karten
 - [x] Klick auf Karte:
   - Overlay/Modal öffnen mit Task-Details
-  - [ ] Bearbeiten (PUT) <-- subtask fehlen noch
+  - [x] Bearbeiten (PUT) 
   - Löschen (DELETE)
 - [x] Overlay mit Add - Task zum task erstellen , mit verschiedenen Categorien
 
@@ -84,7 +84,7 @@
 - [x] `GET /api/tasks` → Alle Tasks inkl. Subtasks
 - [x] `POST /api/tasks` → Neue Task anlegen
 - [x] `PUT /api/tasks/:id` → Task bearbeiten
-- [ ] `DELETE /api/tasks/:id` → Task löschen
+- [x] `DELETE /api/tasks/:id` → Task löschen
 
 - [x] `GET /api/contacts` → Alle Contacts
 - [x] `POST /api/contacts` → Neuen Contact anlegen
