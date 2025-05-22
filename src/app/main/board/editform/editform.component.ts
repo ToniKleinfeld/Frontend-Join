@@ -66,6 +66,8 @@ export class EditformComponent extends BaseTaskFormComponent implements OnInit {
       prio: this.addTaskData.prio,
     };
 
+    console.log(this.addTaskData.subtasks)
+
     if (form.valid) {
       this.backendService
         .patchRequest<AddTaskData>(`tasks/${this.data.id}`, currentData)
