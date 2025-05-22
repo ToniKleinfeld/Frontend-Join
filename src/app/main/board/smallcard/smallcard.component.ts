@@ -13,13 +13,23 @@ import { InitialsPipe } from '../../../shared/pipes/initials.pipe';
   selector: 'app-smallcard',
   imports: [CommonModule, InitialsPipe],
   templateUrl: './smallcard.component.html',
-  styleUrls: ['./smallcard.component.scss','./smallcard.mobile.component.scss']
+  styleUrls: [
+    './smallcard.component.scss',
+    './smallcard.mobile.component.scss',
+  ],
 })
 export class SmallcardComponent {
-  isMobile: boolean = window.innerWidth < 681;
+  isMobile: boolean = window.innerWidth <= 1200;
+  openMenu: boolean = false;
+  nextRubric?: number;
 
   @Input() data!: GetTaskData;
   @Output() clicked = new EventEmitter<void>();
+  @Output() setNewRubric = new EventEmitter<{
+    board: string;
+  }>();
+
+  taskboards: string[] = ['To do', 'In progress', 'Await feedback', 'Done'];
 
   onClick() {
     this.clicked.emit();
@@ -52,6 +62,33 @@ export class SmallcardComponent {
 
   @HostListener('window:resize', [])
   onResize() {
-    this.isMobile = window.innerWidth < 681;
+    this.isMobile = window.innerWidth <= 1200;
+  }
+
+  /**
+   * Html render only the rubric not assigned to this class
+   */
+  removeRubric() {
+    const idx = this.taskboards.indexOf(this.data.rubric);
+
+    this.nextRubric = idx
+
+    this.taskboards = this.taskboards.filter((r) => r !== this.data.rubric);
+  }
+
+  /**
+   * open the Menu to swap rubric
+   */
+  showSwapMenu() {
+    this.openMenu = !this.openMenu;
+    this.removeRubric()
+  }
+
+  /**
+   *  change the rubric of Task
+   */
+  changeProgressTo(newBoard: string) {
+    this.setNewRubric.emit({ board: newBoard });
+    this.showSwapMenu();
   }
 }

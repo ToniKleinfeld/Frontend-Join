@@ -1,22 +1,28 @@
 <div class="card-container" draggable="true">
 
-  <div class="changeprogressmenü" [ngClass]="{'d-none': !isMobile}">
-
-    <img src="./assets/img/smallarrowicon.svg" alt="">
-    <div class="progressmenue d-none">
-      <h4>Change progress to:</h4>
-      <div>In progress</div>
-      <!-- TODO: hier alle möglichkeiten zum verschieben mit (click) -->
-    </div>
-
-  </div>
-
   <div class="card">
 
     <div class="wrapper">
-      <div class="headline"
-        [ngClass]="{'story': data.category === 'User Story', 'technical': data.category === 'Technical Task'}">
-        {{ data.category}}
+      <div class="headline-wrapper">
+        <div class="headline"
+          [ngClass]="{'story': data.category === 'User Story', 'technical': data.category === 'Technical Task'}">
+          {{ data.category}}
+        </div>
+
+        <div class="changeprogressmenü" [ngClass]="{'d-none': !isMobile}"
+          (click)="$event.stopPropagation();showSwapMenu()">
+          <img src="./assets/img/swap.svg" alt="">
+
+          <div class="progressmenue" [ngClass]="{'d-none': !openMenu}">
+            <h4>Move to</h4>
+            @for (board of taskboards; track $index) {
+            <div (click)="$event.stopPropagation();changeProgressTo(board)"><img src="./assets/img/arrow_upward.svg"
+                [class.rotate]="$index >= nextRubric!"> {{board}}</div>
+            }
+          </div>
+
+        </div>
+
       </div>
 
       <div class="title-description-container">

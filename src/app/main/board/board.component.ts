@@ -126,8 +126,18 @@ export class BoardComponent {
     ) {
       return;
     }
+    this.setNewRubric(this.draggedCardIndex,board)
+  }
+
+  /**
+   * update backend rubric
+   *
+   * @param CardID - card ID
+   * @param board - wich board change
+   */
+  setNewRubric(CardID:string,board:string){
     let newRubric = { rubric: board };
-    this.patchTask(this.draggedCardIndex, newRubric);
+    this.patchTask(CardID, newRubric);
   }
 
   /**

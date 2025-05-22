@@ -26,6 +26,11 @@
   width: 95%;
 }
 
+.headline-wrapper{
+  @include mix.center($jc:space-between);
+  width: 100%;
+}
+
 .headline {
   @include mix.center();
   padding: 4px 16px;

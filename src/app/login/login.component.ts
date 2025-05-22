@@ -186,6 +186,4 @@ export class LoginComponent {
       .padStart(6, '0');
     return `#${hex}`;
   }
-
-  // TODO: Gäste login überarbeiten! da jetzt HTTP only Cookie , evtl im backend was machbar?
 }

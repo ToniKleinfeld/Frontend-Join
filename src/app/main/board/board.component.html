@@ -30,7 +30,7 @@
           @for (task of filteredTasks; track task.id ; let taskID = $index ) {
           <app-smallcard [data]="task" draggable="true" (dragstart)="onDragStart(board, task)"
             [ngClass]="{'dragCard': draggedCardIndex === task.id}" (dragend)="onDragEnd($event)"
-            (click)="openTask(task.id!)" />
+            (click)="openTask(task.id!)" (setNewRubric)="setNewRubric(task.id!, $event.board)"/>
           }
           } @else {
           <div class="emptyboard">
