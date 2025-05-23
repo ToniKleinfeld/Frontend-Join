@@ -1,19 +1,33 @@
 <section>
   <nav>
     <div class="nav-wrapper">
-      <a [routerLink]="['/summary']"  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" #summaryicon="routerLinkActive"><img
-        [src]="summaryicon.isActive && isMobile ? '/assets/img/summaryiconmobileactive.svg' : '/assets/img/summaryicon.svg'" >Summary</a>
-      <a [routerLink]="['/addtask']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" #addtaskicon="routerLinkActive"><img src="/assets/img/tasksicon.svg" [src]="addtaskicon.isActive && isMobile ? '/assets/img/tasksiconmobileactive.svg' : '/assets/img/tasksicon.svg'">Add Task</a>
-      <a [routerLink]="['/board']"  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" #boardicon="routerLinkActive"><img [src]="boardicon.isActive && isMobile ? '/assets/img/boardiconmobileactive.svg' : '/assets/img/boardicon.svg'">Board</a>
-      <a [routerLink]="['/contacts']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" #contacticon="routerLinkActive"><img [src]="contacticon.isActive && isMobile ? '/assets/img/contacticonmobileactive.svg' : '/assets/img/contacticon.svg'">Contacts</a>
+      @if(!isPrivate){
+      <a [routerLink]="['/summary']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+        #summaryicon="routerLinkActive"><img
+          [src]="summaryicon.isActive && isMobile ? '/assets/img/summaryiconmobileactive.svg' : '/assets/img/summaryicon.svg'">Summary</a>
+      <a [routerLink]="['/addtask']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+        #addtaskicon="routerLinkActive"><img src="/assets/img/tasksicon.svg"
+          [src]="addtaskicon.isActive && isMobile ? '/assets/img/tasksiconmobileactive.svg' : '/assets/img/tasksicon.svg'">Add
+        Task</a>
+      <a [routerLink]="['/board']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+        #boardicon="routerLinkActive"><img
+          [src]="boardicon.isActive && isMobile ? '/assets/img/boardiconmobileactive.svg' : '/assets/img/boardicon.svg'">Board</a>
+      <a [routerLink]="['/contacts']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+        #contacticon="routerLinkActive"><img
+          [src]="contacticon.isActive && isMobile ? '/assets/img/contacticonmobileactive.svg' : '/assets/img/contacticon.svg'">Contacts</a>
+      }
     </div>
 
     @if (!isMobile) {
-      <div class="legal-privacy-wrapper">
-        <a [routerLink]="['']">Privary Policy</a>
-        <a [routerLink]="['']">Legal notice</a>
-      </div>
+    <div class="legal-privacy-wrapper">
+      @if(!isPrivate){
+      <a [routerLink]="['/privacy']">Privary Policy</a>
+      <a [routerLink]="['/legal']">Legal notice</a>
+      } @else {
+      <a [routerLink]="['/puplic/privacy']">Privary Policy</a>
+      <a [routerLink]="['/puplic/legal']">Legal notice</a>
+      }
+    </div>
     }
-
   </nav>
 </section>
