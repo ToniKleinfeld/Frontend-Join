@@ -6,26 +6,26 @@
 
       @if(!isMobile){
       <p>Kanban Project Managment Tool</p>
-
+      @if(isPrivate){
       <div class="help"><img src="/assets/img/help.svg" alt=""></div>
       }
-
+      }
+      @if(isPrivate){
       <div class="user-logo" (click)="dropDownMenu = dropDownMenu ? false : true">
         <div class="shortusername" *ngIf="user$ | async as user;">
           {{user.username | initials }}
         </div>
       </div>
+      }
     </div>
 
     <div class="dropdownmenu" [ngClass]="{'d-none': !dropDownMenu}">
       @if(isMobile){
-      <a>Help</a>
-      <!-- TODO: routing zur Help section , diese muss erst erstellt werden. -->
+      <a [routerLink]="['/help']">Help</a>
       }
-      <a>Legal Notice</a>
-      <a>Privacy Policy</a>
+      <a [routerLink]="['/legal']">Legal Notice</a>
+      <a [routerLink]="['/privacy']">Privacy Policy</a>
       <a (click)="logOut()">Log out</a>
-      <!-- TODO: routing zur legal / Privacy section , diese müssen erst erstellt werden. -->
     </div>
   </header>
 </section>

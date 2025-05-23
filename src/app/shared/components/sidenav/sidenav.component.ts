@@ -14,7 +14,7 @@ export class SidenavComponent {
 
   constructor(private router: Router) {
     this.currentPath = this.router.url;
-    this.isPrivate = this.isPrivateRoute();
+    this.isPrivate = !this.isPrivateRoute();
   }
 
   isMobile: boolean = window.innerWidth <= 1200;
@@ -24,6 +24,10 @@ export class SidenavComponent {
     this.isMobile = window.innerWidth <= 1200;
   }
 
+  /**
+   * Check if current coute = puplic ( no login )
+   * @returns boolean
+   */
   isPrivateRoute(): boolean {
     return this.currentPath.includes('/puplic');
   }
