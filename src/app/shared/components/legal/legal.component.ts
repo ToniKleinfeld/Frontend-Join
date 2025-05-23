@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-legal',
   imports: [],
   templateUrl: './legal.component.html',
-  styleUrl: './legal.component.scss'
+  styleUrl: '../help-puplic-privacy.component.scss',
 })
-export class LegalComponent {
-
-}
+export class LegalComponent {}

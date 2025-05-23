@@ -1,0 +1,103 @@
+@use "../_mixin" as mix;
+
+section {
+  @include mix.center($jc: flex-start, $ai: flex-start);
+  flex-direction: column;
+  height: var(--main-content-height);
+  width: var(--main-content-width);
+  overflow: auto;
+}
+
+h1 {
+  font-size: 61px;
+  font-weight: 700;
+}
+
+strong {
+  font-weight: 700;
+}
+
+h3,
+h2 {
+  font-size: 1.17rem;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+ul {
+  margin: 1em 0;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.step-number {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-right: 32px;
+}
+
+.step-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+.lightblue {
+  color: #29abe2;
+}
+.help-privacy-legal-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  width: 100%;
+}
+.maincontent {
+  padding: 64px;
+}
+
+.help-privacy-legal-main img {
+  cursor: pointer;
+}
+
+.index-link {
+  color: mix.$third-color;
+  cursor: pointer;
+}
+
+@media (max-width: 1050px) {
+  .help-privacy-legal-main {
+    flex-direction: column-reverse;
+    & img {
+      align-self: flex-end;
+    }
+  }
+}
+
+@media (max-width: 825px) {
+  .maincontent {
+    padding: 90px 64px;
+  }
+
+  .help-privacy-legal-main {
+    font-size: 14px;
+    word-break: break-word;
+
+    & h1 {
+      font-size: 36px;
+      word-break: break-all;
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .help-privacy-legal-main {
+    font-size: 12px;
+
+    & h1 {
+      font-size: 24px;
+    }
+  }
+}

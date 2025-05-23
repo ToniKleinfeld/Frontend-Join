@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-help',
   imports: [],
   templateUrl: './help.component.html',
-  styleUrl: './help.component.scss'
+  styleUrl: '../help-puplic-privacy.component.scss',
 })
-export class HelpComponent {
-
-}
+export class HelpComponent {}

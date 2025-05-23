@@ -4,7 +4,7 @@
 
 - [x] Projektstruktur anlegen (Modules, Components, Services)
 - [x] environment.ts / environment.prod.ts anlegen!
-- [ ] Datenschutzerklärung , Impressum , Help Bereich
+- [x] Datenschutzerklärung , Impressum , Help Bereich
 
 ## 🔐 Authentifizierung
 

@@ -7,7 +7,7 @@
       @if(!isMobile){
       <p>Kanban Project Managment Tool</p>
       @if(isPrivate){
-      <div class="help"><img src="/assets/img/help.svg" alt=""></div>
+      <div [routerLink]="['/help']" class="help"><img src="/assets/img/help.svg" alt=""></div>
       }
       }
       @if(isPrivate){
